@@ -1,0 +1,8 @@
+package com.service.employee.utils;
+
+public class Address {
+
+	private String addLine1;
+	private String city;
+	private String zip;
+}

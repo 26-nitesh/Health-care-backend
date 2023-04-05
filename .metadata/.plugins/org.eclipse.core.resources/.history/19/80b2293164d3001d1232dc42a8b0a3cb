@@ -1,0 +1,149 @@
+package com.empservice.employee.service;
+
+import java.util.List;
+import java.util.Optional;import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.empservice.employee.entity.Employee;
+import com.empservice.employee.exceptions.CustomExceptions;
+import com.empservice.employee.exceptions.DataAlreadyExistException;
+import com.empservice.employee.exceptions.ResourceNotFoundException;
+import com.empservice.employee.repo.EmployeeRepository;
+import com.empservice.employee.utils.Address;
+import com.empservice.employee.utils.EmployeeDto;
+import com.empservice.employee.utils.Helper;
+import com.empservice.employee.utils.User;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService{
+	
+
+
+	@Autowired EmployeeRepository empRepo;
+	@Autowired ModelMapper mapper;
+	
+	private EmployeeDto ModelToUtil(Employee employee) {
+		EmployeeDto utils = new EmployeeDto();
+		mapper.map(employee, utils);
+		return utils;
+	}
+	
+	private Employee utilToModel(EmployeeDto empUtil) {
+		Employee emp = new Employee();
+		mapper.map(empUtil, emp);
+		return emp;
+	}
+	@Override
+	public EmployeeDto createEmployee(EmployeeDto empUtil) {
+		if(checkIfEmpAlreadyExist(empUtil.getEmpEmail())==null) {
+			try {
+				empUtil.setPassword(Helper.getEncryptedPassword(empUtil.getPassword()));
+				return ModelToUtil(empRepo.save(utilToModel(empUtil)));
+			} catch (Exception e) {
+				throw new CustomExceptions(e.getMessage(),empUtil);
+			}
+		}else
+		throw new CustomExceptions("Employee Already Exist with the email : ", empUtil.getEmpEmail());
+	}
+	private Employee checkIfEmpAlreadyExist(String empEmail) {
+		Optional<Employee> empByEmail = empRepo.findByEmpEmail(empEmail);
+		if(empByEmail.isPresent()) {
+			return empByEmail.get();
+		}
+		return null;
+	}
+
+	@Override
+	public EmployeeDto findEmpByEmail(String email) {
+	   Employee byEmail = checkIfEmpAlreadyExist(email);
+	   if(byEmail!=null) {
+		   return ModelToUtil(byEmail);
+	   }
+		throw new ResourceNotFoundException("Employee", "email", email);
+	}
+
+	@Override
+	public List<EmployeeDto> findEmpsByOrgEmail(String orgEmail) {
+		List<Employee> employees = empRepo.findByOrgEmail(orgEmail);
+		if(employees!=null && !employees.isEmpty())
+			return employees.stream().map(emp->ModelToUtil(emp)).collect(Collectors.toList());
+		throw new ResourceNotFoundException("employees", "organisation Email", orgEmail);
+		
+	}
+
+	@Override
+	public EmployeeDto deleteEmpByEmail(String email) {
+		Employee emp = checkIfEmpAlreadyExist(email);
+		if(emp!=null) {
+			try {
+				empRepo.delete(emp);
+				return ModelToUtil(emp);
+			}catch (Exception e) {
+              e.printStackTrace();
+			}
+		}
+		else
+		throw new ResourceNotFoundException("employee", "email", email);
+		return null;
+	}
+
+	@Override
+	public EmployeeDto updateOrgEmailByEmpEmail(String empEmail,String orgEmail) {
+		Employee emp = checkIfEmpAlreadyExist(empEmail);
+		if(emp!=null) {
+			try {
+				emp.setOrgEmail(orgEmail);
+				return ModelToUtil(empRepo.save(emp));
+			}catch (Exception e) {
+              e.printStackTrace();
+			}
+		}
+		else
+		throw new ResourceNotFoundException("employee", "email", empEmail);
+		return null;
+	}
+
+	@Override
+	public EmployeeDto updateAddressEmpByEmail(String email,Address address) {
+		Employee emp = checkIfEmpAlreadyExist(email);
+		if(emp!=null) {
+			try {
+				emp.setAddLine1(address.getAddLine1());
+				emp.setCity(address.getCity());
+				emp.setZip(address.toString());
+				return ModelToUtil(empRepo.save(emp));
+			}catch (Exception e) {
+              e.printStackTrace();
+			}
+		}
+		else
+		throw new ResourceNotFoundException("employee", "email", email);
+		return null;
+	}
+
+	@Override
+	public String getPasswordByEmail(String email) {
+		Employee emp = checkIfEmpAlreadyExist(email);
+		if(emp!=null) {
+			return emp.getPassword();
+		}
+		return "Email Not Present";
+	}
+
+	@Override
+	public EmployeeDto validateEmployee(User user) {
+		Employee emp = checkIfEmpAlreadyExist(user.getEmpEmail());
+		if(emp!=null) {
+			if(Helper.decryptPassword(emp.getPassword()).equals(user.getPassword()));{
+				return ModelToUtil(emp);
+			}
+			 throw new CustomExceptions("password is wrong for email : ", user.getEmpEmail());
+		}
+		else throw new ResourceNotFoundException("employee", "email", user.getEmpEmail());
+	}
+
+}

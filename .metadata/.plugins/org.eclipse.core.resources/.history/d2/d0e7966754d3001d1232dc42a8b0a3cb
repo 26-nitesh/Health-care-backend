@@ -1,0 +1,39 @@
+package com.service.organisation.entity;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Organisation {
+
+//	organisation_name varchar
+//	organisation_email varchar
+//	organisation_address varchar
+//	password varchar
+//	insurence_agency_id int [ref: - insurence_agency.agency_id]
+//	health_checkup_policy varchar [ref: > policy.policy_id]
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int orgId;
+	private int insuranceAgencyId;
+	private List<Integer> policyIds;
+	private String organisationName;
+	@Column(nullable = false,unique = true)
+	private String organisationEmail;
+	@Column(nullable = false)
+	private String password;
+	private String addLine1;
+	private String city;
+	private String zip;
+	
+	public Organisation() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

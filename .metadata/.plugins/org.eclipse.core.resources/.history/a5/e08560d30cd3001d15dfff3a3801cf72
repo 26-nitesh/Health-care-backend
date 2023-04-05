@@ -1,0 +1,13 @@
+package com.service.employee.utils;
+
+import java.util.Base64;
+import java.util.Base64.Encoder;
+
+public class Helper {
+
+	public static String getEncryptedPassword(String password) {
+		Encoder encoder = Base64.getEncoder();
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

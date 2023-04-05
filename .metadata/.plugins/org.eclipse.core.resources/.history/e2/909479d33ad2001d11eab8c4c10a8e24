@@ -1,0 +1,5 @@
+package com.service.organisation.entity;
+
+public class Organisation {
+
+}

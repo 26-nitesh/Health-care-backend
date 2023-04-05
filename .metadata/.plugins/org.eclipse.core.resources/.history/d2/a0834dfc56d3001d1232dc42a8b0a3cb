@@ -1,0 +1,16 @@
+package com.service.organisation.services;
+
+import org.springframework.stereotype.Service;
+
+import com.service.organisation.entity.Organisation;
+
+@Service
+public class OrgServiceImpl implements OrgService{
+
+	@Override
+	public Organisation createOrg(Organisation organisation) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

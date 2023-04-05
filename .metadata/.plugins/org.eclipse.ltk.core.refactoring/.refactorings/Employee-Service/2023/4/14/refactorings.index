@@ -1,0 +1,16 @@
+1680621319132	Rename type 'EmoloyeeUtils'
+1680627672850	Rename resource 'application.properties'
+1680658229380	Copy package
+1680658543011	Copy package
+1680658891212	Delete element
+1680660131994	Copy package
+1680661007485	Copy compilation unit
+1680665752958	Rename package 'com.service.employee'
+1680665759906	Rename package 'com.service.employee.controller'
+1680665892731	Rename package 'com.service.employee.entity'
+1680665901792	Rename package 'com.service.employee.exceptions'
+1680665909382	Rename package 'com.service.employee.repo'
+1680665923457	Rename package 'com.service.employee.service'
+1680665932815	Rename package 'com.service.employee.utils'
+1680666230801	Rename type 'EmployeeUtils'
+1680692506017	Delete element

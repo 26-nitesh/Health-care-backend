@@ -1,0 +1,5 @@
+package com.service.employee.exceptions;
+
+public class DataAlreadyExistException {
+
+}

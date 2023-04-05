@@ -1,0 +1,5 @@
+package com.service.organisation.services;
+
+public class OrgServiceImpl {
+
+}

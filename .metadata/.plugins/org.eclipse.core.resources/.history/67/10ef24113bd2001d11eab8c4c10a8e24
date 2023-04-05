@@ -1,0 +1,5 @@
+package com.service.report.controller;
+
+public class ReportRestController {
+
+}

@@ -1,0 +1,39 @@
+package com.service.organisation.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.service.organisation.entity.Organisation;
+import com.service.organisation.util.APIResponse;
+
+@RestController
+@RequestMapping("/api/organisation")
+public class OrgRestController {
+
+	@PostMapping("/addOrg")
+	public ResponseEntity<Object> createOrganisation(@RequestBody Organisation organisation){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.CREATED.name(),
+							HttpStatus.CREATED, 
+							empService.createEmployee(empUtil)
+							);
+		} catch (CustomExceptions e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.CONFLICT,
+					null
+					);
+		}
+		
+	}
+}

@@ -1,0 +1,22 @@
+package com.empservice.employee.utils;
+
+import javax.crypto.Cipher;
+
+public class D {
+	 private static Cipher cipher;
+public static void main(String[] args) {
+	
+}
+public static String decrypt(String encryptedString) {
+    String decryptedText = null;
+    try {
+      cipher.init(Cipher.DECRYPT_MODE, key);
+      byte[] encryptedText = Base64.decodeBase64(encryptedString);
+      byte[] plainText = cipher.doFinal(encryptedText);
+      decryptedText = new String(plainText);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return decryptedText;
+  }
+}

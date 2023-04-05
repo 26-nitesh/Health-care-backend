@@ -1,0 +1,16 @@
+package com.service.employee.service;
+
+import javax.persistence.Entity;
+
+import com.service.employee.utils.EmployeeUtils;
+
+@Entity
+public interface EmployeeService {
+
+	EmployeeUtils createEmployee(EmployeeUtils empUtil);
+
+	EmployeeUtils findEmpByEmail(String email);
+
+	Object findEmpsByOrgEmail(String email);
+
+}

@@ -1,0 +1,8 @@
+package com.service.organisation.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class OrgRestController {
+
+}

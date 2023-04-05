@@ -1,0 +1,9 @@
+package com.service.organisation.services;
+
+import com.service.organisation.entity.Organisation;
+
+public interface OrgService {
+
+	Object createOrg(Organisation organisation);
+
+}

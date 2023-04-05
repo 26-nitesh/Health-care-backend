@@ -1,0 +1,38 @@
+package com.service.organisation.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.service.employee.entity.Employee;
+import com.service.employee.exceptions.CustomExceptions;
+import com.service.employee.utils.Helper;
+import com.service.organisation.entity.Organisation;
+import com.service.organisation.repositories.OrgRepository;
+
+@Service
+public class OrgServiceImpl implements OrgService{
+
+	@Autowired private OrgRepository orgRepo;
+	@Override
+	public Organisation createOrg(Organisation organisation) {
+		if(checkIfOrgAlreadyExist(organisation.getOrganisationEmail()==null) {
+			try {
+				empUtil.setPassword(Helper.getEncryptedPassword(empUtil.getPassword()));
+				return ModelToUtil(empRepo.save(utilToModel(empUtil)));
+			} catch (Exception e) {
+				throw new CustomExceptions(e.getMessage(),empUtil);
+			}
+		}else
+		throw new CustomExceptions("Employee Already Exist with the email : ", empUtil.getEmpEmail());
+	}
+	private Organisation checkIfOrgAlreadyExist(String orgEmail) {
+		Optional<Organisation> orgByEmail = orgRepo.findByOrganisationEmail(orgEmail);
+		if(orgByEmail.isPresent()) {
+			return orgByEmail.get();
+		}
+		return null;
+	}
+
+}
