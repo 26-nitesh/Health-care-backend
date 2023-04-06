@@ -1,0 +1,30 @@
+server:
+    port: 9595
+    
+spring:
+  application:
+    name: EMPLOYEE-SERVCIE
+    
+  datasource:
+    url: jdbc:mysql://localhost:3306/HealthCare
+    username: root
+    password: 8210
+   
+   
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+
+
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
+# mvc:
+#  pathmatch:
+#   matching-strategy=ANT_PATH_MATCHER
+

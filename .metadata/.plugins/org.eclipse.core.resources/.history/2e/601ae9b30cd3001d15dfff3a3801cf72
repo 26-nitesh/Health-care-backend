@@ -1,9 +1,0 @@
-package com.service.employee.utils;
-
-public class Helper {
-
-	public static String getEncryptedPassword(String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-}

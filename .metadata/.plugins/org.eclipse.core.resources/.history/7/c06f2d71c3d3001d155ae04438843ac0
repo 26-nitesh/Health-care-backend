@@ -1,0 +1,7 @@
+package com.empservice.employee.service;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public class CustomUserDetailService implements UserDetailsService  {
+
+}

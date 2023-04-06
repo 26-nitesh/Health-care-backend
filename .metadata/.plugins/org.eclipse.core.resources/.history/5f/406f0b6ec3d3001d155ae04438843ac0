@@ -1,0 +1,5 @@
+package com.empservice.employee.service;
+
+public class CustomUserDetailService {
+
+}

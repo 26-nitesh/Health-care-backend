@@ -24,33 +24,34 @@ import com.empservice.employee.utils.EmployeeDto;
 import com.empservice.employee.utils.User;
 
 
+
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeRestController {
 	
 	@Autowired EmployeeService empService;
-	
-	@PostMapping("/create-new-employee")
-	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
-		try {
-			return 
-				APIResponse.
-					generateResponse(
-							HttpStatus.CREATED.name(),
-							HttpStatus.CREATED, 
-							empService.createEmployee(empDto)
-							);
-		} catch (CustomExceptions e) {
-			return 
-				APIResponse.
-				generateResponse(
-					e.getMessage(),
-					HttpStatus.CONFLICT,
-					null
-					);
-		}
-		
-	}
+//	
+//	@PostMapping("public/create-new-employee")
+//	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
+//		try {
+//			return 
+//				APIResponse.
+//					generateResponse(
+//							HttpStatus.CREATED.name(),
+//							HttpStatus.CREATED, 
+//							empService.createEmployee(empDto)
+//							);
+//		} catch (CustomExceptions e) {
+//			return 
+//				APIResponse.
+//				generateResponse(
+//					e.getMessage(),
+//					HttpStatus.CONFLICT,
+//					null
+//					);
+//		}
+//		
+//	}
 	
 	@GetMapping("/{email}")
 	public ResponseEntity<Object> findByEmail(@PathVariable String email){

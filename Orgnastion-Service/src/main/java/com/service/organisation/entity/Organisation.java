@@ -3,12 +3,15 @@ package com.service.organisation.entity;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "organisation")
 public class Organisation {
 
 //	organisation_name varchar
@@ -21,7 +24,8 @@ public class Organisation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orgId;
-	private int insuranceAgencyId;
+	private String insuranceAgencyEmail;
+	@ElementCollection
 	private List<Integer> policyIds;
 	private String organisationName;
 	@Column(nullable = false,unique = true)
@@ -44,12 +48,14 @@ public class Organisation {
 		this.orgId = orgId;
 	}
 
-	public int getInsuranceAgencyId() {
-		return insuranceAgencyId;
+	
+
+	public String getInsuranceAgencyEmail() {
+		return insuranceAgencyEmail;
 	}
 
-	public void setInsuranceAgencyId(int insuranceAgencyId) {
-		this.insuranceAgencyId = insuranceAgencyId;
+	public void setInsuranceAgencyEmail(String insuranceAgencyEmail) {
+		this.insuranceAgencyEmail = insuranceAgencyEmail;
 	}
 
 	public List<Integer> getPolicyIds() {
