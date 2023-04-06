@@ -1,0 +1,7 @@
+spring.data  
+  
+  
+  data:
+    mongodb:
+      database: fdb
+      port: 27017

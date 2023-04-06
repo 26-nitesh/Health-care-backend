@@ -1,0 +1,14 @@
+package com.service.appointment.repo;
+
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import com.service.appointment.entity.AppointMent;
+
+@Repository
+public interface AppointMentRepo extends MongoRepository<AppointMent, Integer> {
+
+	Optional<AppointMent> findByEmployeeEmail(String email);
+}

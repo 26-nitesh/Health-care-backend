@@ -1,0 +1,31 @@
+package com.service.appointment.entity;
+
+import java.util.Date;
+
+import javax.annotation.Generated;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collation = "appointment")
+public class AppointMent {
+//	Table public.Appointment as Appointment {
+//		appointment_id int [pk]
+//		emp_id int [ref: - org.org_id]
+//		appointment_date datetime
+//		appointment_status varchar
+//		isVerfied boolean
+//		remarks varchar
+//		hospital_id int [ref: > hospital.hospital_id]
+//		}
+
+	
+	@Id
+	private int appintmentId;
+	private String employeeEmail;
+	private String hospitalEmail;
+	private Date appointmentDate;
+	private String status;
+	private boolean isVerified;
+	private String remarks;
+}

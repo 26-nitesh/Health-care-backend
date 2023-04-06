@@ -1,0 +1,8 @@
+package com.service.appointment.entity;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collation = "appointment")
+public class AppointMent {
+
+}

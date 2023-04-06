@@ -1,0 +1,16 @@
+package com.service.appointment.service;
+
+import org.springframework.stereotype.Service;
+
+import com.service.appointment.entity.AppointMent;
+
+@Service
+public class AppointmentServiceimpl implements AppointmentService{
+
+	@Override
+	public AppointMent createnewAppointMent(AppointMent appointment) {
+	
+		
+	}
+
+}

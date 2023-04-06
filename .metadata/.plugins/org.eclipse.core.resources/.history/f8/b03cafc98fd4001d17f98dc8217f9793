@@ -1,0 +1,21 @@
+package com.service.appointment.service;
+
+import org.springframework.stereotype.Service;
+
+import com.service.appointment.entity.AppointMent;
+import com.service.appointment.exceptions.CustomExceptions;
+
+@Service
+public class AppointmentServiceimpl implements AppointmentService{
+
+	@Override
+	public AppointMent createnewAppointMent(AppointMent appointment) {
+	
+		try {
+			
+		}catch (Exception e) {
+			throw new CustomExceptions("exception occured while creating appointment  :",e.getMessage());
+		}
+	}
+
+}

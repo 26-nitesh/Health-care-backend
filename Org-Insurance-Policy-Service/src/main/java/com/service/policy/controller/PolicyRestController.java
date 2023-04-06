@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +20,7 @@ import com.service.policy.service.utils.APIResponse;
 import com.service.policy.service.utils.PolicyKV;
 
 @RestController
-@RequestMapping("/policy")
+@RequestMapping("/api/policy")
 public class PolicyRestController {
 
 @Autowired PolicyService policyService;
@@ -32,8 +33,7 @@ public class PolicyRestController {
 					generateResponse(
 							HttpStatus.CREATED.name(),
 							HttpStatus.CREATED, 
-							policyService.createPolicy(policy)
-							);
+							policyService.createPolicy(policy));
 		} catch (Exception e) {
 			return 
 				APIResponse.
@@ -53,7 +53,7 @@ public class PolicyRestController {
 				return 
 						APIResponse.
 							generateResponse(
-									"Policy Key Not Found",
+									"Policy Name Not Found Please add First",
 									HttpStatus.BAD_REQUEST, 
 									null
 									);
@@ -63,9 +63,32 @@ public class PolicyRestController {
 					generateResponse(
 							"Updated sucessfully",
 							HttpStatus.OK, 
-							Map.of("email", orgEmail, "policy Name",kv.getPolicyKey(),"policy value", kv.getPolicyValue())
+							Map.of(
+									"email", orgEmail,
+									"policy Name",kv.getPolicyKey(),
+									"policy value", kv.getPolicyValue())
 							);
 		} catch (CustomExceptions e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+}
+	
+	@DeleteMapping("/delete-policy/{email}")
+	public ResponseEntity<Object> deletePolicyByOrg(@PathVariable String email){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"deleted sucessfully",
+							HttpStatus.OK, 
+							policyService.deletePolicyByEmail(email));
+		} catch (Exception e) {
 			return 
 				APIResponse.
 				generateResponse(

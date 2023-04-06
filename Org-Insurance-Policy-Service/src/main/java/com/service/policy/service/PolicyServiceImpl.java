@@ -3,6 +3,7 @@ package com.service.policy.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,15 @@ public class PolicyServiceImpl implements PolicyService{
 			return policies;
 		}
       throw new CustomExceptions("policy not found with email : ", email);
+	}
+
+
+
+	@Override
+	public List<Policy> deletePolicyByEmail(String email) {
+		List<Policy> policies = findByEmail(email);
+		policyRepo.deleteAll(policies);
+		return policies;
 	}
 
 }

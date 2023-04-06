@@ -1,0 +1,24 @@
+package com.service.appointment.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.service.appointment.entity.AppointMent;
+import com.service.appointment.exceptions.CustomExceptions;
+import com.service.appointment.repo.AppointMentRepo;
+
+@Service
+public class AppointmentServiceimpl implements AppointmentService{
+
+	@Autowired AppointMentRepo appoinmentRepo;
+	@Override
+	public AppointMent createnewAppointMent(AppointMent appointment) {
+	
+		try {
+			appoinmentRepo.save(appointment)
+		}catch (Exception e) {
+			throw new CustomExceptions("exception occured while creating appointment  :",e.getMessage());
+		}
+	}
+
+}

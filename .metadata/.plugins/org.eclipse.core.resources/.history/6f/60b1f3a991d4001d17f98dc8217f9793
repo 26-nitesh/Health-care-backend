@@ -1,0 +1,45 @@
+package com.service.appointment.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.service.appointment.entity.AppointMent;
+import com.service.appointment.exceptions.CustomExceptions;
+import com.service.appointment.exceptions.ResourceNotFoundException;
+import com.service.appointment.repo.AppointMentRepo;
+
+@Service
+public class AppointmentServiceimpl implements AppointmentService{
+
+	@Autowired AppointMentRepo appoinmentRepo;
+	@Override
+	public AppointMent createnewAppointMent(AppointMent appointment) {
+	
+		try {
+		    return	appoinmentRepo.save(appointment);
+		}catch (Exception e) {
+			throw new CustomExceptions("exception occured while creating appointment  :",e.getMessage());
+		}
+	}
+	@Override
+	public List<AppointMent> findByEmpEmail(String email) {
+		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmail(email);
+		if(!apps.isEmpty()) {
+		return apps;	
+		}
+		throw new ResourceNotFoundException("Appointment", "Employee-Email", email);
+		
+	}
+	@Override
+	public List<AppointMent> findByHospEmail(String email) {
+		List<AppointMent> apps = appoinmentRepo.findByHospitalEmail(email);
+		if(app.isPresent()) {
+		return app.get();	
+		}
+		throw new ResourceNotFoundException("Appointment", "Hospital-Email", email);
+	}
+
+}

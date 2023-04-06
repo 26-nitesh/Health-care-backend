@@ -1,0 +1,9 @@
+package com.service.appointment.service;
+
+import com.service.appointment.entity.AppointMent;
+
+public interface AppointmentService {
+
+	Object createnewAppointMent(AppointMent appointment);
+
+}

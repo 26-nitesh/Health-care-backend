@@ -1,0 +1,11 @@
+package com.service.appointment.service;
+
+import com.service.appointment.entity.AppointMent;
+
+public interface AppointmentService {
+
+	AppointMent createnewAppointMent(AppointMent appointment);
+
+	Object findByOrgEmail(String email);
+
+}

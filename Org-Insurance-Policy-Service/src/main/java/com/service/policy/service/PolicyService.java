@@ -12,4 +12,6 @@ public interface PolicyService {
 	List<Policy> findByEmail(String email);
 
 	Object updatePolicy(String orgEmail, PolicyKV kv);
+
+	List<Policy> deletePolicyByEmail(String email);
 }
