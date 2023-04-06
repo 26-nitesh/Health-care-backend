@@ -1,0 +1,7 @@
+package com.service.policy.service.utils;
+
+public class PolicyKV {
+
+	private String PolicyKey;
+	private String policyValue;
+}

@@ -1,0 +1,10 @@
+package com.service.policy.entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Policy {
+
+	private String orgEmail;
+	private int policyId;
+}

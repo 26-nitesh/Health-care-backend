@@ -1,0 +1,50 @@
+package com.service.policy.entity;
+
+import java.io.Serializable;
+
+public class PolicyComposite implements Serializable {
+
+	private String orgEmail;
+	private int policyId;
+	public String getOrgEmail() {
+		return orgEmail;
+	}
+	public void setOrgEmail(String orgEmail) {
+		this.orgEmail = orgEmail;
+	}
+	public int getPolicyId() {
+		return policyId;
+	}
+	public void setPolicyId(int policyId) {
+		this.policyId = policyId;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((orgEmail == null) ? 0 : orgEmail.hashCode());
+		result = prime * result + policyId;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PolicyComposite other = (PolicyComposite) obj;
+		if (orgEmail == null) {
+			if (other.orgEmail != null)
+				return false;
+		} else if (!orgEmail.equals(other.orgEmail))
+			return false;
+		if (policyId != other.policyId)
+			return false;
+		return true;
+	}
+	
+	
+	
+}

@@ -1,0 +1,16 @@
+package com.service.policy.service;
+
+import org.springframework.stereotype.Service;
+
+import com.service.policy.entity.Policy;
+
+@Service
+public class PolicyServiceImpl implements PolicyService{
+
+	@Override
+	public Policy createPolicy(Policy policy) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
