@@ -63,7 +63,7 @@ public class PolicyRestController {
 					generateResponse(
 							"Updated sucessfully",
 							HttpStatus.OK, 
-							Map.of("email", orgEmail, "policy Name",kv.getPolicyKey(),"policy value", kv.getPolicyValue())
+							Map.of("email", orgEmail, kv.getPolicyKey(), kv.getPolicyValue())
 							);
 		} catch (CustomExceptions e) {
 			return 

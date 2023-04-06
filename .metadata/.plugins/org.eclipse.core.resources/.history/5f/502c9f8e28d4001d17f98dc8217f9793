@@ -28,7 +28,6 @@ public class PolicyServiceImpl implements PolicyService{
 		List<Policy> policies = findByEmail(email);
         Map<String, Boolean> status = new HashMap<>();
         status.put("updated", false);
-        
 		policies.forEach(policy->{
 			Map<String, String> oldKV = policy.getPolicyKeyValue();
 			if(oldKV.containsKey(kv.getPolicyKey())) {
