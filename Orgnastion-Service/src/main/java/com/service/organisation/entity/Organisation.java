@@ -113,6 +113,16 @@ public class Organisation {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+
+	public Organisation(String insuranceAgencyEmail, String organisationName, String organisationEmail,
+			String password) {
+		super();
+		this.insuranceAgencyEmail = insuranceAgencyEmail;
+		this.organisationName = organisationName;
+		this.organisationEmail = organisationEmail;
+		this.password = password;
+	}
+	
 	
 	
 }
