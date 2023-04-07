@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.service.appointment.entity.AppointMent;
 import com.service.appointment.exceptions.CustomExceptions;
+import com.service.appointment.exceptions.ResourceNotFoundException;
 import com.service.appointment.service.AppointmentService;
 import com.service.appointment.utils.APIResponse;
 
@@ -57,7 +58,7 @@ public class AppointMentRestController {
 							HttpStatus.FOUND, 
 							appointmentService.findByEmpEmail(email)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -100,7 +101,7 @@ public class AppointMentRestController {
 							HttpStatus.FOUND, 
 							appointmentService.findByHospEmail(email)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -145,7 +146,7 @@ public class AppointMentRestController {
 							HttpStatus.FOUND, 
 							appointmentService.findByHospAndEmp(empEmail,hospEmail)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(

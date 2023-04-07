@@ -19,7 +19,7 @@ public class OrgServiceImpl implements OrgService{
 
 	@Autowired private OrgRepository orgRepo;
 	@Override
-	public Organisation createOrg(Organisation organisation) {
+	public Organisation createOrg(Organisation organisation) throws CustomExceptions {
 		if(checkIfOrgAlreadyExist(organisation.getOrganisationEmail())==null) {
 			try {
 				organisation.setPassword(Helper.getEncryptedPassword(organisation.getPassword()));
@@ -38,7 +38,7 @@ public class OrgServiceImpl implements OrgService{
 		return null;
 	}
 	@Override
-	public Organisation getByEmail(String email) {
+	public Organisation getByEmail(String email) throws ResourceNotFoundException {
 		Organisation byEmail = checkIfOrgAlreadyExist(email);
 		   if(byEmail!=null) {
 			   return byEmail;
@@ -46,7 +46,7 @@ public class OrgServiceImpl implements OrgService{
 			throw new ResourceNotFoundException("Orgaisation", "email", email);
 		}
 	@Override
-	public List<Organisation> getByAgencyEmail(String email) {
+	public List<Organisation> getByAgencyEmail(String email) throws CustomExceptions {
 		List<Organisation> Orgs = orgRepo.findByInsuranceAgencyEmail(email);
 		if(!Orgs.isEmpty()) {
 			return Orgs;
@@ -54,7 +54,7 @@ public class OrgServiceImpl implements OrgService{
 		throw new CustomExceptions("Organisations Not Found with agency the email : ", email);
 	}
 	@Override
-	public List<Organisation> deleteByAgencyEmail(String email) {
+	public List<Organisation> deleteByAgencyEmail(String email) throws CustomExceptions {
 		List<Organisation> Orgs = getByAgencyEmail(email);
 		if(!Orgs.isEmpty()) {
 //		List<Integer> ids = Orgs.stream().map(o->o.getOrgId()).collect(Collectors.toList());
@@ -65,7 +65,7 @@ public class OrgServiceImpl implements OrgService{
 		throw new CustomExceptions("Organisations Not Found with agency the email : ", email);
 	}
 	@Override
-	public List<Integer> findPolicyIdsByEmail(String email) {
+	public List<Integer> findPolicyIdsByEmail(String email) throws ResourceNotFoundException {
 		Organisation byEmail = checkIfOrgAlreadyExist(email);
 		   if(byEmail!=null) {
 			   return byEmail.getPolicyIds();
@@ -73,7 +73,7 @@ public class OrgServiceImpl implements OrgService{
 			throw new ResourceNotFoundException("Orgaisation", "email", email);
 		}
 	@Override
-	public Organisation deleteByEmail(String email) {
+	public Organisation deleteByEmail(String email) throws ResourceNotFoundException {
 		Organisation byEmail = checkIfOrgAlreadyExist(email);
 		   if(byEmail!=null) {
 			   orgRepo.deleteById(byEmail.getOrgId());

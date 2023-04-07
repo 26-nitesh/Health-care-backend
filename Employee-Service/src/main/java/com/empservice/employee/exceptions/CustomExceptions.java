@@ -1,6 +1,6 @@
 package com.empservice.employee.exceptions;
 
-public class CustomExceptions extends RuntimeException{
+public class CustomExceptions extends Exception{
 
 	private static final long serialVersionUID = 2196459485643738368L;
 

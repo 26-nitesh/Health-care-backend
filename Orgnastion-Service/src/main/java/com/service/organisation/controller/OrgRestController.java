@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.service.organisation.entity.Organisation;
 import com.service.organisation.exceptions.CustomExceptions;
+import com.service.organisation.exceptions.ResourceNotFoundException;
 import com.service.organisation.services.OrgService;
 import com.service.organisation.util.APIResponse;
 
@@ -54,7 +55,7 @@ public class OrgRestController {
 							HttpStatus.FOUND, 
 							orgService.getByEmail(email)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -75,7 +76,7 @@ public class OrgRestController {
 							HttpStatus.OK, 
 							orgService.deleteByEmail(email)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -140,7 +141,7 @@ public class OrgRestController {
 							HttpStatus.FOUND, 
 							orgService.findPolicyIdsByEmail(email)
 							);
-		} catch (CustomExceptions e) {
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(

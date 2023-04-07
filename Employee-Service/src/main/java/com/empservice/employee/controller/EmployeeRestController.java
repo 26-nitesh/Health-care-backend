@@ -30,36 +30,36 @@ import com.empservice.employee.utils.User;
 public class EmployeeRestController {
 	
 	@Autowired EmployeeService empService;
-//	
-//	@PostMapping("public/create-new-employee")
-//	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
-//		try {
-//			return 
-//				APIResponse.
-//					generateResponse(
-//							HttpStatus.CREATED.name(),
-//							HttpStatus.CREATED, 
-//							empService.createEmployee(empDto)
-//							);
-//		} catch (CustomExceptions e) {
-//			return 
-//				APIResponse.
-//				generateResponse(
-//					e.getMessage(),
-//					HttpStatus.CONFLICT,
-//					null
-//					);
-//		}
-//		
-//	}
+	
+	@PostMapping("public/create-new-employee")
+	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.CREATED.name(),
+							HttpStatus.CREATED, 
+							empService.createEmployee(empDto)
+							);
+		} catch (CustomExceptions e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.CONFLICT,
+					         null
+					          );
+		}
+		
+	}
 	
 	@GetMapping("/{email}")
-	public ResponseEntity<Object> findByEmail(@PathVariable String email){
+	public ResponseEntity<Object> findByEmail(@PathVariable String email) throws ResourceNotFoundException{
 		try {
 			return 
 					APIResponse.generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND,
+							HttpStatus.OK,
 							empService.findEmpByEmail(email)
 							);
 		} catch (ResourceNotFoundException e) {
@@ -78,7 +78,7 @@ public class EmployeeRestController {
 			return 
 					APIResponse.generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND,
+							HttpStatus.OK,
 							empService.findEmpsByOrgEmail(email)
 							);
 		} catch (ResourceNotFoundException e) {
@@ -92,18 +92,24 @@ public class EmployeeRestController {
 	}
 	@DeleteMapping("/delete/{email}")
 	public ResponseEntity<Object> deleteByEmail(@PathVariable String email){
-		try {
-			return 
-					APIResponse.generateResponse(
-							"deleted sucessfully",
-							HttpStatus.OK,
-							empService.deleteEmpByEmail(email)
-							);
-		} catch (ResourceNotFoundException e) {
+			try {
+				return 
+						APIResponse.generateResponse(
+								"deleted sucessfully",
+								HttpStatus.OK,
+								empService.deleteEmpByEmail(email)
+								);
+			}
+//				catch (CustomExceptions e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		} 
+		catch (Exception e) {
 			return 
 					APIResponse.generateResponse(
 							e.getMessage(),
-							HttpStatus.NOT_FOUND,
+							HttpStatus.BAD_REQUEST,
 							null);
 		}
 		
@@ -119,11 +125,11 @@ public class EmployeeRestController {
 							HttpStatus.OK,
 							empService.updateOrgEmailByEmpEmail(empEmail,orgEmail)
 							);
-		} catch (ResourceNotFoundException e) {
+		} catch (Exception e) {
 			return 
 					APIResponse.generateResponse(
 							e.getMessage(),
-							HttpStatus.NOT_FOUND,
+							HttpStatus.BAD_REQUEST,
 							null);
 		}
 		
@@ -137,11 +143,11 @@ public class EmployeeRestController {
 							HttpStatus.OK,
 							empService.updateAddressEmpByEmail(email,address)
 							);
-		} catch (ResourceNotFoundException e) {
+		} catch (Exception e) {
 			return 
 					APIResponse.generateResponse(
 							e.getMessage(),
-							HttpStatus.NOT_FOUND,
+							HttpStatus.BAD_REQUEST,
 							null);
 		}
 		
@@ -152,14 +158,14 @@ public class EmployeeRestController {
 //		return empService.getPasswordByEmail(email);
 //		
 //		}
-	@PostMapping("/validate-emp")
-	public ResponseEntity<Object>  validateEmp(@RequestBody User user){
-		try {
-			EmployeeDto emp = empService.validateEmployee(user);
-			return APIResponse.generateResponse(HttpStatus.OK.name(), HttpStatus.OK, Map.of("User Status", "Valid", "Email", emp.getEmpEmail(),"Organisation Email",emp.getOrgEmail()));
-		}catch (CustomExceptions e) {
-			return APIResponse.generateResponse(e.getMessage(), HttpStatus.FORBIDDEN, Map.of("User Status","Not Valid","Email",user.getEmail()));
-		}
-	}
+//	@PostMapping("/validate-emp")
+//	public ResponseEntity<Object>  validateEmp(@RequestBody User user){
+//		try {
+//			EmployeeDto emp = empService.validateEmployee(user);
+//			return APIResponse.generateResponse(HttpStatus.OK.name(), HttpStatus.OK, Map.of("User Status", "Valid", "Email", emp.getEmpEmail(),"Organisation Email",emp.getOrgEmail()));
+//		}catch (CustomExceptions e) {
+//			return APIResponse.generateResponse(e.getMessage(), HttpStatus.FORBIDDEN, Map.of("User Status","Not Valid","Email",user.getEmail()));
+//		}
+//	}
 
 }

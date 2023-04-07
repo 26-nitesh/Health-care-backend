@@ -1,6 +1,6 @@
 package com.service.organisation.exceptions;
 
-public class ResourceNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends Exception {
 
 	private static final long serialVersionUID = 3012558027226470104L;
 

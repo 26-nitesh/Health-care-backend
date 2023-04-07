@@ -1,6 +1,6 @@
 package com.service.appointment.exceptions;
 
-public class DataAlreadyExistException extends RuntimeException
+public class DataAlreadyExistException extends Exception
 {
 
 }

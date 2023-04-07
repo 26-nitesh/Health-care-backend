@@ -25,7 +25,7 @@ public class PolicyServiceImpl implements PolicyService{
 	
 	
 	@Override
-	public Object updatePolicy(String email,PolicyKV kv) {
+	public Object updatePolicy(String email,PolicyKV kv) throws CustomExceptions {
 		List<Policy> policies = findByEmail(email);
         Map<String, Boolean> status = new HashMap<>();
         status.put("updated", false);
@@ -57,7 +57,7 @@ public class PolicyServiceImpl implements PolicyService{
 
 
 	@Override
-	public List<Policy> findByEmail(String email) {
+	public List<Policy> findByEmail(String email) throws CustomExceptions {
 		List<Policy> policies = policyRepo.findByOrgEmail(email);
 		if(!policies.isEmpty()) {
 			return policies;
@@ -68,7 +68,7 @@ public class PolicyServiceImpl implements PolicyService{
 
 
 	@Override
-	public List<Policy> deletePolicyByEmail(String email) {
+	public List<Policy> deletePolicyByEmail(String email) throws CustomExceptions {
 		List<Policy> policies = findByEmail(email);
 		policyRepo.deleteAll(policies);
 		return policies;

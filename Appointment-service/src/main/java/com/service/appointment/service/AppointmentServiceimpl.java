@@ -16,7 +16,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 
 	@Autowired AppointMentRepo appoinmentRepo;
 	@Override
-	public AppointMent createnewAppointMent(AppointMent appointment) {
+	public AppointMent createnewAppointMent(AppointMent appointment) throws CustomExceptions {
 	
 		try {
 		    return	appoinmentRepo.save(appointment);
@@ -25,7 +25,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 		}
 	}
 	@Override
-	public List<AppointMent> findByEmpEmail(String email) {
+	public List<AppointMent> findByEmpEmail(String email) throws ResourceNotFoundException {
 		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmail(email);
 		if(!apps.isEmpty()) {
 		return apps;	
@@ -34,7 +34,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 		
 	}
 	@Override
-	public List<AppointMent> findByHospEmail(String email) {
+	public List<AppointMent> findByHospEmail(String email) throws ResourceNotFoundException {
 		List<AppointMent> apps = appoinmentRepo.findByHospitalEmail(email);
 		if(!apps.isEmpty()) {
 		return apps;	
@@ -42,7 +42,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 		throw new ResourceNotFoundException("Appointment", "Hospital-Email", email);
 	}
 	
-	void deleteAppintments(List<AppointMent> apps) {
+	void deleteAppintments(List<AppointMent> apps) throws CustomExceptions {
 		try {
 			appoinmentRepo.deleteAll(apps);
 		}catch (Exception e) {
@@ -51,19 +51,19 @@ public class AppointmentServiceimpl implements AppointmentService{
 	}
 	
 	@Override
-	public List<AppointMent> deleteByHospital(String email) {
+	public List<AppointMent> deleteByHospital(String email) throws CustomExceptions {
 		List<AppointMent> apps = appoinmentRepo.findByHospitalEmail(email);
 		deleteAppintments(apps);
 		return apps;
 	}
 	@Override
-	public List<AppointMent> deleteByEmpEmail(String email) {
+	public List<AppointMent> deleteByEmpEmail(String email) throws CustomExceptions {
 		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmail(email);
 		deleteAppintments(apps);
 		return apps;
 	}
 	@Override
-	public List<AppointMent> findByHospAndEmp(String empEmail, String hospEmail) {
+	public List<AppointMent> findByHospAndEmp(String empEmail, String hospEmail) throws ResourceNotFoundException {
 		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmailAndHospitalEmail(empEmail, hospEmail);
 		if(!apps.isEmpty()) {
 			return apps;	
@@ -71,7 +71,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 			throw new ResourceNotFoundException("Appointment", "Hospital-Email", "Employee Email :"+empEmail +" & hospital Email :"+ hospEmail);
 	}
 	@Override
-	public List<AppointMent> deleteByHospAndEmp(String empEmail, String hospEmail) {
+	public List<AppointMent> deleteByHospAndEmp(String empEmail, String hospEmail) throws CustomExceptions {
 		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmailAndHospitalEmail(empEmail, hospEmail);
 		deleteAppintments(apps);
 		return apps;
