@@ -1,5 +1,7 @@
 package com.service.appointment.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +20,7 @@ import com.service.appointment.exceptions.CustomExceptions;
 import com.service.appointment.exceptions.ResourceNotFoundException;
 import com.service.appointment.service.AppointmentService;
 import com.service.appointment.utils.APIResponse;
+import com.service.appointment.utils.UpdateAppointmentO;
 
 
 @RestController
@@ -135,9 +139,9 @@ public class AppointMentRestController {
 		
 	}
 	
-	@GetMapping("/getByHospAndEmp/{email}")
-	public ResponseEntity<Object> findByHospAndEmp(@RequestParam("empEmail") String empEmail,
-			                                       @RequestParam("HospEmail") String hospEmail){
+	@GetMapping("/getByHospAndEmp")
+	public ResponseEntity<Object> findByHospAndEmp(@RequestParam(value = "empEmail",required = true) String empEmail,
+			                                       @RequestParam(value = "HospEmail",required = true) String hospEmail){
 		try {
 			return 
 				APIResponse.
@@ -158,16 +162,38 @@ public class AppointMentRestController {
 		
 	}
 	
-	@GetMapping("/deleteByHospAndEmp/{email}")
-	public ResponseEntity<Object> deleteByHospAndEmp(@RequestParam("empEmail") String empEmail,
-			                                       @RequestParam("HospEmail") String hospEmail){
+	@PutMapping("/updateAppointmnet")
+	public ResponseEntity<Object> updateAppointment(@RequestBody UpdateAppointmentO appointment){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
-							"Deleted Sucessfully",
+							"Updated succesfully",
 							HttpStatus.OK, 
-							appointmentService.deleteByHospAndEmp(empEmail,hospEmail)
+							appointmentService.updateAppintment(appointment)
+							);
+		} catch (ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+		
+	}
+	
+	@GetMapping("/appointMent")
+	public ResponseEntity<Object> findByEmailAndDate(@RequestParam(value = "email",required = true) String empEmail,
+			                                          @RequestParam(value = "date",required = true) Date date){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.FOUND.name(),
+							HttpStatus.OK, 
+							appointmentService.findByEmpAndDate(empEmail,date)
 							);
 		} catch (CustomExceptions e) {
 			return 

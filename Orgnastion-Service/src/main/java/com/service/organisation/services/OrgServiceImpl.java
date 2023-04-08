@@ -139,6 +139,21 @@ public class OrgServiceImpl implements OrgService{
 		else
 			throw new ResourceNotFoundException("Organisation", "email", user.getEmail());
 	}
+	@Override
+	public List<String> getAllOrgEmails() throws CustomExceptions {
+		try {
+			return orgRepo.findAll().
+					stream().map(
+							org
+							    ->
+							       org.getOrganisationEmail())
+					                           .collect(Collectors.toList()
+					                                  );
+		} catch (Exception e) {
+		throw new CustomExceptions("exception occured ::"+e.getMessage());
+		}
+		
+	}
 	
 
 }

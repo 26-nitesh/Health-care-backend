@@ -1,5 +1,7 @@
 package com.service.appointment.repo;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +16,6 @@ public interface AppointMentRepo extends MongoRepository<AppointMent, Integer> {
 	List<AppointMent> findByEmployeeEmail(String email);
 	List<AppointMent> findByHospitalEmail(String email);
 	List<AppointMent> findByEmployeeEmailAndHospitalEmail(String empEmail,String hospEmail);
+	Optional<AppointMent> findByEmployeeEmailAndAppointmentDate(String email,Date appDate);
+//	Optional<AppointMent> 
 }

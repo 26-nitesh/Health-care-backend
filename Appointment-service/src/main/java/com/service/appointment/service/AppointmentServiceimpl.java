@@ -1,5 +1,6 @@
 package com.service.appointment.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import com.service.appointment.entity.AppointMent;
 import com.service.appointment.exceptions.CustomExceptions;
 import com.service.appointment.exceptions.ResourceNotFoundException;
 import com.service.appointment.repo.AppointMentRepo;
+import com.service.appointment.utils.UpdateAppointmentO;
 
 @Service
 public class AppointmentServiceimpl implements AppointmentService{
@@ -17,7 +19,9 @@ public class AppointmentServiceimpl implements AppointmentService{
 	@Autowired AppointMentRepo appoinmentRepo;
 	@Override
 	public AppointMent createnewAppointMent(AppointMent appointment) throws CustomExceptions {
-	
+		 Optional<AppointMent> appO = appoinmentRepo.findByEmployeeEmailAndAppointmentDate(appointment.getEmployeeEmail(), appointment.getAppointmentDate());
+          if(appO.isPresent())
+        	  throw new CustomExceptions("Appointment already Exist", "");
 		try {
 		    return	appoinmentRepo.save(appointment);
 		}catch (Exception e) {
@@ -75,6 +79,27 @@ public class AppointmentServiceimpl implements AppointmentService{
 		List<AppointMent> apps = appoinmentRepo.findByEmployeeEmailAndHospitalEmail(empEmail, hospEmail);
 		deleteAppintments(apps);
 		return apps;
+	}
+	@Override
+	public AppointMent updateAppintment(UpdateAppointmentO appointment) throws ResourceNotFoundException {
+		 Optional<AppointMent> appO = appoinmentRepo.findByEmployeeEmailAndAppointmentDate(appointment.getEmployeeEmail(), appointment.getAppointmentDate());
+		
+		 if(appO.isPresent()) {
+			 AppointMent app = appO.get();
+			  app.setStatus(appointment.getStatus());
+			  app.setVerified(appointment.isVerified());
+			  app.setRemarks(appointment.getRemarks());
+			  return appoinmentRepo.save(app);
+		 }
+		 throw new ResourceNotFoundException("AppointMent not found");
+	}
+	@Override
+	public AppointMent findByEmpAndDate(String empEmail, Date date) throws CustomExceptions {
+		 Optional<AppointMent> appO = appoinmentRepo.findByEmployeeEmailAndAppointmentDate(empEmail, date);
+          if(appO.isPresent()) {
+        	  return appO.get();
+          }else
+        	  throw new CustomExceptions("appointment not found","");
 	}
 
 }

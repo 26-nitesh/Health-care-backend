@@ -1,5 +1,6 @@
 package com.empservice.employee.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,7 +32,10 @@ public class Employee {
 	private String empName;
 	
 	private String empDesignation;
-	private Date dob;
+	private LocalDate dob;
+	private LocalDate dateOfJoining;
+	private boolean isHazardousExposure;
+	private LocalDate lastCheckupDate;
 	private String addLine1;
 	private String city;
 	private String zip;
@@ -89,12 +93,40 @@ public class Employee {
 		this.empDesignation = empDesignation;
 	}
 
-	public Date getDob() {
+	
+
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
+	}
+
+	public LocalDate getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining(LocalDate dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+	
+
+	public boolean isHazardousExposure() {
+		return isHazardousExposure;
+	}
+
+	public void setHazardousExposure(boolean isHazardousExposure) {
+		this.isHazardousExposure = isHazardousExposure;
+	}
+
+	public LocalDate getLastCheckupDate() {
+		return lastCheckupDate;
+	}
+
+	public void setLastCheckupDate(LocalDate lastCheckupDate) {
+		this.lastCheckupDate = lastCheckupDate;
 	}
 
 	public String getAddLine1() {
@@ -121,18 +153,7 @@ public class Employee {
 		this.zip = zip;
 	}
 
-	public Employee(String orgEmail, String password, String empName, String empDesignation, Date dob, String addLine1,
-			String city, String zip) {
-		super();
-		this.orgEmail = orgEmail;
-		this.password = password;
-		this.empName = empName;
-		this.empDesignation = empDesignation;
-		this.dob = dob;
-		this.addLine1 = addLine1;
-		this.city = city;
-		this.zip = zip;
-	}
+	
 	
 	
 }

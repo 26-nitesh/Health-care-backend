@@ -26,8 +26,6 @@ public class Organisation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orgId;
 	private String insuranceAgencyEmail;
-//	@ElementCollection
-//	private List<Integer> policyIds;
 	private String organisationName;
 	@Column(nullable = false,unique = true)
 	private String organisationEmail;

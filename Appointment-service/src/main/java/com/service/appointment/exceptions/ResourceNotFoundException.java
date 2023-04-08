@@ -11,6 +11,9 @@ public class ResourceNotFoundException extends Exception {
 		super(String.format("%s not found with %s : %s", resourceName,fieldName,fieldValue));
 		
 	}
+	public ResourceNotFoundException(String string) {
+		super(string);
+	}
 	
 	
 }

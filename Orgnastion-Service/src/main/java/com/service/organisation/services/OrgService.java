@@ -27,4 +27,6 @@ public interface OrgService {
 
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
 
+	List<String> getAllOrgEmails() throws CustomExceptions;
+
 }

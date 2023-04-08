@@ -50,6 +50,29 @@ public class OrgRestController {
 		}
 	}
 	
+	
+	@GetMapping("/all")
+	public ResponseEntity<Object> getAllOrgs(){
+		try {
+			OrgServiceLogger.log.info("request for validating user");
+			return 
+				APIResponse.
+					generateResponse(
+							"Sucess",
+							HttpStatus.OK, 
+							orgService.getAllOrgEmails()
+							);
+		} catch (Exception e) {
+			return 
+					APIResponse.
+					generateResponse(
+						e.getMessage(),
+						HttpStatus.BAD_GATEWAY,
+						null
+						);
+		}
+	}
+	
 	@PostMapping("/addOrg")
 	public ResponseEntity<Object> createOrganisation(@RequestBody @Valid Organisation organisation){
 		try {

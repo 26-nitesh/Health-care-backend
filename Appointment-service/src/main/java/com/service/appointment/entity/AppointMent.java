@@ -1,5 +1,6 @@
 package com.service.appointment.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.annotation.Generated;
@@ -7,7 +8,7 @@ import javax.annotation.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "appointment")
+@Document(collection  = "appointment")
 public class AppointMent {
 //	Table public.Appointment as Appointment {
 //		appointment_id int [pk]
@@ -20,8 +21,8 @@ public class AppointMent {
 //		}
 
 	
-	@Id
-	private int appintmentId;
+//	@Id
+//	private int appintmentId;
 	private String employeeEmail;
 	private String hospitalEmail;
 	private Date appointmentDate;
@@ -33,13 +34,13 @@ public class AppointMent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getAppintmentId() {
-		return appintmentId;
-	}
-
-	public void setAppintmentId(int appintmentId) {
-		this.appintmentId = appintmentId;
-	}
+//	public int getAppintmentId() {
+//		return appintmentId;
+//	}
+//
+//	public void setAppintmentId(int appintmentId) {
+//		this.appintmentId = appintmentId;
+//	}
 
 	public String getEmployeeEmail() {
 		return employeeEmail;
@@ -57,6 +58,7 @@ public class AppointMent {
 		this.hospitalEmail = hospitalEmail;
 	}
 
+	
 	public Date getAppointmentDate() {
 		return appointmentDate;
 	}

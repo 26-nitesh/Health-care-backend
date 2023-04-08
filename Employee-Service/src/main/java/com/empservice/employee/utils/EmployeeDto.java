@@ -1,6 +1,7 @@
 package com.empservice.employee.utils;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,7 +19,11 @@ public class EmployeeDto implements Serializable{
 	private String empName;
 	
 	private String empDesignation;
-	private Date dob;
+	private LocalDate dob;
+	private LocalDate dateOfJoining;
+	private boolean isHazardousExposure;
+	private LocalDate lastCheckupDate;
+//	private boolean 
 	private String addLine1;
 	private String city;
 	private String zip;
@@ -62,11 +67,31 @@ public class EmployeeDto implements Serializable{
 	public void setEmpDesignation(String empDesignation) {
 		this.empDesignation = empDesignation;
 	}
-	public Date getDob() {
+
+	public LocalDate getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
+	}
+	public LocalDate getDateOfJoining() {
+		return dateOfJoining;
+	}
+	public void setDateOfJoining(LocalDate dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+	
+	public boolean isHazardousExposure() {
+		return isHazardousExposure;
+	}
+	public void setHazardousExposure(boolean isHazardousExposure) {
+		this.isHazardousExposure = isHazardousExposure;
+	}
+	public LocalDate getLastCheckupDate() {
+		return lastCheckupDate;
+	}
+	public void setLastCheckupDate(LocalDate lastCheckupDate) {
+		this.lastCheckupDate = lastCheckupDate;
 	}
 	public String getAddLine1() {
 		return addLine1;
