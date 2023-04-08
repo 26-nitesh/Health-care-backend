@@ -13,6 +13,7 @@ import com.service.organisation.exceptions.CustomExceptions;
 import com.service.organisation.exceptions.ResourceNotFoundException;
 import com.service.organisation.repositories.OrgRepository;
 import com.service.organisation.util.Helper;
+import com.service.organisation.util.OrgServiceLogger;
 
 @Service
 public class OrgServiceImpl implements OrgService{
@@ -23,12 +24,17 @@ public class OrgServiceImpl implements OrgService{
 		if(checkIfOrgAlreadyExist(organisation.getOrganisationEmail())==null) {
 			try {
 				organisation.setPassword(Helper.getEncryptedPassword(organisation.getPassword()));
+				OrgServiceLogger.log.info("saving org with email {}",organisation.getOrganisationEmail());
 				return orgRepo.save(organisation);
 			} catch (Exception e) {
-				throw new CustomExceptions(e.getMessage(),organisation);
+				OrgServiceLogger.log.error("exception occurred @@@ {}",e.getMessage());
+				throw new CustomExceptions(e.getMessage(),organisation.getOrganisationEmail());
 			}
-		}else
-		throw new CustomExceptions("Organisation Already Exist with the email : ", organisation.getOrganisationEmail());
+		}else {
+
+			OrgServiceLogger.log.error("org already exist @@@ {}",organisation.getOrganisationEmail());
+			throw new CustomExceptions("Organisation Already Exist with the email : ", organisation.getOrganisationEmail());
+		}
 	}
 	private Organisation checkIfOrgAlreadyExist(String orgEmail) {
 		Optional<Organisation> orgByEmail = orgRepo.findByOrganisationEmail(orgEmail);

@@ -122,6 +122,8 @@ public class Organisation {
 		this.organisationEmail = organisationEmail;
 		this.password = password;
 	}
+
+	
 	
 	
 	

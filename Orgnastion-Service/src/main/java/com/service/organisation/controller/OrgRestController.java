@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.service.organisation.OrgnastionServiceApplication;
 import com.service.organisation.entity.Organisation;
 import com.service.organisation.exceptions.CustomExceptions;
 import com.service.organisation.exceptions.ResourceNotFoundException;
 import com.service.organisation.services.OrgService;
 import com.service.organisation.util.APIResponse;
+import com.service.organisation.util.OrgServiceLogger;
 
 @RestController
 @RequestMapping("/api/organisation")
@@ -27,6 +28,7 @@ public class OrgRestController {
 	@PostMapping("/addOrg")
 	public ResponseEntity<Object> createOrganisation(@RequestBody Organisation organisation){
 		try {
+			OrgServiceLogger.log.info("request came for creation of new organisation");
 			return 
 				APIResponse.
 					generateResponse(
