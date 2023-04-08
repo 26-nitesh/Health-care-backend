@@ -123,6 +123,22 @@ public class OrgServiceImpl implements OrgService{
 			throw new ResourceNotFoundException("Organisation", "email", org.getOrganisationName());
 	
 	}
+	@Override
+	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {
+		Organisation byEmail = checkIfOrgAlreadyExist(user.getEmail());
+		if(byEmail!=null) {
+			if(user.getPassword()==null && user.getPassword().isEmpty()) {
+				throw new ResourceNotFoundException("password not present");
+			}
+			else if(Helper.decryptPassword(byEmail.getPassword()).equals(user.getPassword())) {
+				return Helper.genrateJwtTokken(user);
+			}else {
+				throw new ResourceNotFoundException("wrong password");
+			}
+		}
+		else
+			throw new ResourceNotFoundException("Organisation", "email", user.getEmail());
+	}
 	
 
 }

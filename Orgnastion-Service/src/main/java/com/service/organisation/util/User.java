@@ -3,7 +3,7 @@ package com.service.organisation.util;
 
 public class User {
 
-private String Email;
+private String email;
 private String password;
 
 public User() {
@@ -13,13 +13,13 @@ public User() {
 
 
 public String getEmail() {
-	return Email;
+	return email;
 }
 
 
 
 public void setEmail(String email) {
-	Email = email;
+	this.email = email;
 }
 
 

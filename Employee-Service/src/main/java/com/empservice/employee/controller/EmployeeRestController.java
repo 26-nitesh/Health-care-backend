@@ -32,6 +32,27 @@ public class EmployeeRestController {
 	
 	@Autowired EmployeeService empService;
 	
+	@PostMapping("/login")
+	public ResponseEntity<Object> validateUserAndGenerateToken(@RequestBody User user){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"Sucess",
+							HttpStatus.OK, 
+							empService.validateUserAndGetToken(user)
+							);
+		} catch (Exception e) {
+			return 
+					APIResponse.
+					generateResponse(
+						e.getMessage(),
+						HttpStatus.UNAUTHORIZED,
+						null
+						);
+		}
+	}
+	
 	@PostMapping("public/create-new-employee")
 	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
 		try {

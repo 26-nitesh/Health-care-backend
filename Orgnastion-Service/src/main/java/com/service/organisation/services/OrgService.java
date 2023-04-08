@@ -25,4 +25,6 @@ public interface OrgService {
 
 	Organisation updateOrganisation(Organisation org) throws ResourceNotFoundException;
 
+	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
+
 }

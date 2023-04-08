@@ -22,4 +22,6 @@ public interface OrgRepository extends JpaRepository<Organisation, Integer> {
 	@Modifying
 	@Query(value = "delete from organisation org where org.insurance_agency_email :email",nativeQuery = true)
 	void deleteAllByInsuranceAgencyEmail(String email);
+	
+//	Optional<Organisation> findByOrganisationEmailAndPassword(String email,String password);
 }

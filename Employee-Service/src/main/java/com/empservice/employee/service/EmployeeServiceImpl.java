@@ -166,6 +166,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
 	}
 
+	@Override
+	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {
+		Employee byEmail = checkIfEmpAlreadyExist(user.getEmail());
+		if(byEmail!=null) {
+			if(user.getPassword()==null && user.getPassword().isEmpty()) {
+				throw new ResourceNotFoundException("password not present");
+			}
+			else if(Helper.decryptPassword(byEmail.getPassword()).equals(user.getPassword())) {
+				return Helper.genrateJwtTokken(user);
+			}else {
+				throw new ResourceNotFoundException("wrong password");
+			}
+		}
+		else
+			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
+	}
+
 //	@Override
 //	public String getPasswordByEmail(String email) {
 //		Employee emp = checkIfEmpAlreadyExist(email);

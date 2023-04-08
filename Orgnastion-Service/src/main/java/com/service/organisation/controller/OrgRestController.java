@@ -27,6 +27,29 @@ public class OrgRestController {
 
 	@Autowired private OrgService orgService;
 	
+	
+	@PostMapping("/login")
+	public ResponseEntity<Object> validateUserAndGenerateToken(@RequestBody User user){
+		try {
+			OrgServiceLogger.log.info("request for validating user");
+			return 
+				APIResponse.
+					generateResponse(
+							"Sucess",
+							HttpStatus.OK, 
+							orgService.validateUserAndGetToken(user)
+							);
+		} catch (Exception e) {
+			return 
+					APIResponse.
+					generateResponse(
+						e.getMessage(),
+						HttpStatus.UNAUTHORIZED,
+						null
+						);
+		}
+	}
+	
 	@PostMapping("/addOrg")
 	public ResponseEntity<Object> createOrganisation(@RequestBody @Valid Organisation organisation){
 		try {
