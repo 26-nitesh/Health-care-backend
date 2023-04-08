@@ -71,7 +71,8 @@ public class OrganisationControllerTest {
 	    public void CreateOrganisationWhenOrganiasationNotExist() throws Exception {
 	        when(orgServices.createOrg(any())).thenReturn(org1);
 	        String orgJson = mapper.writeValueAsString(org1);
-	        MvcResult andReturn = mockMvc.perform(post("/api/organisation/addOrg")
+//	        MvcResult andReturn = 
+	        		mockMvc.perform(post("/api/organisation/addOrg")
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(orgJson))
 	                .andExpect(status().isCreated())
@@ -114,8 +115,8 @@ public class OrganisationControllerTest {
 	        when(orgServices.getByEmail("org1@org.com")).
 	        thenReturn(org1);
 	        mockMvc.perform(get("/api/organisation/org/org1@org.com"))
-	                .andExpect(status().isFound())
-	                .andExpect(jsonPath("$.HttpStatus", is(302)))
+	                .andExpect(status().isOk())
+	                .andExpect(jsonPath("$.HttpStatus", is(200)))
 	                .andExpect(jsonPath("$.data.organisationName", is(org1.getOrganisationName())))
 	                .andReturn();
 	    }

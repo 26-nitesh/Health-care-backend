@@ -55,7 +55,7 @@ public class OrganisationServiceTest {
 	}
 
 	@Test
-	public void createOrg_withNewOrganisation_shouldReturnOrganisation() throws CustomExceptions {
+	public void createOrg_withNewOrganisation_shouldReturnOrganisation() throws CustomExceptions, ResourceNotFoundException {
 
 		when(orgRepo.findByOrganisationEmail(org.getOrganisationEmail())).thenReturn(Optional.ofNullable(null));
 		when(orgRepo.save(org)).thenReturn(org);

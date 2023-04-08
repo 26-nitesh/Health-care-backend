@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.empservice.employee.exceptions.CustomExceptions;
+import com.empservice.employee.exceptions.ResourceNotFoundException;
 import com.empservice.employee.service.EmployeeService;
 import com.empservice.employee.utils.APIResponse;
 import com.empservice.employee.utils.EmployeeDto;
@@ -31,7 +32,7 @@ public class PublicEmpRestController {
 							HttpStatus.CREATED, 
 							empService.createEmployee(empDto)
 							);
-		} catch (CustomExceptions e) {
+		} catch (CustomExceptions  | ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(

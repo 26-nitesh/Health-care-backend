@@ -1,5 +1,7 @@
 package com.service.organisation.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,17 +9,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.service.organisation.OrgnastionServiceApplication;
 import com.service.organisation.entity.Organisation;
 import com.service.organisation.exceptions.CustomExceptions;
 import com.service.organisation.exceptions.ResourceNotFoundException;
 import com.service.organisation.services.OrgService;
 import com.service.organisation.util.APIResponse;
 import com.service.organisation.util.OrgServiceLogger;
+import com.service.organisation.util.User;
 
 @RestController
 @RequestMapping("/api/organisation")
@@ -26,7 +28,7 @@ public class OrgRestController {
 	@Autowired private OrgService orgService;
 	
 	@PostMapping("/addOrg")
-	public ResponseEntity<Object> createOrganisation(@RequestBody Organisation organisation){
+	public ResponseEntity<Object> createOrganisation(@RequestBody @Valid Organisation organisation){
 		try {
 			OrgServiceLogger.log.info("request came for creation of new organisation");
 			return 
@@ -36,7 +38,7 @@ public class OrgRestController {
 							HttpStatus.CREATED, 
 							orgService.createOrg(organisation)
 							);
-		} catch (CustomExceptions e) {
+		} catch (CustomExceptions | ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -54,7 +56,7 @@ public class OrgRestController {
 				APIResponse.
 					generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND, 
+							HttpStatus.OK, 
 							orgService.getByEmail(email)
 							);
 		} catch (ResourceNotFoundException e) {
@@ -68,7 +70,7 @@ public class OrgRestController {
 		}
 		
 	}
-	@GetMapping("delete-org/{email}")
+	@DeleteMapping("delete-org/{email}")
 	public ResponseEntity<Object> deleteOrganisationByEmail(@PathVariable String email){
 		try {
 			return 
@@ -96,7 +98,7 @@ public class OrgRestController {
 				APIResponse.
 					generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND, 
+							HttpStatus.OK, 
 							orgService.getByAgencyEmail(email)
 							);
 		} catch (CustomExceptions e) {
@@ -133,26 +135,70 @@ public class OrgRestController {
 		
 	}
 	
-	@GetMapping("policy/{email}")
-	public ResponseEntity<Object> getPolicyIds(@PathVariable String email){
+
+	@PutMapping("/changePassword")
+	public ResponseEntity<Object> changePAssword(@RequestBody User user){
+		try {
+			orgService.changePassword(user);
+			return 
+				APIResponse.
+					generateResponse(
+							"Password changed sucessfully",
+							HttpStatus.OK, 
+							null
+							);
+		} catch (CustomExceptions | ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
+		}
+	
+}
+	
+	@PutMapping("/update-org")
+	public ResponseEntity<Object> update(@RequestBody Organisation org){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
-							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND, 
-							orgService.findPolicyIdsByEmail(email)
+							"updated sucessfully",
+							HttpStatus.OK, 
+							orgService.updateOrganisation(org)
 							);
-		} catch (ResourceNotFoundException e) {
+		} catch ( ResourceNotFoundException e) {
 			return 
 				APIResponse.
-				generateResponse(
-					e.getMessage(),
-					HttpStatus.NOT_FOUND,
-					null
-					);
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
 		}
-		
 	}
+//	@GetMapping("policy/{email}")
+//	public ResponseEntity<Object> getPolicyIds(@PathVariable String email){
+//		try {
+//			return 
+//				APIResponse.
+//					generateResponse(
+//							HttpStatus.FOUND.name(),
+//							HttpStatus.OK, 
+//							orgService.findPolicyIdsByEmail(email)
+//							);
+//		} catch (ResourceNotFoundException e) {
+//			return 
+//				APIResponse.
+//				generateResponse(
+//					e.getMessage(),
+//					HttpStatus.NOT_FOUND,
+//					null
+//					);
+//		}
+//		
+//	}
 
 }

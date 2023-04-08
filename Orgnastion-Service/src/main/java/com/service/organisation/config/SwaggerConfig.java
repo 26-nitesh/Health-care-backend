@@ -18,7 +18,7 @@ public class SwaggerConfig {
 
 		@Bean
 		public Docket postsApi() {
-			return new Docket(DocumentationType.SWAGGER_2).groupName("Java Techie").apiInfo(apiInfo()).select()
+			return new Docket(DocumentationType.SWAGGER_2).groupName("Health care").apiInfo(apiInfo()).select()
 					.paths(or(regex("/public.*"),regex("/api.*"))).build();
 //					.paths(regex("/public.*")).build();
 		}

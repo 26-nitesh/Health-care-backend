@@ -7,4 +7,8 @@ public class CustomExceptions extends Exception{
 	public CustomExceptions(String message, Object data) {
 		super(String.format("%s", message+" "+data.toString()));
 	}
+	
+	public CustomExceptions(String message) {
+		super(String.format(message));
+	}
 }

@@ -38,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		return emp;
 	}
 	@Override
-	public EmployeeDto createEmployee(EmployeeDto empDto)  throws CustomExceptions{
+	public EmployeeDto createEmployee(EmployeeDto empDto)  throws CustomExceptions, ResourceNotFoundException{
 		if(checkIfEmpAlreadyExist(empDto.getEmpEmail())==null) {
 			try {
 				empDto.setPassword(Helper.getEncryptedPassword(empDto.getPassword()));
@@ -50,7 +50,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		throw new CustomExceptions("Employee Already Exist with the email : ", empDto.getEmpEmail());
 	}
 	
-	private Employee checkIfEmpAlreadyExist(String empEmail) {
+	private Employee checkIfEmpAlreadyExist(String empEmail) throws ResourceNotFoundException {
+		if(empEmail==null || empEmail.isEmpty())
+			throw new ResourceNotFoundException("email is not valid");
 		Optional<Employee> empByEmail = empRepo.findByEmpEmail(empEmail);
 		if(empByEmail.isPresent()) {
 			return empByEmail.get();
@@ -123,6 +125,45 @@ public class EmployeeServiceImpl implements EmployeeService{
 			}
 		}
 		throw new ResourceNotFoundException("employee", "email", email);
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) throws ResourceNotFoundException {
+ 
+		Employee empFound = checkIfEmpAlreadyExist(employee.getEmpEmail());
+		if(empFound!=null) {
+			empFound.setEmpName(employee.getEmpName());
+			empFound.setAddLine1(employee.getAddLine1());
+			empFound.setCity(employee.getCity());
+			empFound.setZip(employee.getZip());
+			empFound.setDob(employee.getDob());
+			empFound.setEmpName(employee.getEmpName());
+			empFound.setEmpName(employee.getEmpName());
+			empFound.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
+			empFound.setEmpDesignation(employee.getEmpDesignation());
+			return empRepo.save(empFound);
+		}
+		else 
+			throw new ResourceNotFoundException("Employee", "email", employee.getEmpEmail());
+	
+	}
+
+	@Override
+	public Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
+		Employee emp = checkIfEmpAlreadyExist(user.getEmail());
+		if(emp!=null) {
+			if(user.getPassword()!=null) {
+				if(Helper.decryptPassword(emp.getPassword()).equals(user.getPassword())) {
+					emp.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					return  empRepo.save(emp);
+				}else {
+					throw new  CustomExceptions("Password did not match");
+				}
+			}
+			throw new  CustomExceptions("Password not valid");
+		}
+		else
+			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
 	}
 
 //	@Override

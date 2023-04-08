@@ -120,6 +120,20 @@ public class Employee {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+
+	public Employee(String orgEmail, String password, String empName, String empDesignation, Date dob, String addLine1,
+			String city, String zip) {
+		super();
+		this.orgEmail = orgEmail;
+		this.password = password;
+		this.empName = empName;
+		this.empDesignation = empDesignation;
+		this.dob = dob;
+		this.addLine1 = addLine1;
+		this.city = city;
+		this.zip = zip;
+	}
+	
 	
 }
 

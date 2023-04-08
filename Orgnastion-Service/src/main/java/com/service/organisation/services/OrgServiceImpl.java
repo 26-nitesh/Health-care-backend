@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.service.organisation.entity.Organisation;
 import com.service.organisation.exceptions.CustomExceptions;
 import com.service.organisation.exceptions.ResourceNotFoundException;
 import com.service.organisation.repositories.OrgRepository;
 import com.service.organisation.util.Helper;
 import com.service.organisation.util.OrgServiceLogger;
+import com.service.organisation.util.User;
 
 @Service
 public class OrgServiceImpl implements OrgService{
 
 	@Autowired private OrgRepository orgRepo;
 	@Override
-	public Organisation createOrg(Organisation organisation) throws CustomExceptions {
+	public Organisation createOrg(Organisation organisation) throws CustomExceptions, ResourceNotFoundException {
 		if(checkIfOrgAlreadyExist(organisation.getOrganisationEmail())==null) {
 			try {
 				organisation.setPassword(Helper.getEncryptedPassword(organisation.getPassword()));
@@ -36,7 +36,9 @@ public class OrgServiceImpl implements OrgService{
 			throw new CustomExceptions("Organisation Already Exist with the email : ", organisation.getOrganisationEmail());
 		}
 	}
-	private Organisation checkIfOrgAlreadyExist(String orgEmail) {
+	private Organisation checkIfOrgAlreadyExist(String orgEmail) throws ResourceNotFoundException {
+		if(orgEmail==null || orgEmail.isEmpty())
+			throw new ResourceNotFoundException("email id not valid");
 		Optional<Organisation> orgByEmail = orgRepo.findByOrganisationEmail(orgEmail);
 		if(orgByEmail.isPresent()) {
 			return orgByEmail.get();
@@ -70,14 +72,14 @@ public class OrgServiceImpl implements OrgService{
 		}
 		throw new CustomExceptions("Organisations Not Found with agency the email : ", email);
 	}
-	@Override
-	public List<Integer> findPolicyIdsByEmail(String email) throws ResourceNotFoundException {
-		Organisation byEmail = checkIfOrgAlreadyExist(email);
-		   if(byEmail!=null) {
-			   return byEmail.getPolicyIds();
-		   }
-			throw new ResourceNotFoundException("Orgaisation", "email", email);
-		}
+//	@Override
+//	public List<Integer> findPolicyIdsByEmail(String email) throws ResourceNotFoundException {
+//		Organisation byEmail = checkIfOrgAlreadyExist(email);
+//		   if(byEmail!=null) {
+//			   return byEmail.getPolicyIds();
+//		   }
+//			throw new ResourceNotFoundException("Orgaisation", "email", email);
+//		}
 	@Override
 	public Organisation deleteByEmail(String email) throws ResourceNotFoundException {
 		Organisation byEmail = checkIfOrgAlreadyExist(email);
@@ -86,6 +88,40 @@ public class OrgServiceImpl implements OrgService{
 			   return byEmail;
 		   }
 			throw new ResourceNotFoundException("Orgaisation", "email", email);
+	}
+	@Override
+	public Organisation changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
+		Organisation org = checkIfOrgAlreadyExist(user.getEmail());
+		if(org!=null) {
+			if(user.getPassword()!=null) {
+				if(Helper.decryptPassword(org.getPassword()).equals(user.getPassword())) {
+					org.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					return  orgRepo.save(org);
+				}else {
+					throw new  CustomExceptions("Password did not match");
+				}
+			}
+			throw new  CustomExceptions("Password not valid");
+		}
+		else
+			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
+	}
+	@Override
+	public Organisation updateOrganisation(Organisation org) throws ResourceNotFoundException {
+ 
+		Organisation orgFound = checkIfOrgAlreadyExist(org.getOrganisationEmail());
+		if(orgFound!=null) {
+			orgFound.setOrganisationName(org.getOrganisationName());
+			orgFound.setAddLine1(org.getAddLine1());
+			orgFound.setCity(org.getCity());
+			orgFound.setZip(org.getZip());
+			orgFound.setInsuranceAgencyEmail(org.getInsuranceAgencyEmail());
+			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
+			return orgRepo.save(orgFound);
+		}
+		else 
+			throw new ResourceNotFoundException("Organisation", "email", org.getOrganisationName());
+	
 	}
 	
 

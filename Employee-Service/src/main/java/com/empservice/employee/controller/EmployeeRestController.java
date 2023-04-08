@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.empservice.employee.entity.Employee;
 import com.empservice.employee.exceptions.CustomExceptions;
 import com.empservice.employee.exceptions.ResourceNotFoundException;
 import com.empservice.employee.service.EmployeeService;
@@ -41,7 +42,7 @@ public class EmployeeRestController {
 							HttpStatus.CREATED, 
 							empService.createEmployee(empDto)
 							);
-		} catch (CustomExceptions e) {
+		} catch (CustomExceptions |ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				    generateResponse(
@@ -153,6 +154,49 @@ public class EmployeeRestController {
 		
 	}
 
+	@PutMapping("/update-employee")
+	public ResponseEntity<Object> update(@RequestBody Employee employee){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"updated sucessfully",
+							HttpStatus.OK, 
+							empService.updateEmployee(employee)
+							);
+		} catch (CustomExceptions | ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
+		}
+	}
+		
+		@PutMapping("/changePassword")
+		public ResponseEntity<Object> changePAssword(@RequestBody User user){
+			try {
+				empService.changePassword(user);
+				return 
+					APIResponse.
+						generateResponse(
+								"Password changed sucessfully",
+								HttpStatus.OK, 
+								null
+								);
+			} catch (CustomExceptions | ResourceNotFoundException e) {
+				return 
+					APIResponse.
+					    generateResponse(
+						         e.getMessage(),
+						         HttpStatus.BAD_REQUEST,
+						         null
+						          );
+			}
+		
+	}
 //	@GetMapping("/getPassword/{email}")
 //	public String getPassword(@PathVariable String email) {
 //		return empService.getPasswordByEmail(email);

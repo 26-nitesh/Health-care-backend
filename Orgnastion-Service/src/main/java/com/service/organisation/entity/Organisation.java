@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "organisation")
@@ -25,8 +26,8 @@ public class Organisation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int orgId;
 	private String insuranceAgencyEmail;
-	@ElementCollection
-	private List<Integer> policyIds;
+//	@ElementCollection
+//	private List<Integer> policyIds;
 	private String organisationName;
 	@Column(nullable = false,unique = true)
 	private String organisationEmail;
@@ -58,13 +59,13 @@ public class Organisation {
 		this.insuranceAgencyEmail = insuranceAgencyEmail;
 	}
 
-	public List<Integer> getPolicyIds() {
-		return policyIds;
-	}
-
-	public void setPolicyIds(List<Integer> policyIds) {
-		this.policyIds = policyIds;
-	}
+//	public List<Integer> getPolicyIds() {
+//		return policyIds;
+//	}
+//
+//	public void setPolicyIds(List<Integer> policyIds) {
+//		this.policyIds = policyIds;
+//	}
 
 	public String getOrganisationName() {
 		return organisationName;
