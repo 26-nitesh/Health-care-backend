@@ -22,20 +22,11 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
       
-     
+#logging:
+#  level:
+#    '[org.springframework.web]': ERROR
+#    s7.
       
-#logging.level.s7.Application=WARN
-#logging.level.org.springframework.web=ERROR
-#logging.level.com.javatechie.spring.logging.api=DEBUG
-
-# Logging pattern for the console
-#logging.pattern.console= "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-
-#logging pattern for file
-#logging.pattern.file= "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-
-#logging.file=C:/Users/bahota/Desktop/spring-boot-logging/api.log
-
 
 #springdoc:
 #  swagger-ui:

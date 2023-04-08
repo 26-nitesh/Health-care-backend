@@ -162,7 +162,7 @@ public class OrganisationServiceTest {
 	}
 
 	@Test
-	public void deleteAllByEmail_when_EmailPresent_should_deleteOrganisation()
+	public void deleteAllByAgency_when_EmailPresent_should_deleteOrganisation()
 			throws ResourceNotFoundException, CustomExceptions {
 
 		when(orgRepo.findByInsuranceAgencyEmail(AGENCY_Email))
@@ -180,7 +180,7 @@ public class OrganisationServiceTest {
 	}
 
 	@Test
-	public void deleteAllByEmail_when_Email_NOT_Present_should_throwCustomExp() throws CustomExceptions {
+	public void deleteAllByAgency_when_Email_NOT_Present_should_throwCustomExp() throws CustomExceptions {
 
 		when(orgRepo.findByInsuranceAgencyEmail(AGENCY_Email)).thenReturn(Collections.emptyList());
 
