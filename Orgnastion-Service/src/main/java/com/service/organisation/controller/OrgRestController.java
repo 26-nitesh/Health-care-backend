@@ -51,7 +51,7 @@ public class OrgRestController {
 	}
 	
 	
-	@GetMapping("/all")
+	@GetMapping("/allEmails")
 	public ResponseEntity<Object> getAllOrgs(){
 		try {
 			OrgServiceLogger.log.info("request for validating user");
@@ -224,6 +224,27 @@ public class OrgRestController {
 					         null
 					          );
 		}
+		
+		
+	}
+	
+	@GetMapping("/")
+	public ResponseEntity<Object> findAll(@PathVariable String email) throws ResourceNotFoundException{
+		try {
+			return 
+					APIResponse.generateResponse(
+							HttpStatus.OK.name(),
+							HttpStatus.OK,
+							orgService.getAllOrgs()
+							);
+		} catch (CustomExceptions e) {
+			return 
+					APIResponse.generateResponse(
+							e.getMessage(),
+							HttpStatus.NOT_FOUND,
+							null);
+		}
+		
 	}
 //	@GetMapping("policy/{email}")
 //	public ResponseEntity<Object> getPolicyIds(@PathVariable String email){

@@ -53,7 +53,7 @@ public class EmployeeRestController {
 		}
 	}
 	
-	@PostMapping("public/create-new-employee")
+	@PostMapping("/create-new-employee")
 	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
 		try {
 			return 
@@ -136,26 +136,26 @@ public class EmployeeRestController {
 		}
 		
 	}
-	@PutMapping("/update-orgEmail/")
-	public ResponseEntity<Object> updateOrgEmailByEmpEmail(
-			                                              @RequestParam(value = "empEmail",required = true) String empEmail,
-			                                               @RequestParam(value = "orgEmail",required = true) String orgEmail){
-		try {
-			return 
-					APIResponse.generateResponse(
-							"updated sucessfully",
-							HttpStatus.OK,
-							empService.updateOrgEmailByEmpEmail(empEmail,orgEmail)
-							);
-		} catch (Exception e) {
-			return 
-					APIResponse.generateResponse(
-							e.getMessage(),
-							HttpStatus.BAD_REQUEST,
-							null);
-		}
-		
-	}
+//	@PutMapping("/update-orgEmail/")
+//	public ResponseEntity<Object> updateOrgEmailByEmpEmail(
+//			                                              @RequestParam(value = "empEmail",required = true) String empEmail,
+//			                                               @RequestParam(value = "orgEmail",required = true) String orgEmail){
+//		try {
+//			return 
+//					APIResponse.generateResponse(
+//							"updated sucessfully",
+//							HttpStatus.OK,
+//							empService.updateOrgEmailByEmpEmail(empEmail,orgEmail)
+//							);
+//		} catch (Exception e) {
+//			return 
+//					APIResponse.generateResponse(
+//							e.getMessage(),
+//							HttpStatus.BAD_REQUEST,
+//							null);
+//		}
+//		
+//	}
 	@PutMapping("/updateAddress/{email}")
 	public ResponseEntity<Object> updateOrgEmailByEmpEmail(@PathVariable String email,@RequestBody Address address){
 		try {

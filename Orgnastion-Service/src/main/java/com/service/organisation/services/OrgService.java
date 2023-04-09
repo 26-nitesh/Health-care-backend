@@ -1,6 +1,7 @@
 package com.service.organisation.services;
 
 import java.util.List;
+import java.util.Map;
 
 import com.service.organisation.entity.Organisation;
 import com.service.organisation.exceptions.CustomExceptions;
@@ -27,6 +28,8 @@ public interface OrgService {
 
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
 
-	List<String> getAllOrgEmails() throws CustomExceptions;
+	List<Map<String, String>> getAllOrgEmails() throws CustomExceptions;
+
+	List<Organisation> getAllOrgs() throws CustomExceptions;
 
 }

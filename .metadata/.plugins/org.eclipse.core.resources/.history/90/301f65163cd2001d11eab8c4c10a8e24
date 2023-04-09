@@ -1,5 +1,0 @@
-package com.service.appointment.controllers;
-
-public class AppointMentRestController {
-
-}

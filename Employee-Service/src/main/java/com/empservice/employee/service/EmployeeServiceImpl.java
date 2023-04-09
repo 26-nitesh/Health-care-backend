@@ -42,7 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(checkIfEmpAlreadyExist(empDto.getEmpEmail())==null) {
 			try {
 				empDto.setPassword(Helper.getEncryptedPassword(empDto.getPassword()));
-				return ModelToDto(empRepo.save(dtoToModel(empDto)));
+				EmployeeDto createdEmp = ModelToDto(empRepo.save(dtoToModel(empDto)));
+				createdEmp.setPassword("*****");
+				return createdEmp;
 			} catch (Exception e) {
 				throw new CustomExceptions("exception occured while saving employee with email : ",empDto.getEmpEmail());
 			}
@@ -117,7 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			try {
 				emp.setAddLine1(address.getAddLine1());
 				emp.setCity(address.getCity());
-				emp.setZip(address.toString());
+				emp.setZip(address.getZip());
 				return ModelToDto(empRepo.save(emp));
 			}catch (Exception e) {
               e.printStackTrace();
@@ -128,9 +130,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee updateEmployee(Employee employee) throws ResourceNotFoundException {
+	public Employee updateEmployee(Employee employee) throws ResourceNotFoundException, CustomExceptions {
  
 		Employee empFound = checkIfEmpAlreadyExist(employee.getEmpEmail());
+		if(!validatePassword(empFound, employee))
+			throw new CustomExceptions("New Password and old Password did not match");
 		if(empFound!=null) {
 			empFound.setEmpName(employee.getEmpName());
 			empFound.setAddLine1(employee.getAddLine1());
@@ -148,6 +152,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	}
 
+	public boolean validatePassword(Employee oldEmp, Employee newEmp) {
+		
+		return Helper.
+				decryptPassword(
+						oldEmp.getPassword()).equals(newEmp.getPassword());
+	}
 	@Override
 	public Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
 		Employee emp = checkIfEmpAlreadyExist(user.getEmail());

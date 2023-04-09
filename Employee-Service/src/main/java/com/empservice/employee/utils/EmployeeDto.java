@@ -81,6 +81,7 @@ public class EmployeeDto implements Serializable{
 		this.dateOfJoining = dateOfJoining;
 	}
 	
+	
 	public boolean isHazardousExposure() {
 		return isHazardousExposure;
 	}

@@ -18,19 +18,19 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int employeeId;
-	
+
 	@Column(nullable = false)
 	private String orgEmail;
-	
-	@Column(unique = true,nullable = false)
+
+	@Column(unique = true, nullable = false)
 	private String empEmail;
-	
+
 	@Column(nullable = false)
 	private String password;
-	
+
 	@Column(nullable = false)
 	private String empName;
-	
+
 	private String empDesignation;
 	private LocalDate dob;
 	private LocalDate dateOfJoining;
@@ -51,7 +51,6 @@ public class Employee {
 	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
-
 
 	public String getOrgEmail() {
 		return orgEmail;
@@ -93,8 +92,6 @@ public class Employee {
 		this.empDesignation = empDesignation;
 	}
 
-	
-
 	public LocalDate getDob() {
 		return dob;
 	}
@@ -109,16 +106,6 @@ public class Employee {
 
 	public void setDateOfJoining(LocalDate dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
-	}
-
-	
-
-	public boolean isHazardousExposure() {
-		return isHazardousExposure;
-	}
-
-	public void setHazardousExposure(boolean isHazardousExposure) {
-		this.isHazardousExposure = isHazardousExposure;
 	}
 
 	public LocalDate getLastCheckupDate() {
@@ -153,8 +140,12 @@ public class Employee {
 		this.zip = zip;
 	}
 
-	
-	
-	
-}
+	public boolean isHazardousExposure() {
+		return isHazardousExposure;
+	}
 
+	public void setHazardousExposure(boolean isHazardousExposure) {
+		this.isHazardousExposure = isHazardousExposure;
+	}
+
+}

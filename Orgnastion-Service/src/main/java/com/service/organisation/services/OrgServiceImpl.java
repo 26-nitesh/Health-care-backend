@@ -1,6 +1,7 @@
 package com.service.organisation.services;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -110,6 +111,8 @@ public class OrgServiceImpl implements OrgService{
 	public Organisation updateOrganisation(Organisation org) throws ResourceNotFoundException {
  
 		Organisation orgFound = checkIfOrgAlreadyExist(org.getOrganisationEmail());
+		if(!validatePassword(orgFound, org))
+			throw new ResourceNotFoundException("New Password and old Password did not match");
 		if(orgFound!=null) {
 			orgFound.setOrganisationName(org.getOrganisationName());
 			orgFound.setAddLine1(org.getAddLine1());
@@ -122,6 +125,11 @@ public class OrgServiceImpl implements OrgService{
 		else 
 			throw new ResourceNotFoundException("Organisation", "email", org.getOrganisationName());
 	
+	}
+	private boolean validatePassword(Organisation oldOrg, Organisation newOrg) {
+		return Helper.
+				decryptPassword(
+						oldOrg.getPassword()).equals(newOrg.getPassword());
 	}
 	@Override
 	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {
@@ -140,19 +148,25 @@ public class OrgServiceImpl implements OrgService{
 			throw new ResourceNotFoundException("Organisation", "email", user.getEmail());
 	}
 	@Override
-	public List<String> getAllOrgEmails() throws CustomExceptions {
+	public List<Map<String, String>> getAllOrgEmails() throws CustomExceptions {
 		try {
 			return orgRepo.findAll().
 					stream().map(
 							org
 							    ->
-							       org.getOrganisationEmail())
+							Map.of("Org Name", org.getOrganisationName(),
+        		            		"Org Email",org.getOrganisationEmail()))
 					                           .collect(Collectors.toList()
 					                                  );
 		} catch (Exception e) {
 		throw new CustomExceptions("exception occured ::"+e.getMessage());
 		}
 		
+	}
+	@Override
+	public List<Organisation> getAllOrgs() throws CustomExceptions {
+		// TODO Auto-generated method stub
+		return orgRepo.findAll();
 	}
 	
 
