@@ -27,9 +27,9 @@ public interface EmployeeService {
 
 	Employee updateEmployee(Employee employee) throws CustomExceptions,ResourceNotFoundException;
 
-	Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
-
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
+
+	Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
 
 //	String getPasswordByEmail(String email);
 //

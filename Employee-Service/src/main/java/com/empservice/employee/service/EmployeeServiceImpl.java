@@ -158,13 +158,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 				decryptPassword(
 						oldEmp.getPassword()).equals(newEmp.getPassword());
 	}
+
 	@Override
 	public Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
 		Employee emp = checkIfEmpAlreadyExist(user.getEmail());
 		if(emp!=null) {
 			if(user.getPassword()!=null) {
 				if(Helper.decryptPassword(emp.getPassword()).equals(user.getPassword())) {
-					emp.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					emp.setPassword(Helper.getEncryptedPassword(user.getNewPassword()));
 					return  empRepo.save(emp);
 				}else {
 					throw new  CustomExceptions("Password did not match");

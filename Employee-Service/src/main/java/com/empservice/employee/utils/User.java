@@ -5,9 +5,21 @@ public class User {
 
 private String email;
 private String password;
-
+private String newPassword;
 public User() {
 	// TODO Auto-generated constructor stub
+}
+
+
+
+public String getNewPassword() {
+	return newPassword;
+}
+
+
+
+public void setNewPassword(String newPassword) {
+	this.newPassword = newPassword;
 }
 
 
