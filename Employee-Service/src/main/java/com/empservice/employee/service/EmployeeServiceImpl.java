@@ -26,26 +26,31 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired EmployeeRepository empRepo;
 	@Autowired ModelMapper mapper;
 	
-	private EmployeeDto ModelToDto(Employee employee) {
-		EmployeeDto utils = new EmployeeDto();
-		mapper.map(employee, utils);
-		return utils;
+	@Override
+	public  EmployeeDto ModelToDto(Employee employee) {
+//		EmployeeDto utils = new EmployeeDto();
+//		System.out.println("comming "+employee.getEmpEmail());
+	return	mapper.map(employee, EmployeeDto.class);
+//		System.out.println("coming");
+//		return utils;
 	}
-	
-	private Employee dtoToModel(EmployeeDto empDto) {
-		Employee emp = new Employee();
-		mapper.map(empDto, emp);
-		return emp;
+	@Override
+	public Employee dtoToModel(EmployeeDto empDto) {
+//		Employee emp = new Employee();
+		return mapper.map(empDto, Employee.class);
+//		return emp;
 	}
 	@Override
 	public EmployeeDto createEmployee(EmployeeDto empDto)  throws CustomExceptions, ResourceNotFoundException{
 		if(checkIfEmpAlreadyExist(empDto.getEmpEmail())==null) {
 			try {
+				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
 				empDto.setPassword(Helper.getEncryptedPassword(empDto.getPassword()));
 				EmployeeDto createdEmp = ModelToDto(empRepo.save(dtoToModel(empDto)));
 				createdEmp.setPassword("*****");
 				return createdEmp;
 			} catch (Exception e) {
+				e.printStackTrace();
 				throw new CustomExceptions("exception occured while saving employee with email : ",empDto.getEmpEmail());
 			}
 		}else
@@ -195,6 +200,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		else
 			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
 	}
+
 
 //	@Override
 //	public String getPasswordByEmail(String email) {

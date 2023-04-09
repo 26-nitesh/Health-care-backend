@@ -37,7 +37,7 @@ public class HospitalServiceImpls implements HospitalService {
 			}
 		}
 		else
-			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
+			throw new ResourceNotFoundException("Hospital", "email", user.getEmail());
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class HospitalServiceImpls implements HospitalService {
 				throw new CustomExceptions("exception occured while saving employee with email : ",hospital.getHospitalEmail());
 			}
 		}else
-		throw new CustomExceptions("Employee Already Exist with the email : ", hospital.getHospitalEmail());
+		throw new CustomExceptions("Hospital Already Exist with the email : ", hospital.getHospitalEmail());
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class HospitalServiceImpls implements HospitalService {
 	@Override
 	public List<Hospital> findByAgency(String email) throws ResourceNotFoundException{
 	   List<Hospital> hospitals = hospitalRepository.findByAgencyEmail(email);
-	   if(hospitals!=null && hospitals.isEmpty())
+	   if(hospitals!=null && !hospitals.isEmpty())
 		   return hospitals;
 	   throw new ResourceNotFoundException("Hospitals", "Agency Email", email);
 	}

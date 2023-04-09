@@ -37,7 +37,13 @@ public class Hospital {
 //	
 //	@ElementCollection
 //	private List<String> agencies;
-	
+	public Hospital() {
+		// TODO Auto-generated constructor stub
+	}
+	public Hospital(String hospitalEmail, String password) {
+		this.hospitalEmail = hospitalEmail;
+		this.password = password;
+	}
 	public int getHospitalId() {
 		return hospitalId;
 	}
@@ -84,6 +90,12 @@ public class Hospital {
 		return agencyEmail;
 	}
 	public void setAgencyEmail(String agencyEmail) {
+		this.agencyEmail = agencyEmail;
+	}
+	public Hospital(String hospitalEmail, String password, String agencyEmail) {
+		super();
+		this.hospitalEmail = hospitalEmail;
+		this.password = password;
 		this.agencyEmail = agencyEmail;
 	}
 	

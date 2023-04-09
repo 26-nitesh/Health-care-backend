@@ -1,4 +1,4 @@
-package com.service.agency;
+package com.agencyservice.agency;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

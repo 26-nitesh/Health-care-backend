@@ -88,6 +88,11 @@ public class Agency {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+	public Agency(String agencyEmail, String password) {
+		super();
+		this.agencyEmail = agencyEmail;
+		this.password = password;
+	}
 	
 	
 	

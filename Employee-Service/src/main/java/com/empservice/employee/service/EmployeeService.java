@@ -30,7 +30,8 @@ public interface EmployeeService {
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
 
 	Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
-
+	EmployeeDto ModelToDto(Employee employee);
+	 Employee dtoToModel(EmployeeDto empDto);
 //	String getPasswordByEmail(String email);
 //
 //	EmployeeDto validateEmployee(User user);
