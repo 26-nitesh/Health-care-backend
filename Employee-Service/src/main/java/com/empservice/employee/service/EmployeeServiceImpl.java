@@ -163,6 +163,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
 		Employee emp = checkIfEmpAlreadyExist(user.getEmail());
 		if(emp!=null) {
+			if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
+				throw new  CustomExceptions("New Password not valid");
 			if(user.getPassword()!=null) {
 				if(Helper.decryptPassword(emp.getPassword()).equals(user.getPassword())) {
 					emp.setPassword(Helper.getEncryptedPassword(user.getNewPassword()));

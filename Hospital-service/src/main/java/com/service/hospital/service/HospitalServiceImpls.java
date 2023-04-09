@@ -24,6 +24,8 @@ public class HospitalServiceImpls implements HospitalService {
 	@Override
 	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {
 		Hospital byEmail = checkIfHospAlreadyExist(user.getEmail());
+		if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
+			throw new  ResourceNotFoundException("New Password not valid");
 		if(byEmail!=null) {
 			if(user.getPassword()==null && user.getPassword().isEmpty()) {
 				throw new ResourceNotFoundException("password not present");
@@ -81,7 +83,7 @@ public class HospitalServiceImpls implements HospitalService {
 		if(hospital!=null) {
 			if(user.getPassword()!=null) {
 				if(Helper.decryptPassword(hospital.getPassword()).equals(user.getPassword())) {
-					hospital.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					hospital.setPassword(Helper.getEncryptedPassword(user.getNewPassword()));
 					return  hospitalRepository.save(hospital);
 				}else {
 					throw new  CustomExceptions("Password did not match");

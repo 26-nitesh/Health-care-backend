@@ -98,10 +98,12 @@ public class AgencyServiceImpl implements AgencyService {
 	@Override
 	public Agency changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
 		Agency agency = checkIfAgencyAlreadyExist(user.getEmail());
+		if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
+			throw new  CustomExceptions("New Password not valid");
 		if(agency!=null) {
 			if(user.getPassword()!=null) {
 				if(Helper.decryptPassword(agency.getPassword()).equals(user.getPassword())) {
-					agency.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					agency.setPassword(Helper.getEncryptedPassword(user.getNewPassword()));
 					return  agencyRepositpory.save(agency);
 				}else {
 					throw new  CustomExceptions("Password did not match");

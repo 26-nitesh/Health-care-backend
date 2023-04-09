@@ -94,9 +94,11 @@ public class OrgServiceImpl implements OrgService{
 	public Organisation changePassword(User user) throws ResourceNotFoundException, CustomExceptions {
 		Organisation org = checkIfOrgAlreadyExist(user.getEmail());
 		if(org!=null) {
+			if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
+				throw new  CustomExceptions("New Password not valid");
 			if(user.getPassword()!=null) {
 				if(Helper.decryptPassword(org.getPassword()).equals(user.getPassword())) {
-					org.setPassword(Helper.getEncryptedPassword(user.getPassword()));
+					org.setPassword(Helper.getEncryptedPassword(user.getNewPassword()));
 					return  orgRepo.save(org);
 				}else {
 					throw new  CustomExceptions("Password did not match");
