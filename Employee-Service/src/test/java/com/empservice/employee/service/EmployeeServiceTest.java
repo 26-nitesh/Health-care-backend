@@ -3,6 +3,8 @@ package com.empservice.employee.service;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,9 +32,7 @@ import com.empservice.employee.utils.EmployeeDto;
 public class EmployeeServiceTest {
 
 	private Employee employee = null;
-	private EmployeeDto dto = null;
 	
-	@Autowired ModelMapper mapper;
 	
 	@Autowired private EmployeeService empService;
 	
@@ -40,23 +40,93 @@ public class EmployeeServiceTest {
 	
 	@BeforeEach
 	public void SetUp() {
-	    dto = new EmployeeDto();
-	    dto.setEmpEmail("emp@emp.com");
-	    dto.setPassword("pass");
-	    dto.setOrgEmail("org@org.com");
+		employee = new Employee();
+		employee.setEmpEmail("emp@emp.com");
+		employee.setPassword("pass");
+		employee.setOrgEmail("org@org.com");
 	    
 	}
 	
 	@AfterEach
 	public void drop() {
 		employee = null;
-		dto = null;
 	}
 	
 	@Test
 	public void createEmp_withNewEmp_shouldReturnEmp() throws CustomExceptions, ResourceNotFoundException {
 
-		
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.ofNullable(null));
+		when(empRepo.save(employee)).thenReturn(employee);
 
+		// Act
+		  Employee result = empService.createEmployee(employee);
+
+		// Assert
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		verify(empRepo, times(1)).save(employee);
+		assertNotNull(result);
+		assertEquals(employee, result);
+
+	}
+	
+	@Test
+	public void createEmp_withExistingEmp_shouldThrowCustomExceptions() {
+
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.of(employee));
+
+		// Act and Assert
+		CustomExceptions exception = assertThrows(CustomExceptions.class, () -> {
+			empService.createEmployee(employee);
+		});
+
+		// Assert
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		verify(empRepo, never()).save(employee);
+		assertEquals("Employee Already Exist with the email :  emp@emp.com", exception.getMessage());
+	}
+	
+	@Test
+	public void getByEmail_when_NoEmailPresent_shouldThrowResoureNotFoundException() throws ResourceNotFoundException {
+
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.ofNullable(null));
+
+		ResourceNotFoundException exp = assertThrows(ResourceNotFoundException.class,
+				() -> empService.findEmpByEmail("emp@emp.com"));
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		assertEquals("Employee not found with email : emp@emp.com", exp.getMessage());
+	}
+
+	@Test
+	public void getByEmail_when_EmailPresent_should_ReturnEmployee() throws ResourceNotFoundException {
+
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.of(employee));
+
+		Employee result = empService.findEmpByEmail("emp@emp.com");
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		assertNotNull(result);
+		assertEquals(employee, result);
+	}
+	
+	@Test
+	public void deleteByEmail_when_NoEmailPresent_shouldThrowResoureNotFoundException()
+			throws ResourceNotFoundException {
+
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.ofNullable(null));
+
+		ResourceNotFoundException exp = assertThrows(ResourceNotFoundException.class,
+				() -> empService.deleteEmpByEmail("emp@emp.com"));
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		assertEquals("employee not found with email : emp@emp.com", exp.getMessage());
+	}
+
+	@Test
+	public void getByEmail_when_EmailPresent_should_deleteOrganisation() throws ResourceNotFoundException, CustomExceptions {
+
+		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.of(employee));
+
+		Employee result = empService.deleteEmpByEmail("emp@emp.com");
+		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		assertNotNull(result);
+		assertEquals(employee, result);
 	}
 }
