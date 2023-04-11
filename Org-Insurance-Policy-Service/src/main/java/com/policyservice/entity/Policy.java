@@ -1,4 +1,4 @@
-package com.service.policy.entity;
+package com.policyservice.entity;
 
 import java.util.Map;
 
@@ -29,9 +29,7 @@ public class Policy {
 	private String orgEmail;
 	
 	private String policyName;
-	
-	private String HazardousExposure;
-	
+		
 	private int age;
 	
 	private int minMonthOfService;

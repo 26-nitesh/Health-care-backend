@@ -229,7 +229,7 @@ public class OrgRestController {
 	}
 	
 	@GetMapping("/")
-	public ResponseEntity<Object> findAll(@PathVariable String email) throws ResourceNotFoundException{
+	public ResponseEntity<Object> findAll() throws ResourceNotFoundException{
 		try {
 			return 
 					APIResponse.generateResponse(

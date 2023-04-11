@@ -1,4 +1,4 @@
-package com.service.policy.controller;
+package com.policyservice.controller;
 
 import java.util.Map;
 
@@ -6,18 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.service.policy.entity.Policy;
-import com.service.policy.exceptions.CustomExceptions;
-import com.service.policy.service.PolicyService;
-import com.service.policy.service.utils.APIResponse;
-import com.service.policy.service.utils.PolicyKV;
+import com.policyservice.entity.Policy;
+import com.policyservice.exceptions.CustomExceptions;
+import com.policyservice.exceptions.ResourceNotFoundException;
+import com.policyservice.service.PolicyService;
+import com.policyservice.utils.APIResponse;
+import com.policyservice.utils.PolicyServiceLogger;
+
 
 @RestController
 @RequestMapping("/api/policy")
@@ -35,6 +39,7 @@ public class PolicyRestController {
 							HttpStatus.CREATED, 
 							policyService.createPolicy(policy));
 		} catch (Exception e) {
+			PolicyServiceLogger.log.error("exception in creating new Policy {}",e.getMessage());
 			return 
 				APIResponse.
 				generateResponse(
@@ -46,29 +51,43 @@ public class PolicyRestController {
 }
 	
 	@PutMapping("/update-policy/{orgEmail}")
-	public ResponseEntity<Object> updatePolicyByPolicyName(@PathVariable String  orgEmail,@RequestBody PolicyKV kv){
+	public ResponseEntity<Object> updatePolicyByPolicyName(@PathVariable String  orgEmail,
+			                                         @RequestBody Policy policy){
 		try {
-			Object policy = policyService.updatePolicy(orgEmail,kv);
-			if(policy==null) {
-				return 
-						APIResponse.
-							generateResponse(
-									"Policy Name Not Found Please add First",
-									HttpStatus.BAD_REQUEST, 
-									null
-									);
-			}
+			policyService.updatePolicy(orgEmail,policy);
+			
 			return 
 				APIResponse.
 					generateResponse(
 							"Updated sucessfully",
 							HttpStatus.OK, 
-							Map.of(
-									"email", orgEmail,
-									"policy Name",kv.getPolicyKey(),
-									"policy value", kv.getPolicyValue())
+							policy
 							);
-		} catch (CustomExceptions e) {
+		} catch (CustomExceptions | ResourceNotFoundException e  ) {
+			PolicyServiceLogger.log.error("exception in updating  Policy {}",e.getMessage());
+
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.BAD_REQUEST,
+					null
+					);
+		}
+}
+	
+	@DeleteMapping("/delete-all-policy/{email}")
+	public ResponseEntity<Object> deletePolicyByOrg(@PathVariable String email){
+		try {
+			policyService.deletePolicyByEmail(email);
+			PolicyServiceLogger.log.info("policy deleted");
+         return 
+				APIResponse.
+					generateResponse(
+							"deleted sucessfully",
+							HttpStatus.OK, 
+							null);
+		} catch (Exception e) {
 			return 
 				APIResponse.
 				generateResponse(
@@ -78,17 +97,17 @@ public class PolicyRestController {
 					);
 		}
 }
-	
-	@DeleteMapping("/delete-policy/{email}")
-	public ResponseEntity<Object> deletePolicyByOrg(@PathVariable String email){
+
+	@GetMapping("/get-all-policy/{email}")
+	public ResponseEntity<Object> getAllPolicyByOrg(@PathVariable String email){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
-							"deleted sucessfully",
+							HttpStatus.FOUND.name(),
 							HttpStatus.OK, 
-							policyService.deletePolicyByEmail(email));
-		} catch (Exception e) {
+							policyService.getAllPolicyByOrgEmail(email));
+		} catch (ResourceNotFoundException e) {
 			return 
 				APIResponse.
 				generateResponse(

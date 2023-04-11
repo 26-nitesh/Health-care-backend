@@ -1,4 +1,4 @@
-package com.service.policy.exceptions;
+package com.policyservice.exceptions;
 
 public class ResourceNotFoundException extends Exception {
 

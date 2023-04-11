@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "organisation")
+@Table(name = "organisation_tbl")
 public class Organisation {
 
 //	organisation_name varchar

@@ -54,14 +54,14 @@ public class EmployeeRestController {
 	}
 	
 	@PostMapping("/create-new-employee")
-	public ResponseEntity<Object> createNewEmployee(@RequestBody EmployeeDto empDto){
+	public ResponseEntity<Object> createNewEmployee(@RequestBody Employee employee){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
 							HttpStatus.CREATED.name(),
 							HttpStatus.CREATED, 
-							empService.createEmployee(empDto)
+							empService.createEmployee(employee)
 							);
 		} catch (CustomExceptions |ResourceNotFoundException e) {
 			return 

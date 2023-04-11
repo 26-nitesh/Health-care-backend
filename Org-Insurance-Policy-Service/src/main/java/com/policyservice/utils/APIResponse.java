@@ -1,4 +1,4 @@
-package com.service.policy.service.utils;
+package com.policyservice.utils;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

@@ -26,38 +26,38 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Autowired EmployeeRepository empRepo;
 	@Autowired ModelMapper mapper;
 	
+//	@Override
+//	public  EmployeeDto ModelToDto(Employee employee) {
+////		EmployeeDto utils = new EmployeeDto();
+////		System.out.println("comming "+employee.getEmpEmail());
+//	return	mapper.map(employee, EmployeeDto.class);
+////		System.out.println("coming");
+////		return utils;
+//	}
+//	@Override
+//	public Employee dtoToModel(EmployeeDto empDto) {
+////		Employee emp = new Employee();
+//		return mapper.map(empDto, Employee.class);
+////		return emp;
+//	}
 	@Override
-	public  EmployeeDto ModelToDto(Employee employee) {
-//		EmployeeDto utils = new EmployeeDto();
-//		System.out.println("comming "+employee.getEmpEmail());
-	return	mapper.map(employee, EmployeeDto.class);
-//		System.out.println("coming");
-//		return utils;
-	}
-	@Override
-	public Employee dtoToModel(EmployeeDto empDto) {
-//		Employee emp = new Employee();
-		return mapper.map(empDto, Employee.class);
-//		return emp;
-	}
-	@Override
-	public EmployeeDto createEmployee(EmployeeDto empDto)  throws CustomExceptions, ResourceNotFoundException{
-		if(checkIfEmpAlreadyExist(empDto.getEmpEmail())==null) {
+	public Employee createEmployee(Employee employee)  throws CustomExceptions, ResourceNotFoundException{
+		if(checkIfEmpAlreadyExist(employee.getEmpEmail(),employee.getOrgEmail())==null) {
 			try {
-				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
-				empDto.setPassword(Helper.getEncryptedPassword(empDto.getPassword()));
-				EmployeeDto createdEmp = ModelToDto(empRepo.save(dtoToModel(empDto)));
+//				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
+				employee.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
+				Employee createdEmp =empRepo.save(employee);
 				createdEmp.setPassword("*****");
 				return createdEmp;
 			} catch (Exception e) {
-				e.printStackTrace();
-				throw new CustomExceptions("exception occured while saving employee with email : ",empDto.getEmpEmail());
+//				e.printStackTrace();
+				throw new CustomExceptions("exception occured while saving employee with email : ",employee.getEmpEmail());
 			}
 		}else
-		throw new CustomExceptions("Employee Already Exist with the email : ", empDto.getEmpEmail());
+		throw new CustomExceptions("Employee Already Exist with the email : ", employee.getEmpEmail());
 	}
 	
-	private Employee checkIfEmpAlreadyExist(String empEmail) throws ResourceNotFoundException {
+	private Employee checkIfEmpAlreadyExist(String empEmail,String orgEmail) throws ResourceNotFoundException {
 		if(empEmail==null || empEmail.isEmpty())
 			throw new ResourceNotFoundException("email is not valid");
 		Optional<Employee> empByEmail = empRepo.findByEmpEmail(empEmail);
@@ -68,30 +68,30 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public EmployeeDto findEmpByEmail(String email) throws ResourceNotFoundException {
+	public Employee findEmpByEmail(String email) throws ResourceNotFoundException {
 	   Employee byEmail = checkIfEmpAlreadyExist(email);
 	   if(byEmail!=null) {
-		   return ModelToDto(byEmail);
+		   return byEmail;
 	   }
 		throw new ResourceNotFoundException("Employee", "email", email);
 	}
 
 	@Override
-	public List<EmployeeDto> findEmpsByOrgEmail(String orgEmail) throws ResourceNotFoundException {
+	public List<Employee> findEmpsByOrgEmail(String orgEmail) throws ResourceNotFoundException {
 		List<Employee> employees = empRepo.findByOrgEmail(orgEmail);
 		if(employees!=null && !employees.isEmpty())
-			return employees.stream().map(emp->ModelToDto(emp)).collect(Collectors.toList());
-		throw new ResourceNotFoundException("employees", "organisation Email", orgEmail);
+           return employees;
+			throw new ResourceNotFoundException("employees", "organisation Email", orgEmail);
 		
 	}
 
 	@Override
-	public EmployeeDto deleteEmpByEmail(String email) throws ResourceNotFoundException, CustomExceptions{
+	public Employee deleteEmpByEmail(String email) throws ResourceNotFoundException, CustomExceptions{
 		Employee emp = checkIfEmpAlreadyExist(email);
 		if(emp!=null) {
 			try {
 				empRepo.delete(emp);
-				return ModelToDto(emp);
+				return emp;
 			}catch (Exception e) {
               e.printStackTrace();
               throw new CustomExceptions("Exception occured while deleting  ", e.getMessage());
@@ -102,12 +102,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public EmployeeDto updateOrgEmailByEmpEmail(String empEmail,String orgEmail) throws CustomExceptions ,ResourceNotFoundException {
+	public Employee updateOrgEmailByEmpEmail(String empEmail,String orgEmail) throws CustomExceptions ,ResourceNotFoundException {
 		Employee emp = checkIfEmpAlreadyExist(empEmail);
 		if(emp!=null) {
 			try {
 				emp.setOrgEmail(orgEmail);
-				return ModelToDto(empRepo.save(emp));
+				return empRepo.save(emp);
 			}catch (Exception e) {
               e.printStackTrace();
               throw new CustomExceptions("Exception occured while updating ", e.getMessage());
@@ -118,14 +118,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public EmployeeDto updateAddressEmpByEmail(String email,Address address) throws ResourceNotFoundException, CustomExceptions {
+	public Employee updateAddressEmpByEmail(String email,Address address) throws ResourceNotFoundException, CustomExceptions {
 		Employee emp = checkIfEmpAlreadyExist(email);
 		if(emp!=null) {
 			try {
 				emp.setAddLine1(address.getAddLine1());
 				emp.setCity(address.getCity());
 				emp.setZip(address.getZip());
-				return ModelToDto(empRepo.save(emp));
+				return empRepo.save(emp);
 			}catch (Exception e) {
               e.printStackTrace();
               throw new CustomExceptions("exception occured while updating address for employee :" , email);

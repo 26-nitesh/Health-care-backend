@@ -4,6 +4,7 @@ package com.empservice.employee.utils;
 public class User {
 
 private String email;
+private String orgEmail;
 private String password;
 private String newPassword;
 public User() {

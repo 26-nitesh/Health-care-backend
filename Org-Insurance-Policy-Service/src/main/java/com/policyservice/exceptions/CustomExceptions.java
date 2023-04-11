@@ -1,4 +1,4 @@
-package com.service.policy.exceptions;
+package com.policyservice.exceptions;
 
 public class CustomExceptions extends Exception{
 
@@ -6,5 +6,9 @@ public class CustomExceptions extends Exception{
 
 	public CustomExceptions(String message, Object data) {
 		super(String.format("%s", message+" "+data.toString()));
+	}
+
+	public CustomExceptions(String string) {
+		super(string);
 	}
 }

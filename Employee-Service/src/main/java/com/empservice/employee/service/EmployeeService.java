@@ -13,27 +13,22 @@ import com.empservice.employee.utils.User;
 
 public interface EmployeeService {
 
-	EmployeeDto createEmployee(EmployeeDto empUtil) throws CustomExceptions, ResourceNotFoundException;
+	Employee createEmployee(Employee employee) throws CustomExceptions, ResourceNotFoundException;
 
-	EmployeeDto findEmpByEmail(String email) throws ResourceNotFoundException;
+	Employee findEmpByEmail(String email) throws ResourceNotFoundException;
 
-	List<EmployeeDto> findEmpsByOrgEmail(String email) throws ResourceNotFoundException;
+	List<Employee> findEmpsByOrgEmail(String email) throws ResourceNotFoundException;
 
-	EmployeeDto deleteEmpByEmail(String email) throws ResourceNotFoundException, CustomExceptions;
+	Employee deleteEmpByEmail(String email) throws ResourceNotFoundException, CustomExceptions;
 
-	EmployeeDto updateOrgEmailByEmpEmail(String empEmail,String orgEmail) throws CustomExceptions, ResourceNotFoundException;
+	Employee updateOrgEmailByEmpEmail(String empEmail,String orgEmail) throws CustomExceptions, ResourceNotFoundException;
 
-	EmployeeDto updateAddressEmpByEmail(String email,Address address) throws ResourceNotFoundException, CustomExceptions;
+	Employee updateAddressEmpByEmail(String email,Address address) throws ResourceNotFoundException, CustomExceptions;
 
 	Employee updateEmployee(Employee employee) throws CustomExceptions,ResourceNotFoundException;
 
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
 
 	Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
-	EmployeeDto ModelToDto(Employee employee);
-	 Employee dtoToModel(EmployeeDto empDto);
-//	String getPasswordByEmail(String email);
-//
-//	EmployeeDto validateEmployee(User user);
-
+	
 }
