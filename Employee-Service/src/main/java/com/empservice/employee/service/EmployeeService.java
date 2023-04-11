@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
+import org.springframework.stereotype.Service;
+
 import com.empservice.employee.entity.Employee;
 import com.empservice.employee.exceptions.CustomExceptions;
 import com.empservice.employee.exceptions.ResourceNotFoundException;
@@ -11,6 +13,7 @@ import com.empservice.employee.utils.Address;
 import com.empservice.employee.utils.EmployeeDto;
 import com.empservice.employee.utils.User;
 
+@Service
 public interface EmployeeService {
 
 	Employee createEmployee(Employee employee) throws CustomExceptions, ResourceNotFoundException;

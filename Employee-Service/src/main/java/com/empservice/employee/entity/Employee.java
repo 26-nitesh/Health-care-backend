@@ -148,4 +148,13 @@ public class Employee {
 		this.isHazardousExposure = isHazardousExposure;
 	}
 
+	public Employee(String empEmail, String orgEmail, String empName, String password) {
+		super();
+		this.empEmail = empEmail;
+		this.orgEmail = orgEmail;
+		this.empName = empName;
+		this.password = password;
+	}
+
+	
 }

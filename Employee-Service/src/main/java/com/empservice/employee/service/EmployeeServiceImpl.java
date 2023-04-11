@@ -46,9 +46,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 			try {
 //				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
 				employee.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
-				Employee createdEmp =empRepo.save(employee);
-				createdEmp.setPassword("*****");
-				return createdEmp;
+//				System.out.println(employee.getEmpEmail());
+				return empRepo.save(employee);
 			} catch (Exception e) {
 //				e.printStackTrace();
 				throw new CustomExceptions("exception occured while saving employee with email : ",employee.getEmpEmail());
