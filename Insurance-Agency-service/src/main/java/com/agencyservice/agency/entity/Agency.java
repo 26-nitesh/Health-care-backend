@@ -88,10 +88,18 @@ public class Agency {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+	public Agency() {
+		// TODO Auto-generated constructor stub
+	}
 	public Agency(String agencyEmail, String password) {
 		super();
 		this.agencyEmail = agencyEmail;
 		this.password = password;
+	}
+	public Agency(String agencyEmail, String agencyName, String password) {
+	  this.agencyEmail=agencyEmail;
+	  this.agencyName = agencyName;
+	  this.password=password;
 	}
 	
 	
