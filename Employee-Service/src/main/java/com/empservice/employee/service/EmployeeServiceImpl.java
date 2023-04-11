@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 //	}
 	@Override
 	public Employee createEmployee(Employee employee)  throws CustomExceptions, ResourceNotFoundException{
-		if(checkIfEmpAlreadyExist(employee.getEmpEmail(),employee.getOrgEmail())==null) {
+		if(checkIfEmpAlreadyExist(employee.getEmpEmail())==null) {
 			try {
 //				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
 				employee.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		throw new CustomExceptions("Employee Already Exist with the email : ", employee.getEmpEmail());
 	}
 	
-	private Employee checkIfEmpAlreadyExist(String empEmail,String orgEmail) throws ResourceNotFoundException {
+	private Employee checkIfEmpAlreadyExist(String empEmail) throws ResourceNotFoundException {
 		if(empEmail==null || empEmail.isEmpty())
 			throw new ResourceNotFoundException("email is not valid");
 		Optional<Employee> empByEmail = empRepo.findByEmpEmail(empEmail);
