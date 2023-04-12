@@ -1,8 +1,0 @@
-package com.service.employee.service;
-
-import javax.persistence.Entity;
-
-@Entity
-public interface EmployeeService {
-
-}

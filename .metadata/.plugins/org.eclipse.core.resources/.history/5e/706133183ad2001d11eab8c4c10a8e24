@@ -1,5 +1,0 @@
-package com.service.employee.service;
-
-public interface EmployeeService {
-
-}

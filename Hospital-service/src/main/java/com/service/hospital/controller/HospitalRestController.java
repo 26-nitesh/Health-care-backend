@@ -46,7 +46,7 @@ public class HospitalRestController {
 		}
 	}
 	
-	@PostMapping("public/add-hospital")
+	@PostMapping("/add-hospital")
 	public ResponseEntity<Object> createNewEmployee(@RequestBody Hospital hospital){
 		try {
 			return 

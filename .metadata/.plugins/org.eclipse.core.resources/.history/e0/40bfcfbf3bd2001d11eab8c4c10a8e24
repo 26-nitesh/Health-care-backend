@@ -1,5 +1,0 @@
-package com.service.hospital.controller;
-
-public class HospitalRestController {
-
-}
