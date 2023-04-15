@@ -1,5 +1,0 @@
-package com.service.appointment.repo;
-
-public interface AppointMentRepo {
-
-}

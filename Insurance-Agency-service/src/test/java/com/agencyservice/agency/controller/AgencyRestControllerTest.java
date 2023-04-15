@@ -59,7 +59,7 @@ public class AgencyRestControllerTest {
         when(agencyService.createNewAgency(any())).thenReturn(agency);
         String orgJson = mapper.writeValueAsString(agency);
 //        MvcResult andReturn = 
-        		mockMvc.perform(post("/api/agency/create")
+        		mockMvc.perform(post("/agency/api/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(orgJson))
                 .andExpect(status().isCreated())
@@ -75,7 +75,7 @@ public class AgencyRestControllerTest {
         thenThrow(new CustomExceptions(
         		"Agency Already Exist with the email :", "agency@agency.com"));
         String orgJson = mapper.writeValueAsString(agency);
-        mockMvc.perform(post("/api/agency/create")
+        mockMvc.perform(post("/agency/api/create")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(orgJson))
                 .andExpect(status().isConflict())

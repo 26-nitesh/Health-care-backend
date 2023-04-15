@@ -72,7 +72,7 @@ public class OrganisationControllerTest {
 	        when(orgServices.createOrg(any())).thenReturn(org1);
 	        String orgJson = mapper.writeValueAsString(org1);
 //	        MvcResult andReturn = 
-	        		mockMvc.perform(post("/api/organisation/addOrg")
+	        		mockMvc.perform(post("/organisation/api/addOrg")
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(orgJson))
 	                .andExpect(status().isCreated())
@@ -89,7 +89,7 @@ public class OrganisationControllerTest {
 	        thenThrow(new CustomExceptions(
 	        		"Organisation Already Exist with the email :", "org1@org.com"));
 	        String orgJson = mapper.writeValueAsString(org1);
-	        mockMvc.perform(post("/api/organisation/addOrg")
+	        mockMvc.perform(post("/organisation/api/addOrg")
 	                .contentType(MediaType.APPLICATION_JSON)
 	                .content(orgJson))
 	                .andExpect(status().isConflict())
@@ -103,7 +103,7 @@ public class OrganisationControllerTest {
 	        when(orgServices.getByEmail("s@s.com")).
 	        thenThrow(new ResourceNotFoundException(
 	        		"Organisation", "email" ,"s@s.com"));
-	        mockMvc.perform(get("/api/organisation/org/s@s.com"))
+	        mockMvc.perform(get("/organisation/api/org/s@s.com"))
 	                .andExpect(status().isNotFound())
 	                .andExpect(jsonPath("$.HttpStatus", is(404)))
 	                .andExpect(jsonPath("$.message", is("Organisation not found with email : s@s.com")))
@@ -114,7 +114,7 @@ public class OrganisationControllerTest {
 	    public void getOrganisationWhenPresentReturnOrganisation() throws Exception {
 	        when(orgServices.getByEmail("org1@org.com")).
 	        thenReturn(org1);
-	        mockMvc.perform(get("/api/organisation/org/org1@org.com"))
+	        mockMvc.perform(get("/organisation/api/org/org1@org.com"))
 	                .andExpect(status().isOk())
 	                .andExpect(jsonPath("$.HttpStatus", is(200)))
 	                .andExpect(jsonPath("$.data.organisationName", is(org1.getOrganisationName())))

@@ -22,7 +22,7 @@ import com.agencyservice.agency.utils.User;
 
 
 @RestController
-@RequestMapping("/api/agency")
+@RequestMapping("/agency/api")
 public class AgencyRestController {
 
 	@Autowired AgencyService agencyService;

@@ -1,5 +1,0 @@
-package com.empservice.employee.controller;
-
-public class PublicEmpRestController {
-
-}

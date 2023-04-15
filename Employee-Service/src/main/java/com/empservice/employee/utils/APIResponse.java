@@ -11,12 +11,12 @@ public class APIResponse {
 
 	public static ResponseEntity<Object> generateResponse(String message, HttpStatus status, Object responseObject) {
 		Map<String, Object> map = new HashMap<>();
-		
+		System.out.println(status.value());
 		if (message != null && !message.isEmpty())
 			map.put("message", message);
 		map.put("HttpStatus", status.value());
 		if(responseObject!=null && !responseObject.toString().isEmpty())
-			System.out.println(responseObject.toString());
+//			System.out.println(responseObject.toString());
 		map.put("data", responseObject);
 		map.put("timeStamp", LocalDateTime.now());
 

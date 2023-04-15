@@ -20,7 +20,7 @@ import com.service.hospital.utils.APIResponse;
 import com.service.hospital.utils.User;
 
 @RestController
-@RequestMapping("/api/hospital")
+@RequestMapping("/hospital/api")
 public class HospitalRestController {
 
 	@Autowired HospitalService hospitalService;

@@ -57,7 +57,7 @@ public class HospitalRestControllerTest {
       when(hospitalService.createHospital(any())).thenReturn(hospital);
       String orgJson = mapper.writeValueAsString(hospital);
 //      MvcResult andReturn = 
-      		mockMvc.perform(post("/api/hospital/add-hospital")
+      		mockMvc.perform(post("/hospital/api/add-hospital")
               .contentType(MediaType.APPLICATION_JSON)
               .content(orgJson))
               .andExpect(status().isCreated())
@@ -73,7 +73,7 @@ public class HospitalRestControllerTest {
       thenThrow(new CustomExceptions(
       		"Hospital Already Exist with the email :", "hosp@hosp.com"));
       String orgJson = mapper.writeValueAsString(hospital);
-      mockMvc.perform(post("/api/hospital/add-hospital")
+      mockMvc.perform(post("/hospital/api/add-hospital")
               .contentType(MediaType.APPLICATION_JSON)
               .content(orgJson))
               .andExpect(status().isConflict())

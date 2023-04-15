@@ -1,5 +1,6 @@
 package com.service.appointment.controllers;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import com.service.appointment.utils.UpdateAppointmentO;
 
 
 @RestController
-@RequestMapping("/api/appointment")
+@RequestMapping("/appointment/api")
 public class AppointMentRestController {
 
 	@Autowired AppointmentService appointmentService;
@@ -186,7 +187,7 @@ public class AppointMentRestController {
 	
 	@GetMapping("/appointMent")
 	public ResponseEntity<Object> findByEmailAndDate(@RequestParam(value = "email",required = true) String empEmail,
-			                                          @RequestParam(value = "date",required = true) Date date){
+			                                          @RequestParam(value = "date",required = true) LocalDate date){
 		try {
 			return 
 				APIResponse.

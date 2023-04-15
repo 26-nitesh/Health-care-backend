@@ -24,7 +24,7 @@ import com.policyservice.utils.PolicyServiceLogger;
 
 
 @RestController
-@RequestMapping("/api/policy")
+@RequestMapping("/policy/api")
 public class PolicyRestController {
 
 @Autowired PolicyService policyService;

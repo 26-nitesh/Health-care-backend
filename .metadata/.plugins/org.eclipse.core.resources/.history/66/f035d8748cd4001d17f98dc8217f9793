@@ -1,5 +1,0 @@
-package com.service.policy.config;
-
-public class SwaggerConfig {
-
-}

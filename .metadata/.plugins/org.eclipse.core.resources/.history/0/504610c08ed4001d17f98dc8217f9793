@@ -1,8 +1,0 @@
-package com.service.appointment.repo;
-
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface AppointMentRepo {
-
-}

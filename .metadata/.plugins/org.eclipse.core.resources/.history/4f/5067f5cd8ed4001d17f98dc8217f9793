@@ -1,9 +1,0 @@
-package com.service.appointment.repo;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
-
-@Repository
-public interface AppointMentRepo extends MongoRepository<T, ID> {
-
-}

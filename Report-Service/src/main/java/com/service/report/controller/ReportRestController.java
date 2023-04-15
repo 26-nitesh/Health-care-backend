@@ -19,7 +19,7 @@ import com.service.report.util.APIResponse;
 
 
 @RestController
-@RequestMapping("api/report")
+@RequestMapping("report/api")
 public class ReportRestController {
 
 	@Autowired ReportService reportService;

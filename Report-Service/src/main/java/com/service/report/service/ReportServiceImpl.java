@@ -17,13 +17,16 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	public Report createReport(Report report) throws CustomExceptions {
-		try {
-			if(checkIfReportAlreadyExist(report.getReportId())==null)
+//		try {
+			if(checkIfReportAlreadyExist(report.getAppointmentId())==null) {
+			
 			return reportRepo.save(report);
-			throw new CustomExceptions("Report already Exist for give appointment "+report.getReportId());
-		} catch (Exception e) {
-		   throw new CustomExceptions("failed to create : "+e.getMessage());
-		}
+			}else
+			throw new CustomExceptions("Report already Exist for given appointment ");
+//			return null;
+//		} catch (Exception e) {
+//		   
+//		}
 	}
 
 	@Override
@@ -35,9 +38,9 @@ public class ReportServiceImpl implements ReportService {
 		throw new ResourceNotFoundException("Report", "Appointment Id", String.valueOf(id));
 	}
 	private Report checkIfReportAlreadyExist(int id) {
-        Optional<Report> orgByEmail = reportRepo.findByAppointmentId(id);
-		if(orgByEmail.isPresent()) {
-			return orgByEmail.get();
+        Optional<Report> report= reportRepo.findByAppointmentId(id);
+		if(report.isPresent()) {
+			return report.get();
 		}
 		return null;
 	}

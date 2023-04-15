@@ -85,6 +85,15 @@ public class Policy {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public Policy() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Policy(String orgEmail, String policyName) {
+		super();
+		this.orgEmail = orgEmail;
+		this.policyName = policyName;
+	}
 	
 	
 }

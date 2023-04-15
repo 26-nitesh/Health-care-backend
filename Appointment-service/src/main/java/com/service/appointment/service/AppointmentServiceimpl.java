@@ -1,5 +1,6 @@
 package com.service.appointment.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -94,7 +95,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 		 throw new ResourceNotFoundException("AppointMent not found");
 	}
 	@Override
-	public AppointMent findByEmpAndDate(String empEmail, Date date) throws CustomExceptions {
+	public AppointMent findByEmpAndDate(String empEmail, LocalDate date) throws CustomExceptions {
 		 Optional<AppointMent> appO = appoinmentRepo.findByEmployeeEmailAndAppointmentDate(empEmail, date);
           if(appO.isPresent()) {
         	  return appO.get();

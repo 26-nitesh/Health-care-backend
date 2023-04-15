@@ -1,8 +1,0 @@
-package com.service.policy.entity;
-
-import java.io.Serializable;
-
-public class PolicyComposite implements Serializable {
-
-	
-}

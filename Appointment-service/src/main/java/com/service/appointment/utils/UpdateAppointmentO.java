@@ -9,7 +9,7 @@ public class UpdateAppointmentO {
 	private String status;
 	private boolean isVerified;
 	private String remarks;
-	private Date appointmentDate;
+	private LocalDate appointmentDate;
 	public String getEmployeeEmail() {
 		return employeeEmail;
 	}
@@ -34,12 +34,13 @@ public class UpdateAppointmentO {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	public Date getAppointmentDate() {
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
-	public void setAppointmentDate(Date appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
+
 	
 	
 }

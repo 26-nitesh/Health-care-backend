@@ -21,11 +21,11 @@ public class AppointMent {
 //		}
 
 	
-//	@Id
-//	private int appintmentId;
+	@Id
+	private int appintmentId;
 	private String employeeEmail;
 	private String hospitalEmail;
-	private Date appointmentDate;
+	private LocalDate appointmentDate;
 	private String status;
 	private boolean isVerified;
 	private String remarks;
@@ -34,13 +34,13 @@ public class AppointMent {
 		// TODO Auto-generated constructor stub
 	}
 
-//	public int getAppintmentId() {
-//		return appintmentId;
-//	}
-//
-//	public void setAppintmentId(int appintmentId) {
-//		this.appintmentId = appintmentId;
-//	}
+	public int getAppintmentId() {
+		return appintmentId;
+	}
+
+	public void setAppintmentId(int appintmentId) {
+		this.appintmentId = appintmentId;
+	}
 
 	public String getEmployeeEmail() {
 		return employeeEmail;
@@ -59,11 +59,13 @@ public class AppointMent {
 	}
 
 	
-	public Date getAppointmentDate() {
+
+
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
 
-	public void setAppointmentDate(Date appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 

@@ -27,7 +27,7 @@ import com.empservice.employee.utils.User;
 
 
 @RestController
-@RequestMapping("/api/employee")
+@RequestMapping("/employee/api")
 public class EmployeeRestController {
 	
 	@Autowired EmployeeService empService;

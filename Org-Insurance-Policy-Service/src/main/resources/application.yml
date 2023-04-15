@@ -21,10 +21,11 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
-#springdoc:
-#  swagger-ui:
-#    disable-swagger-default-url: true
-# mvc:
-#  pathmatch:
-#   matching-strategy=ANT_PATH_MATCHER
+
+#eureka:
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
 

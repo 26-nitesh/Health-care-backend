@@ -1,9 +1,0 @@
-package com.service.organisation.repositories;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.service.organisation.entity.Organisation;
-
-public interface OrgRepository extends JpaRepository<Organisation, Integer> {
-
-}

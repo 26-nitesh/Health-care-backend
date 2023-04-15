@@ -1,5 +1,6 @@
 package com.service.appointment.service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,6 @@ public interface AppointmentService {
 
 	AppointMent updateAppintment(UpdateAppointmentO appointment) throws ResourceNotFoundException;
 
-	AppointMent findByEmpAndDate(String empEmail, Date date) throws CustomExceptions;
+	AppointMent findByEmpAndDate(String empEmail, LocalDate date) throws CustomExceptions;
 
 }

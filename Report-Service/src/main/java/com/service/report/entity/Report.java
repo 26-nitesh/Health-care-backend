@@ -17,7 +17,7 @@ public class Report {
 //		 appointment_status varchar
 //		 }
 	
-	@Id
+//	@Id
 	private int reportId;
 	private int appointmentId;
  

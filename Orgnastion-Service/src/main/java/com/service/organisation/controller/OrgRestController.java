@@ -22,7 +22,7 @@ import com.service.organisation.util.OrgServiceLogger;
 import com.service.organisation.util.User;
 
 @RestController
-@RequestMapping("/api/organisation")
+@RequestMapping("/organisation/api")
 public class OrgRestController {
 
 	@Autowired private OrgService orgService;

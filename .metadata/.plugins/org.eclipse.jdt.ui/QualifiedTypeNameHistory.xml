@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
-    <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
-    <fullyQualifiedTypeName name="javax.crypto.spec.SecretKeySpec"/>
-    <fullyQualifiedTypeName name="javax.crypto.KeyGenerator"/>
-    <fullyQualifiedTypeName name="java.security.Key"/>
-    <fullyQualifiedTypeName name="javax.xml.bind.DatatypeConverter"/>
-    <fullyQualifiedTypeName name="java.lang.Object"/>
-    <fullyQualifiedTypeName name="com.empservice.employee.utils.User"/>
-    <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="io.jsonwebtoken.Jwts"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="io.jsonwebtoken.SignatureAlgorithm"/>
     <fullyQualifiedTypeName name="com.empservice.employee.utils.Helper"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="com.service.appointment.utils.UpdateAppointment"/>
     <fullyQualifiedTypeName name="com.service.appointment.exceptions.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="javax.annotation.Generated"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.service.appointment.entity.AppointMent"/>
     <fullyQualifiedTypeName name="com.service.appointment.exceptions.CustomExceptions"/>
@@ -50,14 +37,27 @@
     <fullyQualifiedTypeName name="com.empservice.employee.controller.EmployeeRestController"/>
     <fullyQualifiedTypeName name="com.empservice.employee.service.EmployeeService"/>
     <fullyQualifiedTypeName name="com.empservice.employee.entity.Employee"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.empservice.employee.exceptions.CustomExceptions"/>
     <fullyQualifiedTypeName name="com.empservice.employee.exceptions.ResourceNotFoundException"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.test.context.SpringBootTest"/>
     <fullyQualifiedTypeName name="com.agencyservice.agency.entity.Agency"/>
     <fullyQualifiedTypeName name="com.agencyservice.agency.services.AgencyService"/>
     <fullyQualifiedTypeName name="com.agencyservice.agency.controller.AgencyRestController"/>
     <fullyQualifiedTypeName name="com.agencyservice.agency.exceptions.CustomExceptions"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="com.service.report.service.ReportService"/>
+    <fullyQualifiedTypeName name="com.service.report.repo.ReportRepo"/>
+    <fullyQualifiedTypeName name="com.service.report.entity.Report"/>
+    <fullyQualifiedTypeName name="com.service.report.exceptions.CustomExceptions"/>
+    <fullyQualifiedTypeName name="com.service.report.exceptions.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="org.mockito.Mock"/>
+    <fullyQualifiedTypeName name="org.mockito.MockitoAnnotations"/>
+    <fullyQualifiedTypeName name="org.mockito.junit.MockitoJUnitRunner"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="org.mockito.InjectMocks"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.test.mock.mockito.MockBean"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.test.context.SpringBootTest"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
 </qualifiedTypeNameHistroy>
