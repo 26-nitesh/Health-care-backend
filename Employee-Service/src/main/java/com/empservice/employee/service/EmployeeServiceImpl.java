@@ -42,7 +42,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 //	}
 	@Override
 	public Employee createEmployee(Employee employee)  throws CustomExceptions, ResourceNotFoundException{
-		if(checkIfEmpAlreadyExist(employee.getEmpEmail())==null) {
+		if(checkIfEmpAlreadyExistWithOrg(employee.getEmpEmail(),employee.getOrgEmail())==null) {
 			try {
 //				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
 				employee.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
@@ -60,6 +60,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(empEmail==null || empEmail.isEmpty())
 			throw new ResourceNotFoundException("email is not valid");
 		Optional<Employee> empByEmail = empRepo.findByEmpEmail(empEmail);
+		if(empByEmail.isPresent()) {
+			return empByEmail.get();
+		}
+		return null;
+	}
+	private Employee checkIfEmpAlreadyExistWithOrg(String empEmail,String orgEmail) throws ResourceNotFoundException {
+		if(empEmail==null || empEmail.isEmpty())
+			throw new ResourceNotFoundException("email is not valid");
+		Optional<Employee> empByEmail = empRepo.findByEmpEmailAndOrgEmail(empEmail, orgEmail);
 		if(empByEmail.isPresent()) {
 			return empByEmail.get();
 		}
@@ -140,15 +149,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(!validatePassword(empFound, employee))
 			throw new CustomExceptions("New Password and old Password did not match");
 		if(empFound!=null) {
-			empFound.setEmpName(employee.getEmpName());
+			if(employee.getAddLine1()!=null && !employee.getAddLine1().isEmpty())
 			empFound.setAddLine1(employee.getAddLine1());
+			if(employee.getCity()!=null && !employee.getCity().isEmpty())
 			empFound.setCity(employee.getCity());
+			if(employee.getZip()!=null && !employee.getZip().isEmpty())
 			empFound.setZip(employee.getZip());
+			if(employee.getDob()!=null && !employee.getZip().isEmpty())
 			empFound.setDob(employee.getDob());
+			if(employee.getEmpName()!=null && !employee.getEmpName().isEmpty())
 			empFound.setEmpName(employee.getEmpName());
-			empFound.setEmpName(employee.getEmpName());
-			empFound.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
-			empFound.setEmpDesignation(employee.getEmpDesignation());
+//			empFound.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
+//			empFound.setEmpDesignation(employee.getEmpDesignation());
 			return empRepo.save(empFound);
 		}
 		else 

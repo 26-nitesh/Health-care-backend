@@ -3,6 +3,7 @@ package com.agencyservice.agency.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import com.agencyservice.agency.utils.User;
 
 @RestController
 @RequestMapping("/agency/api")
+@CrossOrigin("*")
 public class AgencyRestController {
 
 	@Autowired AgencyService agencyService;
@@ -132,5 +134,28 @@ public class AgencyRestController {
 		}
 	
 }
+	
+	@PutMapping("/update-agency")
+	public ResponseEntity<Object> update(@RequestBody Agency agency){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"updated sucessfully",
+							HttpStatus.OK, 
+							agencyService.updateAgency(agency)
+							);
+		} catch ( ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
+		}
+		
+		
+	}
 	
 }

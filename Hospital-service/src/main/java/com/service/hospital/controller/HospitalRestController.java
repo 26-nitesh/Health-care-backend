@@ -3,6 +3,7 @@ package com.service.hospital.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import com.service.hospital.utils.User;
 
 @RestController
 @RequestMapping("/hospital/api")
+@CrossOrigin("*")
 public class HospitalRestController {
 
 	@Autowired HospitalService hospitalService;
@@ -169,6 +171,28 @@ public class HospitalRestController {
 							HttpStatus.NOT_FOUND,
 							null);
 		}
+		
+	}
+	@PutMapping("/update-hosp")
+	public ResponseEntity<Object> update(@RequestBody Hospital hosp){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"updated sucessfully",
+							HttpStatus.OK, 
+							hospitalService.updateHospital(hosp)
+							);
+		} catch ( ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
+		}
+		
 		
 	}
 }

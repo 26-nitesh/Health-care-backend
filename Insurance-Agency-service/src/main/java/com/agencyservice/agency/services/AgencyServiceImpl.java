@@ -115,4 +115,32 @@ public class AgencyServiceImpl implements AgencyService {
 			throw new ResourceNotFoundException("Agency", "email", user.getEmail());
 	}
 
+	@Override
+	public Agency updateAgency(Agency agency) throws ResourceNotFoundException {
+		Agency agencyFound = checkIfAgencyAlreadyExist(agency.getAgencyEmail());
+		if(!validatePassword(agencyFound, agency))
+			throw new ResourceNotFoundException("Password did not match");
+		if(agencyFound!=null) {
+			if(agency.getAgencyName()!=null && !agency.getAgencyName().isEmpty())
+				agencyFound.setAgencyName(agency.getAgencyName());
+			if(agency.getAddLine1()!=null && !agency.getAddLine1().isEmpty())
+				agencyFound.setAddLine1(agency.getAddLine1());
+			if(agency.getCity()!=null && !agency.getCity().isEmpty())
+				agencyFound.setCity(agency.getCity());
+			if(agency.getZip()!=null && !agency.getZip().isEmpty())
+				agencyFound.setZip(agency.getZip());
+//			orgFound.setInsuranceAgencyEmail(org.getInsuranceAgencyEmail());
+//			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
+			return agencyRepositpory.save(agencyFound);
+		}
+		else 
+			throw new ResourceNotFoundException("Agency", "email", agency.getAgencyEmail());
+
+	}
+	
+	private boolean validatePassword(Agency oldAgency,Agency newAgency) {
+		return Helper.
+				decryptPassword(
+						oldAgency.getPassword()).equals(newAgency.getPassword());
+	}
 }

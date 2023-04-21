@@ -33,11 +33,10 @@ public class Helper {
 //        return new SecretKeySpec(apiKeySecretBytes, "HmacSHA256");
 //    }
 	public static Object genrateJwtTokken(User user) {
-//		System.out.println(key);
 		return Map.of("auth_token",Jwts.builder().setSubject(user.getEmail())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+40000))
-                .signWith(SignatureAlgorithm.HS256, "sssadc".getBytes())
-                .compact());
+                .signWith(SignatureAlgorithm.HS256, "eyIYggf".getBytes())
+                .compact(),"email",user.getEmail());
 	}
 }

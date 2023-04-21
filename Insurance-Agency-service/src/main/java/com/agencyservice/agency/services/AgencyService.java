@@ -23,4 +23,6 @@ public interface AgencyService {
 
 	Agency changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
 
+	Agency updateAgency(Agency agency) throws ResourceNotFoundException;
+
 }

@@ -24,7 +24,7 @@ public class Helper {
 	              .setIssuedAt(new Date(System.currentTimeMillis()))
 	              .setExpiration(new Date(System.currentTimeMillis()+40000))
 	              .signWith(SignatureAlgorithm.HS256, "DFGDFg".getBytes())
-	              .compact());
+	              .compact(),"email",user.getEmail());
 		
 	}
 }

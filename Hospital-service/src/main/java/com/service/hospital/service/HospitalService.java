@@ -23,4 +23,6 @@ public interface HospitalService {
 
 	List<Hospital> getAllHospitals() throws CustomExceptions;
 
+	Hospital updateHospital(Hospital hosp) throws ResourceNotFoundException;
+
 }

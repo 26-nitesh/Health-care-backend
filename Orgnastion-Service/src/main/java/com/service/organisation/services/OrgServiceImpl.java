@@ -112,16 +112,30 @@ public class OrgServiceImpl implements OrgService{
 	@Override
 	public Organisation updateOrganisation(Organisation org) throws ResourceNotFoundException {
  
+		OrgServiceLogger.log.info("request came for update  org {}",org.getOrganisationEmail());
 		Organisation orgFound = checkIfOrgAlreadyExist(org.getOrganisationEmail());
-		if(!validatePassword(orgFound, org))
-			throw new ResourceNotFoundException("New Password and old Password did not match");
+		OrgServiceLogger.log.info("org forund for update  org {}",orgFound.getOrganisationEmail());
+		System.out.println(validatePassword(orgFound, org));
 		if(orgFound!=null) {
+		if(!validatePassword(orgFound, org)) {
+			 OrgServiceLogger.log.debug("validation failed");
+			throw new ResourceNotFoundException("Password did not match");
+       
+		}
+		OrgServiceLogger.log.debug("Passwprd validation Passed");
+			OrgServiceLogger.log.info("going to update org {}",org.getOrganisationEmail());
+			if(org.getOrganisationName()!=null && !org.getOrganisationName().isEmpty())
 			orgFound.setOrganisationName(org.getOrganisationName());
+			if(org.getAddLine1()!=null && !org.getAddLine1().isEmpty())
 			orgFound.setAddLine1(org.getAddLine1());
+			if(org.getCity()!=null && !org.getCity().isEmpty())
 			orgFound.setCity(org.getCity());
+			if(org.getZip()!=null && !org.getZip().isEmpty())
 			orgFound.setZip(org.getZip());
+			if(org.getInsuranceAgencyEmail()!=null && !org.getInsuranceAgencyEmail().isEmpty())
 			orgFound.setInsuranceAgencyEmail(org.getInsuranceAgencyEmail());
-			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
+//			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
+			OrgServiceLogger.log.info("updating org {}",org.getOrganisationEmail());
 			return orgRepo.save(orgFound);
 		}
 		else 
@@ -129,9 +143,12 @@ public class OrgServiceImpl implements OrgService{
 	
 	}
 	private boolean validatePassword(Organisation oldOrg, Organisation newOrg) {
-		return Helper.
+		boolean flag = oldOrg.getPassword().equals(newOrg.getPassword());
+		if(!flag)
+		flag =  Helper.
 				decryptPassword(
 						oldOrg.getPassword()).equals(newOrg.getPassword());
+		return flag;
 	}
 	@Override
 	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {

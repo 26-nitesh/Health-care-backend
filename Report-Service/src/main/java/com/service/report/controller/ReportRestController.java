@@ -61,7 +61,7 @@ public class ReportRestController {
 				APIResponse.
 				    generateResponse(
 					         e.getMessage(),
-					         HttpStatus.NOT_FOUND,
+					         HttpStatus.BAD_REQUEST,
 					         null
 					          );
 		}

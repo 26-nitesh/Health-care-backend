@@ -31,8 +31,8 @@ public class Hospital {
 	private String hospitalEmail;
 	private String password;
 	private String agencyEmail;
+	private String addLine1;
 	private String city;
-	private String state;
 	private String zip;
 //	
 //	@ElementCollection
@@ -74,11 +74,12 @@ public class Hospital {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getState() {
-		return state;
+	
+	public String getAddLine1() {
+		return addLine1;
 	}
-	public void setState(String state) {
-		this.state = state;
+	public void setAddLine1(String addLine1) {
+		this.addLine1 = addLine1;
 	}
 	public String getZip() {
 		return zip;

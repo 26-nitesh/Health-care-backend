@@ -24,8 +24,8 @@ public class HospitalServiceImpls implements HospitalService {
 	@Override
 	public Object validateUserAndGetToken(User user) throws ResourceNotFoundException {
 		Hospital byEmail = checkIfHospAlreadyExist(user.getEmail());
-		if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
-			throw new  ResourceNotFoundException("New Password not valid");
+//		if(user.getNewPassword()==null || user.getNewPassword().isEmpty())
+//			throw new  ResourceNotFoundException("New Password not valid");
 		if(byEmail!=null) {
 			if(user.getPassword()==null && user.getPassword().isEmpty()) {
 				throw new ResourceNotFoundException("password not present");
@@ -120,5 +120,33 @@ public class HospitalServiceImpls implements HospitalService {
 	   if(hospitals!=null && !hospitals.isEmpty())
 		   return hospitals;
 	   throw new ResourceNotFoundException("Hospitals", "Agency Email", email);
+	}
+
+	@Override
+	public Hospital updateHospital(Hospital hosp) throws ResourceNotFoundException {
+		Hospital hospFound = checkIfHospAlreadyExist(hosp.getHospitalEmail());
+		if(!validatePassword(hospFound, hosp))
+			throw new ResourceNotFoundException("Password did not match");
+		if(hospFound!=null) {
+			if(hosp.getHospitalName()!=null && !hosp.getHospitalName().isEmpty())
+				hospFound.setHospitalName(hosp.getHospitalName());
+			if(hosp.getAddLine1()!=null && !hosp.getAddLine1().isEmpty())
+				hospFound.setAddLine1(hosp.getAddLine1());
+			if(hosp.getCity()!=null && !hosp.getCity().isEmpty())
+				hospFound.setCity(hosp.getCity());
+			if(hosp.getZip()!=null && !hosp.getZip().isEmpty())
+				hospFound.setZip(hosp.getZip());
+//			orgFound.setInsuranceAgencyEmail(org.getInsuranceAgencyEmail());
+//			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
+			return hospitalRepository.save(hospFound);
+		}
+		else 
+			throw new ResourceNotFoundException("Hospital", "email", hosp.getHospitalEmail());
+
+	}
+	private boolean validatePassword(Hospital oldHosp,Hospital newHosp) {
+		return Helper.
+				decryptPassword(
+						oldHosp.getPassword()).equals(newHosp.getPassword());
 	}
 }
