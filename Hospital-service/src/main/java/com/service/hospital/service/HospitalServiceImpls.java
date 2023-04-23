@@ -125,9 +125,9 @@ public class HospitalServiceImpls implements HospitalService {
 	@Override
 	public Hospital updateHospital(Hospital hosp) throws ResourceNotFoundException {
 		Hospital hospFound = checkIfHospAlreadyExist(hosp.getHospitalEmail());
+		if(hospFound!=null) {
 		if(!validatePassword(hospFound, hosp))
 			throw new ResourceNotFoundException("Password did not match");
-		if(hospFound!=null) {
 			if(hosp.getHospitalName()!=null && !hosp.getHospitalName().isEmpty())
 				hospFound.setHospitalName(hosp.getHospitalName());
 			if(hosp.getAddLine1()!=null && !hosp.getAddLine1().isEmpty())
@@ -136,7 +136,8 @@ public class HospitalServiceImpls implements HospitalService {
 				hospFound.setCity(hosp.getCity());
 			if(hosp.getZip()!=null && !hosp.getZip().isEmpty())
 				hospFound.setZip(hosp.getZip());
-//			orgFound.setInsuranceAgencyEmail(org.getInsuranceAgencyEmail());
+			if(hosp.getAgencyEmail()!=null && !hosp.getAgencyEmail().isEmpty())
+				hospFound.setAgencyEmail(hosp.getAgencyEmail());
 //			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
 			return hospitalRepository.save(hospFound);
 		}
@@ -145,8 +146,11 @@ public class HospitalServiceImpls implements HospitalService {
 
 	}
 	private boolean validatePassword(Hospital oldHosp,Hospital newHosp) {
-		return Helper.
+		boolean flag = oldHosp.getPassword().equals(newHosp.getPassword());
+		if(!flag)
+		flag =  Helper.
 				decryptPassword(
 						oldHosp.getPassword()).equals(newHosp.getPassword());
+		return flag;
 	}
 }

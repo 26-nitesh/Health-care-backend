@@ -122,7 +122,7 @@ public class OrgServiceImpl implements OrgService{
 			throw new ResourceNotFoundException("Password did not match");
        
 		}
-		OrgServiceLogger.log.debug("Passwprd validation Passed");
+		OrgServiceLogger.log.debug("Password validation Passed");
 			OrgServiceLogger.log.info("going to update org {}",org.getOrganisationEmail());
 			if(org.getOrganisationName()!=null && !org.getOrganisationName().isEmpty())
 			orgFound.setOrganisationName(org.getOrganisationName());

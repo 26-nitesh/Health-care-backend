@@ -29,9 +29,19 @@ public class AppointMent {
 	private String status;
 	private boolean isVerified;
 	private String remarks;
+	private boolean isArchived;
+	private LocalDate bookingDate;
 	
 	public AppointMent() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public boolean getIsArchived() {
+		return isArchived;
+	}
+
+	public void setIsArchived(boolean isArchived) {
+		this.isArchived = isArchived;
 	}
 
 	public int getAppintmentId() {
@@ -44,6 +54,14 @@ public class AppointMent {
 
 	public String getEmployeeEmail() {
 		return employeeEmail;
+	}
+
+	public LocalDate getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(LocalDate bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public void setEmployeeEmail(String employeeEmail) {

@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import com.service.appointment.utils.UpdateAppointmentO;
 
 @RestController
 @RequestMapping("/appointment/api")
+@CrossOrigin("*")
 public class AppointMentRestController {
 
 	@Autowired AppointmentService appointmentService;
@@ -97,14 +99,14 @@ public class AppointMentRestController {
 	}
 	
 	@GetMapping("/getByHospital/{email}")
-	public ResponseEntity<Object> findByHosp(@PathVariable String email){
+	public ResponseEntity<Object> findByHosp(@PathVariable String email,@RequestParam(value = "archived") boolean archived ){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND, 
-							appointmentService.findByHospEmail(email)
+							HttpStatus.OK, 
+							appointmentService.findByHospEmail(email,archived)
 							);
 		} catch (ResourceNotFoundException e) {
 			return 
@@ -164,7 +166,7 @@ public class AppointMentRestController {
 	}
 	
 	@PutMapping("/updateAppointmnet")
-	public ResponseEntity<Object> updateAppointment(@RequestBody UpdateAppointmentO appointment){
+	public ResponseEntity<Object> updateAppointment(@RequestBody AppointMent appointment){
 		try {
 			return 
 				APIResponse.

@@ -15,7 +15,7 @@ public interface AppointmentService {
 
 	List<AppointMent> findByEmpEmail(String email) throws ResourceNotFoundException;
 
-	List<AppointMent> findByHospEmail(String email) throws ResourceNotFoundException;
+	List<AppointMent> findByHospEmail(String email,boolean flag) throws ResourceNotFoundException;
 
 	List<AppointMent> deleteByHospital(String email) throws CustomExceptions;
 
@@ -25,7 +25,7 @@ public interface AppointmentService {
 
 	List<AppointMent> deleteByHospAndEmp(String empEmail, String hospEmail) throws CustomExceptions;
 
-	AppointMent updateAppintment(UpdateAppointmentO appointment) throws ResourceNotFoundException;
+	AppointMent updateAppintment(AppointMent appointment) throws ResourceNotFoundException;
 
 	AppointMent findByEmpAndDate(String empEmail, LocalDate date) throws CustomExceptions;
 
