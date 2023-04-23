@@ -1,8 +1,11 @@
 package com.service.hospital.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,7 @@ public class HospitalServiceImpls implements HospitalService {
 	public Hospital createHospital(Hospital hospital) throws CustomExceptions, ResourceNotFoundException {
 		if(checkIfHospAlreadyExist(hospital.getHospitalEmail())==null) {
 			try {
+//				hospital.setAgencies(Arrays.asList("aa"));
 				hospital.setPassword(Helper.getEncryptedPassword(hospital.getPassword()));
 				return hospitalRepository.save(hospital);
 			} catch (Exception e) {
@@ -116,7 +120,9 @@ public class HospitalServiceImpls implements HospitalService {
 	}
 	@Override
 	public List<Hospital> findByAgency(String email) throws ResourceNotFoundException{
-	   List<Hospital> hospitals = hospitalRepository.findByAgencyEmail(email);
+		
+//	   List<Hospital> hospitals = hospitalRepository.findByAgencyEmail(email);
+		   List<Hospital> hospitals = hospitalRepository.findByAgency(email);
 	   if(hospitals!=null && !hospitals.isEmpty())
 		   return hospitals;
 	   throw new ResourceNotFoundException("Hospitals", "Agency Email", email);
@@ -136,8 +142,8 @@ public class HospitalServiceImpls implements HospitalService {
 				hospFound.setCity(hosp.getCity());
 			if(hosp.getZip()!=null && !hosp.getZip().isEmpty())
 				hospFound.setZip(hosp.getZip());
-			if(hosp.getAgencyEmail()!=null && !hosp.getAgencyEmail().isEmpty())
-				hospFound.setAgencyEmail(hosp.getAgencyEmail());
+//			if(hosp.getAgencyEmail()!=null && !hosp.getAgencyEmail().isEmpty())
+//				hospFound.setAgencyEmail(hosp.getAgencyEmail());
 //			orgFound.setPassword(Helper.getEncryptedPassword(org.getPassword()));
 			return hospitalRepository.save(hospFound);
 		}
@@ -152,5 +158,19 @@ public class HospitalServiceImpls implements HospitalService {
 				decryptPassword(
 						oldHosp.getPassword()).equals(newHosp.getPassword());
 		return flag;
+	}
+
+	@Override
+	public Hospital addAgency(String hospEmail, String agencyEmail) throws ResourceNotFoundException {
+		Hospital hospFound = checkIfHospAlreadyExist(hospEmail);
+		if(hospFound!=null) {
+			   Set<String> agencies = hospFound.getAgencies();
+		        agencies.add(agencyEmail);
+		        hospFound.setAgencies(agencies);
+		        return hospitalRepository.save(hospFound);
+		}
+		else 
+			throw new ResourceNotFoundException("Hospital", "email", hospEmail);
+
 	}
 }

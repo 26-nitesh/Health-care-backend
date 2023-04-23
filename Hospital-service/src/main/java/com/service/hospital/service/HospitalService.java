@@ -25,4 +25,6 @@ public interface HospitalService {
 
 	Hospital updateHospital(Hospital hosp) throws ResourceNotFoundException;
 
+	Hospital addAgency(String hospEmail, String agencyEmail) throws ResourceNotFoundException;
+
 }

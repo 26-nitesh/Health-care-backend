@@ -1,15 +1,19 @@
 package com.service.hospital.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "hospital_tbl")
 public class Hospital {
 
 //	Table public.hospital as hospital {
@@ -35,8 +39,8 @@ public class Hospital {
 	private String city;
 	private String zip;
 //	
-//	@ElementCollection
-//	private List<String> agencies;
+	@ElementCollection(fetch = FetchType.EAGER)
+	private Set<String> agencies;
 	public Hospital() {
 		// TODO Auto-generated constructor stub
 	}
@@ -98,6 +102,12 @@ public class Hospital {
 		this.hospitalEmail = hospitalEmail;
 		this.password = password;
 		this.agencyEmail = agencyEmail;
+	}
+	public Set<String> getAgencies() {
+		return agencies;
+	}
+	public void setAgencies(Set<String> agencies) {
+		this.agencies = agencies;
 	}
 	
 	

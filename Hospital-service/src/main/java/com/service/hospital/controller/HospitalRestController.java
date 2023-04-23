@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.hospital.entity.Hospital;
@@ -182,6 +183,32 @@ public class HospitalRestController {
 							"updated sucessfully",
 							HttpStatus.OK, 
 							hospitalService.updateHospital(hosp)
+							);
+		} catch ( ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				    generateResponse(
+					         e.getMessage(),
+					         HttpStatus.BAD_REQUEST,
+					         null
+					          );
+		}
+		
+		
+	}
+	
+	@GetMapping("/add-agency")
+	public ResponseEntity<Object> addAgency(@RequestParam(required = true,name = "hospEmail")String hospEmail,
+			                                @RequestParam(required = true,name = "agencyEmail")String agencyEmail){
+
+		System.out.println(hospEmail +"     @@@@@@@    "+agencyEmail);
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"Added sucessfully",
+							HttpStatus.OK, 
+							hospitalService.addAgency(hospEmail,agencyEmail)
 							);
 		} catch ( ResourceNotFoundException e) {
 			return 

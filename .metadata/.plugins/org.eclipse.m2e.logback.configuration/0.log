@@ -29221,3 +29221,4 @@ org.eclipse.core.runtime.CoreException: Could not read maven project
 2023-04-22 21:00:15,284 [Worker-199: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-04-22 21:00:15,284 [Worker-199: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2023-04-22 21:00:15,284 [Worker-199: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Projects\Final\Appointment-service\src\test\resources
+2023-04-23 07:31:45,452 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
