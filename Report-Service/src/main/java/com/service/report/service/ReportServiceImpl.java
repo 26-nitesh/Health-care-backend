@@ -19,7 +19,7 @@ public class ReportServiceImpl implements ReportService {
 	public Report createReport(Report report) throws CustomExceptions {
 //		try {
 			if(checkIfReportAlreadyExist(report.getAppointmentId())==null) {
-			
+			  report.setReportId(getUniqueId());
 			return reportRepo.save(report);
 			}else
 			throw new CustomExceptions("Report already Exist for given appointment ");
@@ -27,6 +27,17 @@ public class ReportServiceImpl implements ReportService {
 //		} catch (Exception e) {
 //		   
 //		}
+	}
+
+	private int getUniqueId() {
+		int id = Math.absExact((int) (Math.random()*1000));
+		Optional<Report> findById = reportRepo.findById(id);
+		if(findById.isPresent()) {
+			return getUniqueId();
+		}else {
+			return id;
+		}
+		
 	}
 
 	@Override
