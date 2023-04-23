@@ -209,6 +209,51 @@ public class AppointMentRestController {
 		}
 		
 	}
+	@GetMapping("/updateAppointmnet/{id}")
+	public ResponseEntity<Object> updateStatus(@PathVariable int id,
+			                                  @RequestParam(required = true,name = "status") String status,
+			                                  @RequestParam (required = false,name="amount")Double amount){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							"Updated succesfully",
+							HttpStatus.OK, 
+							appointmentService.updateStatus(id,status,amount)
+							);
+		} catch (ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+		
+	}
+	
+	@GetMapping("/")
+	public ResponseEntity<Object> findAll(){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.OK.name(),
+							HttpStatus.OK, 
+							appointmentService.findAllApps()
+							);
+		} catch (ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+		
+	}
 }
 	
 

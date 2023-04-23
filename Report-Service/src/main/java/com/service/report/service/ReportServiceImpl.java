@@ -68,11 +68,11 @@ public class ReportServiceImpl implements ReportService {
 
 	@Override
 	public Report updateReport(Report report) throws ResourceNotFoundException {
-		Report dataToUpdate = checkIfReportAlreadyExist(report.getReportId());
+		Report dataToUpdate = checkIfReportAlreadyExist(report.getAppointmentId());
 		if(dataToUpdate!=null) {
-			
-			dataToUpdate.setAppointmentDate(report.getAppointmentDate());
-			dataToUpdate.setStatus(report.getStatus());
+			System.out.println(dataToUpdate.getAppointmentId());
+//			dataToUpdate.setAppointmentDate(report.getAppointmentDate());
+			dataToUpdate.setRemarks(report.getRemarks());
 			dataToUpdate.setReportDetails(report.getReportDetails());
 			return reportRepo.save(dataToUpdate);
 		}

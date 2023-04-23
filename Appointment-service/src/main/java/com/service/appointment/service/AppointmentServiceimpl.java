@@ -120,5 +120,23 @@ public class AppointmentServiceimpl implements AppointmentService{
           }else
         	  throw new CustomExceptions("appointment not found","");
 	}
+	@Override
+	public AppointMent updateStatus(int id, String status,Double amount) throws ResourceNotFoundException {
+		 Optional<AppointMent> appO = appoinmentRepo.findByAppintmentId(id);
+			System.out.println(amount);
+		 if(appO.isPresent()) {
+			 AppointMent app = appO.get();
+			app.setStatus(status);
+			if(amount!=null
+					&&amount!=0)
+				app.setAmount(amount);
+			  return appoinmentRepo.save(app);
+		 }
+		 throw new ResourceNotFoundException("AppointMent not found");
+	}
+	@Override
+	public List<AppointMent> findAllApps() throws ResourceNotFoundException {
+		return appoinmentRepo.findAll();
+	}
 
 }

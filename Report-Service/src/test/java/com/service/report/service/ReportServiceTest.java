@@ -48,7 +48,7 @@ public class ReportServiceTest {
 		report = new Report();
 		report.setAppointmentId(1);
 		report.setReportId(787);
-		report.setStatus("PAsSS");
+		report.setRemarks("PAsSS");
 	}
 
 	@AfterEach

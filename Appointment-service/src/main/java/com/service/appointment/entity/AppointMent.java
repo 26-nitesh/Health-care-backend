@@ -8,7 +8,7 @@ import javax.annotation.Generated;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection  = "appointment")
+@Document(collection  = "data_appointment")
 public class AppointMent {
 //	Table public.Appointment as Appointment {
 //		appointment_id int [pk]
@@ -29,6 +29,7 @@ public class AppointMent {
 	private String status;
 	private boolean isVerified;
 	private String remarks;
+	private double amount;
 	private boolean isArchived;
 	private LocalDate bookingDate;
 	
@@ -109,6 +110,14 @@ public class AppointMent {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 	
 	

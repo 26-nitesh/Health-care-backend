@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "DatRreport")
+@Document(collection = "DataReport")
 public class Report {
 
 //	 Table public.Report as Report {
@@ -17,13 +17,13 @@ public class Report {
 //		 appointment_status varchar
 //		 }
 	
-//	@Id
+	@Id
 	private int reportId;
 	private int appointmentId;
  
 	private String reportDetails;
 	private Date appointmentDate;
-	private String status;
+	private String remarks;
 	
 	
 	public int getReportId() {
@@ -50,11 +50,11 @@ public class Report {
 	public void setAppointmentDate(Date appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
-	public String getStatus() {
-		return status;
+	public String getRemarks() {
+		return remarks;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
 	}
 	
 	

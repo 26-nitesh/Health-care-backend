@@ -13,6 +13,7 @@ import com.service.appointment.entity.AppointMent;
 
 @Repository
 public interface AppointMentRepo extends MongoRepository<AppointMent, Integer> {
+	Optional<AppointMent> findByAppintmentId(int id);
     List<AppointMent> findByEmployeeEmailOrderByBookingDateDesc(String employeeEmail);
 	List<AppointMent> findByEmployeeEmail(String email);
 	List<AppointMent> findByHospitalEmail(String email);
