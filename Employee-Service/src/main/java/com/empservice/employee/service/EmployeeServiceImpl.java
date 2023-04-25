@@ -1,5 +1,6 @@
 package com.empservice.employee.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -151,14 +152,32 @@ public class EmployeeServiceImpl implements EmployeeService{
 		if(empFound!=null) {
 			if(employee.getAddLine1()!=null && !employee.getAddLine1().isEmpty())
 			empFound.setAddLine1(employee.getAddLine1());
+			
 			if(employee.getCity()!=null && !employee.getCity().isEmpty())
 			empFound.setCity(employee.getCity());
+			
 			if(employee.getZip()!=null && !employee.getZip().isEmpty())
 			empFound.setZip(employee.getZip());
-			if(employee.getDob()!=null && !employee.getZip().isEmpty())
+			
+			if(employee.getDob()!=null)
 			empFound.setDob(employee.getDob());
+			
 			if(employee.getEmpName()!=null && !employee.getEmpName().isEmpty())
 			empFound.setEmpName(employee.getEmpName());
+			
+			if(employee.getDateOfJoining()!=null)
+				empFound.setDateOfJoining(employee.getDateOfJoining());
+			
+			if(employee.getEmpDesignation()!=null && !employee.getEmpDesignation().isEmpty())
+				empFound.setEmpDesignation(employee.getEmpDesignation());
+			
+			if(employee.getEmpEmail()!=null && !employee.getEmpEmail().isEmpty())
+				empFound.setEmpDesignation(employee.getEmpEmail());
+			
+			if(employee.getOrgEmail()!=null && !employee.getOrgEmail().isEmpty())
+				empFound.setOrgEmail(employee.getOrgEmail());
+			
+		
 //			empFound.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
 //			empFound.setEmpDesignation(employee.getEmpDesignation());
 			return empRepo.save(empFound);
@@ -210,6 +229,19 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		else
 			throw new ResourceNotFoundException("Employee", "email", user.getEmail());
+	}
+
+	@Override
+	public Object updateLastAppDateEmpEmail(String email, LocalDate lastAppDate)
+			throws ResourceNotFoundException, CustomExceptions {
+		Employee emp = checkIfEmpAlreadyExist(email);
+//		System.out.println("##@#@ "+emp.getEmpEmail());
+		if(emp!=null) {
+			 emp.setLastCheckupDate(lastAppDate);
+		return	 empRepo.save(emp);
+		}
+		else
+		throw new ResourceNotFoundException("Employee", "email", email);
 	}
 
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.service.appointment.entity.AppointMent;
@@ -121,22 +122,34 @@ public class AppointmentServiceimpl implements AppointmentService{
         	  throw new CustomExceptions("appointment not found","");
 	}
 	@Override
-	public AppointMent updateStatus(int id, String status,Double amount) throws ResourceNotFoundException {
+	public AppointMent updateStatus(int id, String status,Double amount,String claimRemarks) throws ResourceNotFoundException {
 		 Optional<AppointMent> appO = appoinmentRepo.findByAppintmentId(id);
 			System.out.println(amount);
 		 if(appO.isPresent()) {
 			 AppointMent app = appO.get();
 			app.setStatus(status);
+			if(status.equalsIgnoreCase("claim submitted"))
+				app.setClaimDate(LocalDate.now());
 			if(amount!=null
 					&&amount!=0)
 				app.setAmount(amount);
+			if(claimRemarks!=null && !claimRemarks.isEmpty())
+				app.setClaimRemarks(claimRemarks);
 			  return appoinmentRepo.save(app);
 		 }
 		 throw new ResourceNotFoundException("AppointMent not found");
 	}
 	@Override
 	public List<AppointMent> findAllApps() throws ResourceNotFoundException {
-		return appoinmentRepo.findAll();
+		return appoinmentRepo.findAll(Sort.by(Sort.Direction.DESC, "claimDate"));
+	}
+	@Override
+	public List<AppointMent> findAllByHospEmail(String email) throws ResourceNotFoundException {
+		List<AppointMent> apps = appoinmentRepo.findByHospitalEmailOrderByClaimDateDesc(email);
+		if(!apps.isEmpty()) {
+		return apps;	
+		}
+		throw new ResourceNotFoundException("Appointment", "Hospital-Email", email);
 	}
 
 }

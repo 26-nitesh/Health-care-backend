@@ -21,7 +21,7 @@ public interface AppointMentRepo extends MongoRepository<AppointMent, Integer> {
 	List<AppointMent> findByEmployeeEmailAndHospitalEmail(String empEmail,String hospEmail);
 	Optional<AppointMent> findByEmployeeEmailAndAppointmentDate(String email,LocalDate appDate);
 	Optional<AppointMent> findByEmployeeEmailAndIsArchived(String email, boolean flag);
-   
+	 List<AppointMent> findByHospitalEmailOrderByClaimDateDesc(String hospEmail);
 	
 	 
 }

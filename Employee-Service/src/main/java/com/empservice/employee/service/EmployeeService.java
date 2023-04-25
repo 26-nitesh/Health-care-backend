@@ -1,5 +1,6 @@
 package com.empservice.employee.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -33,5 +34,7 @@ public interface EmployeeService {
 	Object validateUserAndGetToken(User user) throws ResourceNotFoundException;
 
 	Employee changePassword(User user) throws ResourceNotFoundException, CustomExceptions;
+
+	Object updateLastAppDateEmpEmail(String email, LocalDate lastAppDate) throws ResourceNotFoundException, CustomExceptions;;
 	
 }

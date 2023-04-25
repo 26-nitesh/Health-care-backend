@@ -32,6 +32,9 @@ public class AppointMent {
 	private double amount;
 	private boolean isArchived;
 	private LocalDate bookingDate;
+	private String claimRemarks;
+	private LocalDate claimDate;
+	private boolean agencyArchived;
 	
 	public AppointMent() {
 		// TODO Auto-generated constructor stub
@@ -56,6 +59,15 @@ public class AppointMent {
 	public String getEmployeeEmail() {
 		return employeeEmail;
 	}
+	
+
+	public LocalDate getClaimDate() {
+		return claimDate;
+	}
+
+	public void setClaimDate(LocalDate claimDate) {
+		this.claimDate = claimDate;
+	}
 
 	public LocalDate getBookingDate() {
 		return bookingDate;
@@ -79,6 +91,14 @@ public class AppointMent {
 
 	
 
+
+	public boolean isAgencyArchived() {
+		return agencyArchived;
+	}
+
+	public void setAgencyArchived(boolean agencyArchived) {
+		this.agencyArchived = agencyArchived;
+	}
 
 	public LocalDate getAppointmentDate() {
 		return appointmentDate;
@@ -117,6 +137,18 @@ public class AppointMent {
 	}
 
 	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public String getClaimRemarks() {
+		return claimRemarks;
+	}
+
+	public void setClaimRemarks(String claimRemarks) {
+		this.claimRemarks = claimRemarks;
+	}
+
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	

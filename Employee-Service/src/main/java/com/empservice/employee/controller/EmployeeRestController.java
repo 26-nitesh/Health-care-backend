@@ -1,7 +1,8 @@
 package com.empservice.employee.controller;
 
+import java.time.LocalDate;
 import java.util.Map;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -177,6 +178,26 @@ public class EmployeeRestController {
 		
 	}
 
+	@PutMapping("/updateLastCheckupDate/{email}")
+	public ResponseEntity<Object> updateLastAppDateEmpEmail(@PathVariable String email,
+			                @RequestParam(required = true,name="lastAppDate")  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate lastAppDate){
+		try {
+			return 
+					APIResponse.generateResponse(
+							"updated sucessfully",
+							HttpStatus.OK,
+							empService.updateLastAppDateEmpEmail(email,lastAppDate)
+							);
+		} catch (Exception e) {
+			return 
+					APIResponse.generateResponse(
+							e.getMessage(),
+							HttpStatus.BAD_REQUEST,
+							null);
+		}
+		
+	}
+	
 	@PutMapping("/update-employee")
 	public ResponseEntity<Object> update(@RequestBody Employee employee){
 		try {

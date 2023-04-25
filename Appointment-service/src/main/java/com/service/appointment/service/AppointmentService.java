@@ -29,8 +29,10 @@ public interface AppointmentService {
 
 	AppointMent findByEmpAndDate(String empEmail, LocalDate date) throws CustomExceptions;
 
-	AppointMent updateStatus(int id, String status,Double amount) throws ResourceNotFoundException;
+	AppointMent updateStatus(int id, String status,Double amount,String claimRemarks) throws ResourceNotFoundException;
 
-	List<AppointMent> findAllApps() throws ResourceNotFoundException;;
+	List<AppointMent> findAllApps() throws ResourceNotFoundException;
+
+	List<AppointMent> findAllByHospEmail(String email) throws ResourceNotFoundException;;;
 
 }

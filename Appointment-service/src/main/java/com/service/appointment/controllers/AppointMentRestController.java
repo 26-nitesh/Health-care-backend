@@ -62,7 +62,7 @@ public class AppointMentRestController {
 				APIResponse.
 					generateResponse(
 							HttpStatus.FOUND.name(),
-							HttpStatus.FOUND, 
+							HttpStatus.OK, 
 							appointmentService.findByEmpEmail(email)
 							);
 		} catch (ResourceNotFoundException e) {
@@ -107,6 +107,28 @@ public class AppointMentRestController {
 							HttpStatus.FOUND.name(),
 							HttpStatus.OK, 
 							appointmentService.findByHospEmail(email,archived)
+							);
+		} catch (ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+		
+	}
+	
+	@GetMapping("/findAllByHosp/{email}")
+	public ResponseEntity<Object> findByHospital(@PathVariable String email){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.FOUND.name(),
+							HttpStatus.OK, 
+							appointmentService.findAllByHospEmail(email)
 							);
 		} catch (ResourceNotFoundException e) {
 			return 
@@ -212,14 +234,15 @@ public class AppointMentRestController {
 	@GetMapping("/updateAppointmnet/{id}")
 	public ResponseEntity<Object> updateStatus(@PathVariable int id,
 			                                  @RequestParam(required = true,name = "status") String status,
-			                                  @RequestParam (required = false,name="amount")Double amount){
+			                                  @RequestParam (required = false,name="amount")Double amount,
+			                                  @RequestParam(required = false,name="claimRemarks") String claimRemarks){
 		try {
 			return 
 				APIResponse.
 					generateResponse(
 							"Updated succesfully",
 							HttpStatus.OK, 
-							appointmentService.updateStatus(id,status,amount)
+							appointmentService.updateStatus(id,status,amount,claimRemarks)
 							);
 		} catch (ResourceNotFoundException e) {
 			return 
@@ -254,6 +277,28 @@ public class AppointMentRestController {
 		}
 		
 	}
+	
+//	@GetMapping("/updateAppointmnet/{id}")
+//	public ResponseEntity<Object> updateAppointmentById(@RequestBody AppointMent appointment){
+//		try {
+//			return 
+//				APIResponse.
+//					generateResponse(
+//							"Updated succesfully",
+//							HttpStatus.OK, 
+//							appointmentService.updateAppintment(appointment)
+//							);
+//		} catch (ResourceNotFoundException e) {
+//			return 
+//				APIResponse.
+//				generateResponse(
+//					e.getMessage(),
+//					HttpStatus.NOT_FOUND,
+//					null
+//					);
+//		}
+//		
+//	}
 }
 	
 
