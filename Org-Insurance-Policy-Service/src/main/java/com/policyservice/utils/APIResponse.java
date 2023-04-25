@@ -17,7 +17,7 @@ public class APIResponse {
 		map.put("HttpStatus", status.value());
 		if(responseObject!=null && !responseObject.toString().isEmpty())
 		map.put("data", responseObject);
-		map.put("timeStamp", LocalDateTime.now());
+		map.put("timeStamp", LocalDateTime.now().toString());
 
 		return new ResponseEntity<Object>(map, status);
 	}

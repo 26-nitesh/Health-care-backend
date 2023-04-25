@@ -10,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "policy_tbl")
 public class Policy {
 
 	/*
@@ -30,10 +32,12 @@ public class Policy {
 	
 	private String policyName;
 		
-	private int age;
+	private String value;
 	
-	private int minMonthOfService;
-			
+//	private int minMonthOfService;
+			public Policy() {
+				// TODO Auto-generated constructor stub
+			}
 	private int frequency;
 
 	public int getPolicyId() {
@@ -70,23 +74,13 @@ public class Policy {
 
 
 
-	public int getMinMonthOfService() {
-		return minMonthOfService;
+
+	public String getValue() {
+		return value;
 	}
 
-	public void setMinMonthOfService(int minMonthOfService) {
-		this.minMonthOfService = minMonthOfService;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-	public Policy() {
-		// TODO Auto-generated constructor stub
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	public Policy(String orgEmail, String policyName) {

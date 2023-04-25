@@ -78,9 +78,13 @@ public class PolicyServiceImpl implements PolicyService{
 
 		if(ploicio.isPresent()) {
 			Policy found = ploicio.get();
-			found.setAge(policy.getAge());
+//			found.setAge(policy.getAge());
+			if(policy.getPolicyName()!=null && !policy.getPolicyName().isEmpty())
+		   found.setPolicyName(policy.getPolicyName());
+			if(policy.getValue()!=null && !policy.getValue().isEmpty())
+				   found.setValue(policy.getValue());
 			found.setFrequency(policy.getFrequency());
-			found.setMinMonthOfService(policy.getMinMonthOfService());
+//			found.setMinMonthOfService(policy.getMinMonthOfService());
 			return policyRepo.save(found);
 		}
 		throw new CustomExceptions("Policy NAme not present");

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.policyservice.entity.Policy;
 
 @Repository
-@EnableJpaRepositories
 public interface PolicyRepo extends JpaRepository<Policy, Integer> {
  List<Policy> findByOrgEmail(String email);
  Optional<Policy> findByOrgEmailAndPolicyName(String email,String policyName);
