@@ -39,7 +39,7 @@ public class Employee {
 	private String addLine1;
 	private String city;
 	private String zip;
-
+    private int checkupCount;
 	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
@@ -58,6 +58,15 @@ public class Employee {
 
 	public void setOrgEmail(String orgEmail) {
 		this.orgEmail = orgEmail;
+	}
+	
+
+	public int getCheckupCount() {
+		return checkupCount;
+	}
+
+	public void setCheckupCount(int checkupCount) {
+		this.checkupCount = checkupCount;
 	}
 
 	public String getEmpEmail() {

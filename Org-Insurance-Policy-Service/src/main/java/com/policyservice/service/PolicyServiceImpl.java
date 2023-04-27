@@ -90,6 +90,13 @@ public class PolicyServiceImpl implements PolicyService{
 		throw new CustomExceptions("Policy NAme not present");
 //			return updatedL.get(0);
 	}
+
+	@Override
+	public void deletePolicyByID(int id) throws ResourceNotFoundException {
+		policyRepo.findById(id).
+		ifPresentOrElse(p->policyRepo.deleteById(id), ()-> new ResourceNotFoundException("Policy", "id", String.valueOf(id)));
+	
+	}
 	
 
 }

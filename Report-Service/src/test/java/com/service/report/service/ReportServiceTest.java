@@ -7,6 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
@@ -56,7 +57,7 @@ public class ReportServiceTest {
 	report = null;
 	}
 	@Test
-	public void createRecordwithNew_Roprt() throws CustomExceptions, ResourceNotFoundException {
+	public void createRecordwithNew_Roprt() throws CustomExceptions, ResourceNotFoundException, IOException {
 
 		when(reportRepo.findByAppointmentId(1)).thenReturn(Optional.empty());
 		when(reportRepo.save(report)).thenReturn(report);

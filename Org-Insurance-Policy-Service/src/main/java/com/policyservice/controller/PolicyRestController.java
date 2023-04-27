@@ -78,10 +78,32 @@ public class PolicyRestController {
 		}
 }
 	
+	
 	@DeleteMapping("/delete-all-policy/{email}")
 	public ResponseEntity<Object> deletePolicyByOrg(@PathVariable String email){
 		try {
 			policyService.deletePolicyByEmail(email);
+			PolicyServiceLogger.log.info("policy deleted");
+         return 
+				APIResponse.
+					generateResponse(
+							"deleted sucessfully",
+							HttpStatus.OK, 
+							null);
+		} catch (Exception e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+}
+	@DeleteMapping("/deleteById/{id}")
+	public ResponseEntity<Object> deletePolicyById(@PathVariable int id){
+		try {
+			policyService.deletePolicyByID(id);
 			PolicyServiceLogger.log.info("policy deleted");
          return 
 				APIResponse.

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.service.report.entity.Report;
 import com.service.report.exceptions.CustomExceptions;
@@ -17,16 +18,12 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Override
 	public Report createReport(Report report) throws CustomExceptions {
-//		try {
+
 			if(checkIfReportAlreadyExist(report.getAppointmentId())==null) {
 			  report.setReportId(getUniqueId());
 			return reportRepo.save(report);
 			}else
 			throw new CustomExceptions("Report already Exist for given appointment ");
-//			return null;
-//		} catch (Exception e) {
-//		   
-//		}
 	}
 
 	private int getUniqueId() {
@@ -44,6 +41,7 @@ public class ReportServiceImpl implements ReportService {
 	public Report findByAppId(int id) throws ResourceNotFoundException {
 		Report report = checkIfReportAlreadyExist(id);
 		if(report!=null) {
+			
 			return report;
 		}
 		throw new ResourceNotFoundException("Report", "Appointment Id", String.valueOf(id));

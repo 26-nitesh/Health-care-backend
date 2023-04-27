@@ -43,7 +43,7 @@ public class PolicyServiceTest {
 		  MockitoAnnotations.openMocks(this);
 		policy = new Policy();
 		policy.setOrgEmail("o@o");
-		policy.setFrequency(2);
+		policy.setFrequency("2");
 		policy.setPolicyName("base");
 	}
 

@@ -17,5 +17,7 @@ public interface PolicyService {
 
 	Policy updatePolicy(String orgEmail, Policy policy) throws CustomExceptions, ResourceNotFoundException;
 
+	void deletePolicyByID(int id) throws ResourceNotFoundException;
+
 	
 }

@@ -1,31 +1,38 @@
 package com.service.report.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "DataReport")
 public class Report {
 
-//	 Table public.Report as Report {
-//		 report_id int [pk]
-//		 appointment_id int [ref: - Appointment.appointment_id]
-//		 report_details blob
-//		 appointment_date datetime
-//		 appointment_status varchar
-//		 }
 	
 	@Id
 	private int reportId;
 	private int appointmentId;
  
 	private String reportDetails;
-	private Date appointmentDate;
+	private LocalDate appointmentDate;
 	private String remarks;
 	
-	
+
+	private byte[] reportFileData;
+
+    
+    
+
+	public byte[] getReportFileData() {
+		return reportFileData;
+	}
+	public void setReportFileData(byte[] reportFileData) {
+		this.reportFileData = reportFileData;
+	}
 	public int getReportId() {
 		return reportId;
 	}
@@ -44,10 +51,10 @@ public class Report {
 	public void setReportDetails(String reportDetails) {
 		this.reportDetails = reportDetails;
 	}
-	public Date getAppointmentDate() {
+	public LocalDate getAppointmentDate() {
 		return appointmentDate;
 	}
-	public void setAppointmentDate(Date appointmentDate) {
+	public void setAppointmentDate(LocalDate appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
 	public String getRemarks() {
@@ -55,6 +62,18 @@ public class Report {
 	}
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+	public Report() {
+		// TODO Auto-generated constructor stub
+	}
+	public Report(int appointmentId, String reportDetails, LocalDate appointmentDate, String remarks,
+			byte[] reportFileData) {
+		super();
+		this.appointmentId = appointmentId;
+		this.reportDetails = reportDetails;
+		this.appointmentDate = appointmentDate;
+		this.remarks = remarks;
+		this.reportFileData = reportFileData;
 	}
 	
 	

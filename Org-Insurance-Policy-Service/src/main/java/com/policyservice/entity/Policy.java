@@ -13,7 +13,7 @@ import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "policy_tbl")
+@Table(name = "policy_table")
 public class Policy {
 
 	/*
@@ -38,7 +38,7 @@ public class Policy {
 			public Policy() {
 				// TODO Auto-generated constructor stub
 			}
-	private int frequency;
+	private String frequency;
 
 	public int getPolicyId() {
 		return policyId;
@@ -64,16 +64,18 @@ public class Policy {
 		this.policyName = policyName;
 	}
 
-	public int getFrequency() {
+	
+
+
+
+
+	public String getFrequency() {
 		return frequency;
 	}
 
-	public void setFrequency(int frequency) {
+	public void setFrequency(String frequency) {
 		this.frequency = frequency;
 	}
-
-
-
 
 	public String getValue() {
 		return value;

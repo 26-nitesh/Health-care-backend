@@ -237,6 +237,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		Employee emp = checkIfEmpAlreadyExist(email);
 //		System.out.println("##@#@ "+emp.getEmpEmail());
 		if(emp!=null) {
+			emp.setCheckupCount(emp.getCheckupCount()+1);
 			 emp.setLastCheckupDate(lastAppDate);
 		return	 empRepo.save(emp);
 		}
