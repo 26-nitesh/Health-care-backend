@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
-    <fullyQualifiedTypeName name="com.service.report.repo.ReportRepo"/>
-    <fullyQualifiedTypeName name="com.service.report.exceptions.ResourceNotFoundException"/>
     <fullyQualifiedTypeName name="org.mockito.Mock"/>
     <fullyQualifiedTypeName name="org.mockito.MockitoAnnotations"/>
     <fullyQualifiedTypeName name="org.mockito.junit.MockitoJUnitRunner"/>
@@ -25,7 +21,6 @@
     <fullyQualifiedTypeName name="com.service.appointment.exceptions.CustomExceptions"/>
     <fullyQualifiedTypeName name="com.service.report.controller.ReportRestController"/>
     <fullyQualifiedTypeName name="com.service.report.service.ReportService"/>
-    <fullyQualifiedTypeName name="com.service.report.entity.Report"/>
     <fullyQualifiedTypeName name="com.service.report.exceptions.CustomExceptions"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="com.agencyservice.agency.exceptions.ResourceNotFoundException"/>
@@ -37,9 +32,7 @@
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="com.service.appointment.entity.AppointMent"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.empservice.employee.exceptions.ResourceNotFoundException"/>
-    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
     <fullyQualifiedTypeName name="javax.persistence.Table"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
@@ -60,4 +53,11 @@
     <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="com.service.report.entity.Report"/>
+    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="org.springframework.core.io.ByteArrayResource"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpHeaders"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
 </qualifiedTypeNameHistroy>
