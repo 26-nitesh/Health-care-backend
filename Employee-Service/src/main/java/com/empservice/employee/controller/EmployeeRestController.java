@@ -23,6 +23,7 @@ import com.empservice.employee.exceptions.ResourceNotFoundException;
 import com.empservice.employee.service.EmployeeService;
 import com.empservice.employee.utils.APIResponse;
 import com.empservice.employee.utils.Address;
+import com.empservice.employee.utils.EmpServiceLogger;
 import com.empservice.employee.utils.EmployeeDto;
 import com.empservice.employee.utils.User;
 
@@ -59,6 +60,7 @@ public class EmployeeRestController {
 	@PostMapping("/create-new-employee")
 	public ResponseEntity<Object> createNewEmployee(@RequestBody Employee employee){
 		try {
+			EmpServiceLogger.log.info("trying to craete employee");
 			return 
 				APIResponse.
 					generateResponse(

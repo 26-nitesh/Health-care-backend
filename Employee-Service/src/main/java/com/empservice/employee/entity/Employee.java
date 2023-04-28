@@ -34,7 +34,8 @@ public class Employee {
 	private String empDesignation;
 	private LocalDate dob;
 	private LocalDate dateOfJoining;
-	private boolean isHazardousExposure;
+	private boolean isHazardousExposure;//isHazardousExposure
+
 	private LocalDate lastCheckupDate;
 	private String addLine1;
 	private String city;
@@ -149,11 +150,12 @@ public class Employee {
 		this.zip = zip;
 	}
 
-	public boolean isHazardousExposure() {
+	
+	public boolean getIsHazardousExposure() {
 		return isHazardousExposure;
 	}
 
-	public void setHazardousExposure(boolean isHazardousExposure) {
+	public void setIsHazardousExposure(boolean isHazardousExposure) {
 		this.isHazardousExposure = isHazardousExposure;
 	}
 

@@ -15,6 +15,7 @@ import com.empservice.employee.exceptions.DataAlreadyExistException;
 import com.empservice.employee.exceptions.ResourceNotFoundException;
 import com.empservice.employee.repo.EmployeeRepository;
 import com.empservice.employee.utils.Address;
+import com.empservice.employee.utils.EmpServiceLogger;
 import com.empservice.employee.utils.EmployeeDto;
 import com.empservice.employee.utils.Helper;
 import com.empservice.employee.utils.User;
@@ -45,7 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public Employee createEmployee(Employee employee)  throws CustomExceptions, ResourceNotFoundException{
 		if(checkIfEmpAlreadyExistWithOrg(employee.getEmpEmail(),employee.getOrgEmail())==null) {
 			try {
+				EmpServiceLogger.log.debug("employee validation passed....##");
 //				System.out.println(empRepo.save(dtoToModel(empDto)).getEmpEmail());
+				EmpServiceLogger.log.info("creating emaployee with exposure type : {} ",employee.getIsHazardousExposure());
 				employee.setPassword(Helper.getEncryptedPassword(employee.getPassword()));
 //				System.out.println(employee.getEmpEmail());
 				return empRepo.save(employee);
@@ -69,6 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private Employee checkIfEmpAlreadyExistWithOrg(String empEmail,String orgEmail) throws ResourceNotFoundException {
 		if(empEmail==null || empEmail.isEmpty())
 			throw new ResourceNotFoundException("email is not valid");
+		EmpServiceLogger.log.info("checking if employee Exist  emp with email : {}",empEmail);
 		Optional<Employee> empByEmail = empRepo.findByEmpEmailAndOrgEmail(empEmail, orgEmail);
 		if(empByEmail.isPresent()) {
 			return empByEmail.get();

@@ -11,7 +11,7 @@ public class APIResponse {
 
 	public static ResponseEntity<Object> generateResponse(String message, HttpStatus status, Object responseObject) {
 		Map<String, Object> map = new HashMap<>();
-		System.out.println(status.value());
+//		System.out.println(status.value());
 		if (message != null && !message.isEmpty())
 			map.put("message", message);
 		map.put("HttpStatus", status.value());
