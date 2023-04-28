@@ -151,5 +151,14 @@ public class AppointmentServiceimpl implements AppointmentService{
 		}
 		throw new ResourceNotFoundException("Appointment", "Hospital-Email", email);
 	}
+	@Override
+	public AppointMent findByAppId(int id) throws ResourceNotFoundException {
+		
+		Optional<AppointMent> appOptional = appoinmentRepo.findByAppintmentId(id);
+		if(appOptional.isPresent()) {
+			return appOptional.get();
+		}else
+			throw new ResourceNotFoundException("Appointment", "id", id+"");
+	}
 
 }

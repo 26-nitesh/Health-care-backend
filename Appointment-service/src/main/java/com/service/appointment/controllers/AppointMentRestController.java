@@ -76,6 +76,29 @@ public class AppointMentRestController {
 		}
 		
 	}
+	
+	@GetMapping("/getById/{id}")
+	public ResponseEntity<Object> findByEmp(@PathVariable int id){
+		try {
+			return 
+				APIResponse.
+					generateResponse(
+							HttpStatus.FOUND.name(),
+							HttpStatus.OK, 
+							appointmentService.findByAppId(id)
+							);
+		} catch (ResourceNotFoundException e) {
+			return 
+				APIResponse.
+				generateResponse(
+					e.getMessage(),
+					HttpStatus.NOT_FOUND,
+					null
+					);
+		}
+		
+	}
+	
 	@DeleteMapping("/deleteByEmp/{email}")
 	public ResponseEntity<Object> deleteByEmp(@PathVariable String email){
 		try {

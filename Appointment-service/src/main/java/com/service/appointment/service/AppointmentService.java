@@ -33,6 +33,8 @@ public interface AppointmentService {
 
 	List<AppointMent> findAllApps() throws ResourceNotFoundException;
 
-	List<AppointMent> findAllByHospEmail(String email) throws ResourceNotFoundException;;;
+	List<AppointMent> findAllByHospEmail(String email) throws ResourceNotFoundException;
+
+	AppointMent findByAppId(int id) throws ResourceNotFoundException;;;
 
 }
