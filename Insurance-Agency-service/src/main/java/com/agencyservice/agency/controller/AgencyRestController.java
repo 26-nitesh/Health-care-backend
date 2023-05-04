@@ -24,7 +24,7 @@ import com.agencyservice.agency.utils.User;
 
 @RestController
 @RequestMapping("/agency/api")
-@CrossOrigin("*")
+@CrossOrigin
 public class AgencyRestController {
 
 	@Autowired AgencyService agencyService;

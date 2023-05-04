@@ -8,14 +8,14 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   
   application:
-    name: REPORT-SERVCIE 
+    name: REPORT-SERVCIE
        
 server:
  port: 9601
  
-#eureka:
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka 
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

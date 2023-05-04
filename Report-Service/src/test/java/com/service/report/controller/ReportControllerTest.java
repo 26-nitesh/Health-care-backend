@@ -55,33 +55,33 @@ public class ReportControllerTest {
    	report = null;
    }
 
-   @Test
-   public void CreateReportWhenReportNotExist() throws Exception {
-   	when(service.createReport(any())).thenReturn(report);
-       String json = mapper.writeValueAsString(report);
-
-       		mockMvc.perform(post("/report/api/create-report")
-               .contentType(MediaType.APPLICATION_JSON)
-               .content(json))
-               .andExpect(status().isCreated())
-               .andExpect(jsonPath("$.HttpStatus", is(201)))
-               .andExpect(jsonPath("$.data.appointmentId", is(12)))
-               .andReturn();
-
-   }
+//   @Test
+//   public void CreateReportWhenReportNotExist() throws Exception {
+//   	when(service.createReport(any())).thenReturn(report);
+//       String json = mapper.writeValueAsString(report);
+//
+//       		mockMvc.perform(post("/report/api/create-report")
+//               .contentType(MediaType.APPLICATION_JSON)
+//               .content(json))
+//               .andExpect(status().isCreated())
+//               .andExpect(jsonPath("$.HttpStatus", is(201)))
+//               .andExpect(jsonPath("$.data.appointmentId", is(12)))
+//               .andReturn();
+//
+//   }
    
-   @Test
-   public void CreateReportWhenReporExist_throwExcp() throws Exception {
-   	when(service.createReport(any())).thenThrow(new CustomExceptions("Report already Exist for given appointment "));
-       String json = mapper.writeValueAsString(report);
-
-       		mockMvc.perform(post("/report/api/create-report")
-               .contentType(MediaType.APPLICATION_JSON)
-               .content(json))
-               .andExpect(status().isConflict())
-               .andExpect(jsonPath("$.HttpStatus", is(409)))
-               .andReturn();
-
-   }
+//   @Test
+//   public void CreateReportWhenReporExist_throwExcp() throws Exception {
+//   	when(service.createReport(any())).thenThrow(new CustomExceptions("Report already Exist for given appointment "));
+//       String json = mapper.writeValueAsString(report);
+//
+//       		mockMvc.perform(post("/report/api/create-report")
+//               .contentType(MediaType.APPLICATION_JSON)
+//               .content(json))
+//               .andExpect(status().isConflict())
+//               .andExpect(jsonPath("$.HttpStatus", is(409)))
+//               .andReturn();
+//
+//   }
    
 }

@@ -26,7 +26,7 @@ import com.policyservice.utils.PolicyServiceLogger;
 
 @RestController
 @RequestMapping("/policy/api")
-@CrossOrigin("*")
+@CrossOrigin
 public class PolicyRestController {
 
 @Autowired PolicyService policyService;

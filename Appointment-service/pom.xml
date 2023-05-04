@@ -15,7 +15,7 @@
 	<description>Appointment-service</description>
 	<properties>
 		<java.version>11</java.version>
-		<!-- <spring-cloud.version>2021.0.6</spring-cloud.version> -->
+		 <spring-cloud.version>2021.0.6</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,10 +54,10 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.4.0</version>
 		</dependency>
-		<!-- <dependency>
+	<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> -->
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -67,9 +67,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>appointment-serviceJAR</finalName>
 	</build>
 
-	<!-- <dependencyManagement>
+	 <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -79,5 +80,5 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement> -->
+	</dependencyManagement>
 </project>

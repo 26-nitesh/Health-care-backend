@@ -7,18 +7,15 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
   application:
-    name: APPOINTMENT-SERVICE    
+    name: APPOINTMENT-SERVICE
 
 server:
- port: 9598  
-#  data:
-#    mongodb:
-#      database: fdb
-#      port: 27017
+ port: 9598
 
-#eureka:
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

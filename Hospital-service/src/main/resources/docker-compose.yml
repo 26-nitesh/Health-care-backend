@@ -1,0 +1,83 @@
+version: "3"
+
+networks:
+  employee-net:
+  org-net:
+  agency-net:
+  policy-net:
+  hospital-net:
+  
+services:
+   
+   employee-service:
+     image: employee-service:1.0
+     container_name: employee-service
+     ports:
+       - 9595:9595  
+     environment: 
+       - DB_URL=jdbc:mysql://192.168.224.1:3306/HealthCare?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+     networks:
+      - employee-net
+      
+   org-service:
+     image: org-service:1.0
+     container_name: org-service
+     ports:
+       - 9596:9596  
+     environment: 
+       - DB_URL=jdbc:mysql://192.168.224.1:3306/HealthCare?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+     networks:
+      - org-net
+      
+   agency-service:
+     image: agency-service:1.0
+     container_name: agency-service
+     ports:
+       - 9599:9599  
+     environment: 
+       - DB_URL=jdbc:mysql://192.168.224.1:3306/HealthCare?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+     networks:
+      - agency-net
+      
+      
+   policy-service:
+     image: policy-service:1.0
+     container_name: policy-service
+     ports:
+       - 9597:9597  
+     environment: 
+       - DB_URL=jdbc:mysql://192.168.224.1:3306/HealthCare?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+     networks:
+      - policy-net
+    
+   
+   hospital-service:
+     image: hospital-service:1.0
+     container_name: hospital-service
+     ports:
+       - 9600:9600  
+     environment: 
+       - DB_URL=jdbc:mysql://192.168.224.1:3306/HealthCare?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+     networks:
+      - hospital-net 
+      
+      
+      
+       
+     
+   service-registry:
+      image: service-registry:1.0
+      container_name: service-registry
+      ports:
+        - 8761:8761
+      networks:
+        - employee-net
+        - org-net
+        - agency-net
+        - policy-net
+        - hospital-net

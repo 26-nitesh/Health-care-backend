@@ -6,10 +6,10 @@ spring:
     name: EMPLOYEE-SERVCIE
     
   datasource:
-    url: jdbc:mysql://localhost:3306/HealthCare
+    url: ${DB_URL}
     username: root
     password: 8210
-   
+    driver-class-name: com.mysql.cj.jdbc.Driver
    
   jpa:
     hibernate:
@@ -25,9 +25,9 @@ springdoc:
   swagger-ui:
     disable-swagger-default-url: true
 
-#eureka:
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

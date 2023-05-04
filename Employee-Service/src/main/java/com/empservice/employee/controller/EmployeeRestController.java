@@ -31,7 +31,7 @@ import com.empservice.employee.utils.User;
 
 @RestController
 @RequestMapping("/employee/api")
-@CrossOrigin("*")
+@CrossOrigin
 public class EmployeeRestController {
 	
 	@Autowired EmployeeService empService;

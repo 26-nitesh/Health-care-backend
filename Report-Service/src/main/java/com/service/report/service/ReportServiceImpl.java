@@ -27,7 +27,7 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	private int getUniqueId() {
-		int id = Math.absExact((int) (Math.random()*1000));
+		int id = (int) (Math.random()*1000);
 		Optional<Report> findById = reportRepo.findById(id);
 		if(findById.isPresent()) {
 			return getUniqueId();

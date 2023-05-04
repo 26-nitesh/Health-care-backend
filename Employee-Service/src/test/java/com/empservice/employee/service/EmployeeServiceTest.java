@@ -55,14 +55,14 @@ public class EmployeeServiceTest {
 	@Test
 	public void createEmp_withNewEmp_shouldReturnEmp() throws CustomExceptions, ResourceNotFoundException {
 
-		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.ofNullable(null));
+		when(empRepo.findByEmpEmailAndOrgEmail(employee.getEmpEmail(),employee.getOrgEmail())).thenReturn(Optional.ofNullable(null));
 		when(empRepo.save(employee)).thenReturn(employee);
 
 		// Act
 		  Employee result = empService.createEmployee(employee);
 
 		// Assert
-//		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		verify(empRepo, times(1)).findByEmpEmailAndOrgEmail(employee.getEmpEmail(),employee.getOrgEmail());
 		verify(empRepo, times(1)).save(employee);
 		assertNotNull(result);
 		assertEquals(employee, result);
@@ -72,17 +72,17 @@ public class EmployeeServiceTest {
 	@Test
 	public void createEmp_withExistingEmp_shouldThrowCustomExceptions() {
 
-		when(empRepo.findByEmpEmail(employee.getEmpEmail())).thenReturn(Optional.of(employee));
+		when(empRepo.findByEmpEmailAndOrgEmail(employee.getEmpEmail(),employee.getOrgEmail())).thenReturn(Optional.of(employee));
 
 		// Act and Assert
-//		CustomExceptions exception = assertThrows(CustomExceptions.class, () -> {
-//			empService.createEmployee(employee);
-//		});
+		CustomExceptions exception = assertThrows(CustomExceptions.class, () -> {
+			empService.createEmployee(employee);
+		});
 
 		// Assert
-//		verify(empRepo, times(1)).findByEmpEmail(employee.getEmpEmail());
+		verify(empRepo, times(1)).findByEmpEmailAndOrgEmail(employee.getEmpEmail(),employee.getOrgEmail());
 		verify(empRepo, never()).save(employee);
-//		assertEquals("Employee Already Exist with the email :  emp@emp.com", exception.getMessage());
+		assertEquals("Employee Already Exist with the email :  emp@emp.com", exception.getMessage());
 	}
 	
 	@Test

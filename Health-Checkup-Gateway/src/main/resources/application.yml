@@ -1,0 +1,53 @@
+server:
+  port: 9594
+  
+spring:
+  application:
+    name: GATEWAY-SERVICE
+  
+  cloud:
+    gateway:
+      routes:
+      - id: service-employee
+        uri: lb://EMPLOYEE-SERVCIE
+        predicates:
+        - Path=/employee/**
+        
+      - id: service-appointment
+        uri: lb://APPOINTMENT-SERVICE
+        predicates:
+        - Path=/appointment/**
+        
+      - id: service-hospital
+        uri: lb://HOSPITAL-SERVCIE
+        predicates:
+        - Path=/hospital/**
+      
+      - id: service-agency
+        uri: lb://AGENCY-SERVICE
+        predicates:
+        - Path=/agency/**
+        
+      - id: service-policy
+        uri: lb://POLICY-SERVCIE
+        predicates:
+        - Path=/policy/**
+        
+      - id: service-organisation
+        uri: lb://ORG-SERVCIE
+        predicates:
+        - Path=/organisation/**
+        
+      - id: service-report
+        uri: lb://REPORT-SERVCIE
+        predicates:
+        - Path=/report/**
+        
+        
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka 

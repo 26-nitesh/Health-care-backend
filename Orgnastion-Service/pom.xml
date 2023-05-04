@@ -15,7 +15,7 @@
 	<description>Org-Service</description>
 	<properties>
 		<java.version>11</java.version>
-		<!-- <spring-cloud.version>2021.0.6</spring-cloud.version> -->
+		 <spring-cloud.version>2021.0.6</spring-cloud.version> 
 	</properties>
 	<dependencies>
 		<dependency>
@@ -78,10 +78,10 @@
 			<artifactId>google-java-format</artifactId>
 			<version>1.16.0</version>
 		</dependency>
-		<!-- <dependency>
+		 <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> -->
+		</dependency> 
 	</dependencies>
 
 	<build>
@@ -91,9 +91,10 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>org-serviceJAR</finalName>
 	</build>
 
-	<!-- <dependencyManagement>
+	 <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -103,5 +104,5 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement> -->
+	</dependencyManagement> 
 </project>

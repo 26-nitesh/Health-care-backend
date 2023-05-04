@@ -31,8 +31,8 @@ import com.service.report.util.APIResponse;
 
 
 @RestController
-@RequestMapping("report/api")
-@CrossOrigin("*")
+@RequestMapping("/report/api")
+@CrossOrigin
 public class ReportRestController {
 
 

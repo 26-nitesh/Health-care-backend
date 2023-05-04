@@ -6,7 +6,7 @@ spring:
     name: ORG-SERVCIE
     
   datasource:
-    url: jdbc:mysql://localhost:3306/HealthCare
+    url: ${DB_URL}
     username: root
     password: 8210
    
@@ -22,11 +22,11 @@ spring:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
 
-#eureka:
-#  client:
-#    fetch-registry: true
-#    register-with-eureka: true
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka      
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka      
 
 

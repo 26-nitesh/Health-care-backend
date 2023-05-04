@@ -23,7 +23,7 @@ import com.service.hospital.utils.User;
 
 @RestController
 @RequestMapping("/hospital/api")
-@CrossOrigin("*")
+@CrossOrigin
 public class HospitalRestController {
 
 	@Autowired HospitalService hospitalService;

@@ -23,7 +23,7 @@ import com.service.organisation.util.OrgServiceLogger;
 import com.service.organisation.util.User;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin
 @RequestMapping("/organisation/api")
 public class OrgRestController {
 

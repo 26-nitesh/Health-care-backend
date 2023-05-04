@@ -27,7 +27,7 @@ import com.service.appointment.utils.UpdateAppointmentO;
 
 @RestController
 @RequestMapping("/appointment/api")
-@CrossOrigin("*")
+@CrossOrigin
 public class AppointMentRestController {
 
 	@Autowired AppointmentService appointmentService;

@@ -35,7 +35,7 @@ public class AppointmentServiceimpl implements AppointmentService{
 		}
 	}
 	private int getUniqueAppId() {
-		int appId = Math.absExact((int) (Math.random()*10000));
+		int appId = (int)(Math.random()*10000);
 	   Optional<AppointMent> findById = appoinmentRepo.findById(appId);
 	   if(findById.isPresent())
 		 return  getUniqueAppId();

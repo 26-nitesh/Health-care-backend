@@ -11,7 +11,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 public class OrgnastionServiceApplication {
 
 	public static void main(String[] args) {
@@ -32,7 +32,7 @@ public class OrgnastionServiceApplication {
 	public ObjectMapper objMApper() {
 		return new ObjectMapper();
 	}
-	   private String secret = "your-secret-key";
+//	   private String secret = "secret-key";
 	    
 
 }

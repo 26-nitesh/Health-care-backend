@@ -14,9 +14,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Org-Insurance-Policy-Service</name>
 	<description>Report-Service</description>
-	<properties>
+	 <properties>
+      <maven.compiler.source>11</maven.compiler.source>
+      <maven.compiler.target>11</maven.compiler.target>
 		<java.version>11</java.version>
-		<!--  <spring-cloud.version>2021.0.6</spring-cloud.version>-->
+		  <spring-cloud.version>2021.0.6</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -68,10 +70,10 @@
 			<version>1.16.0</version>
 		</dependency>
 
-		<!-- <dependency>
+		 <dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> -->
+		</dependency> 
 	</dependencies>
 
 	<build>
@@ -92,6 +94,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>policy-serviceJAR</finalName>
 	</build>
 	<repositories>
 		<repository>
@@ -104,7 +107,7 @@
 			<url>https://repository.coveo.com/nexus/content/repositories/releases/</url>
 		</repository>
 	</repositories>
-	<!-- <dependencyManagement>
+	 <dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -114,5 +117,5 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement> -->
+	</dependencyManagement> 
 </project>
